@@ -10,9 +10,76 @@
 <body>
     <header>
         <h1>Sonido Vivo</h1>
+        <nav>
+            <a>Página Principal</a>
+            <a>Catálogo</a>
+            <a>Carrito</a>
+        </nav>
     </header>
     <main>
+        <section>
+            <h2>Categorías</h2>
+            <div class="categoria">
+                <p>Guitarras Acústicas</p>
+            </div>
+            <div class="categoria">
+                <p>Guitarras Eléctricas</p>
+            </div>
+            <div class="categoria">
+                <p>Bajos Eléctricos</p>
+            </div>
+            <div class="categoria">
+                <p>Baterias</p>
+            </div>
+            <div class="categoria">
+                <p>Teclados y Pianos</p>
+            </div>
+            <div class="categoria">
+                <p>Amplificadores</p>
+            </div>
+            <div class="categoria">
+                <p>Micrófonos</p>
+            </div>
+            <div class="categoria">
+                <p>Pedales de Efectos</p>
+            </div>
+            <div class="categoria">
+                <p>Accesorios</p>
+            </div>
+            <div class="categoria">
+                <p>Estudio y Grabación</p>
+            </div>
+            <!--Ajustar tipo de elemento-->
+            <a href="catalogo.html">Ir al Catálogo</a>
+        </section>
+
+        <section>
+            <h2>Contáctanos</h2>
+            <form id="form-contacto" novalidate>
+                <label for="nombre-contacto">Nombre Completo</label>
+                <input id="nombre-contacto" type="text" required>
+                <label for="correo-contacto">Correo Eléctrico</label>
+                <input id="correo-contacto" type="email" required>
+                <label for="telefono-contacto">Teléfono</label>
+                <input id="telefono-contacto" type="tel" required>
+                <label for="motivo-contacto">Motivo de la consulta</label>
+                <select id="motivo-contacto" required>
+                    <option value>Selecciona una opción</option>
+                    <option>Consulta general</option>
+                    <option>Compra especial</option>
+                    <option>Reclamo</option>
+                    <option>Otro</option>
+                    ::picker-icon
+                </select>
+                <label for="mensaje-contacto">Mensaje</label>
+                <textarea id="mensaje-contacto" required></textarea>
+                <button type="submit">Enviar consulta</button>
+                <p id="mensaje-confirmacion"></p>
+            </form>
+        </section>
     </main>
-    <footer>© 2026 - Sonido Vivo</footer>
+    <footer>
+        <p>© 2026 - Sonido Vivo</p>
+    </footer>
 </body>
 </html>
