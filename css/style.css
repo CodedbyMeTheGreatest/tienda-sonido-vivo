@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+#form-contacto.campo-error {
+  border: 2px solid #e53935;
+  background-color: #ffebee;
+}
+.texto-exito {
+    color: green;
+    font-weight: bold;
+}
+.texto-error {
+    color: red;
+    font-weight: bold;
+}
