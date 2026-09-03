@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compra</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/funciones.js"></script>
+    <script src="js/funciones.js" defer></script>
 </head>
 <body>
     <header>
@@ -13,7 +13,7 @@
         <nav>
             <a href="index.html">Página Principal</a>
             <a href="catalogo.html">Catálogo</a>
-            <a>Carrito</a>
+            <a href="compra.html">Carrito</a>
         </nav>        
     </header>
     
@@ -22,32 +22,30 @@
             <h2 id="titulo-resumen">Resumen de tu pedido</h2>
             <div id="carrito">
             <!--vacio por mientras, we need el catalogo-->
-            <p id="carrito-vacio" hidden>Tu carrito esta vacio.</p>
+            <p id="carrito-vacio" hidden>Tu carrito esta vacio. <a href="index.html">Ir al catalogo.</a></p>
             </div>
-            <p>Total: </p>
+            <p id="total-compra">Total: </p>
         </section>
 
         <section>
             <h2 id="titulo-datos">Datos de entrega y pago</h2>
             <form id="form-compra" novalidate>
-                <label for="nombre">Nombre completo</label>
+                <label for="nombre-compra">Nombre completo</label>
                 <input id="nombre-compra" name="nombre" type="text" required>
-                <label for="correo">Correo electronico</label>
+                <label for="correo-compra">Correo electronico</label>
                 <input id="correo-compra" name="correo" type="email" required>
-                <label for="telefono">Número de teléfono</label>
+                <label for="telefono-compra">Número de teléfono</label>
                 <input id="telefono-compra" name="telefono" type="tel" required>
 
                 <fieldset>
                     <legend>Forma de entrega</legend>
-                    <label ><input type="radio" name="entrega" value="retiro" >Retiro en tienda</label>
-                    <label ><input type="radio" name="entrega" value="despacho" checked>Despacho a domicilio</label>
+                    <label ><input type="radio" name="entrega" value="retiro" checked>Retiro en tienda</label>
+                    <label ><input type="radio" name="entrega" value="despacho">Despacho a domicilio</label>
                 </fieldset>
 
                 <div id="direccion" hidden>
                     <label for="direccion-compra">Direccion de despacho</label>
-                    <input input="direccion-compra" name="direccion" type="text">
-
-
+                    <input id="direccion-compra" name="direccion" type="text">
                 </div>
 
                 <label for="pago-compra">Forma de pago</label>
@@ -62,9 +60,6 @@
                 <p id="confirmacion-compra"></p>
             </form>
         </section>
-
-
-
 
     </main> 
     <footer>© 2026 - Sonido Vivo</footer>
