@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/funciones.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Sonido Vivo</h1>
+        <nav>
+            <a href="index.html">Página Principal</a>
+            <a href="catalogo.html">Catálogo</a>
+            <a href="compra.html">Carrito</a>
+        </nav>        
+    </header>
+
+    <main>
+        <section>
+            <h2>Inicio de sesion</h2>
+            <form id="inicio-sesion" novalidate>
+                <label for="correo-login">Correo</label>
+                <input type="email" name="correo" id="correo" max="100" required>
+
+                <label for="contraseña-login">Contraseña</label>
+                <input type="password" id="contraseña" name="contraseña" min="4" max="10" required>
+
+                <button type="submit">Iniciar sesion</button>
+                <p id="mensaje-confirmacion-login"></p>
+
+
+            </form>
+        </section>
+
+    </main>
+    <footer>
+        <p>© 2026 - Sonido Vivo</p>        
+    </footer>
+</body>
+</html>

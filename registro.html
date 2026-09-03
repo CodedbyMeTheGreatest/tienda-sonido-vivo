@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <script src="js/funciones.js" defer></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Sonido Vivo</h1>
+        <nav>
+            <a href="index.html">Página Principal</a>
+            <a href="catalogo.html">Catálogo</a>
+            <a href="compra.html">Carrito</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Registro de usuario</h2>
+            <form id="form-registro" novalidate>
+                <label for="run-completo">RUN</label>
+                <input id="run-completo" type="text" required min="7" max="9" name="run">
+
+                <label for="nombres">Nombres</label>
+                <input id="nombres" type="text" required max="50" name="nombres">
+
+                <label for="apellidos">Apellidos</label>
+                <input id="apellidos" type="text" max="100" name="apellidos" required>
+
+                <label for="correo">Correo</label>
+                <input id="correo" type="email" name="correo" required max="100">
+
+                <label for="fecha-nacimiento">Fecha de nacimiento</label>
+                <input id="nombre-completo" name="fecha-nacimiento" type="date">
+
+                <label for="contraseña">Contraseña</label>
+                <input type="password" name="contraseña" id="contraseña" required min="4" max="10">
+
+                <label for="confirmar-contraseña">Confirmar contraseña</label>
+                <input type="password" name="confirmar-contraseña" id="confirmar-contraseña" required min="4" max="10">                
+
+                <label for="region-registro">Región</label>
+                <select name="region" id="region-registro" required>
+                    <option value="">Seleccione su región</option>
+                </select>
+
+                <label for="comuna-registro">Comuna</label>
+                <select name="comuna" id="comuna-registro">
+                    <option value="">Seleccione su comuna</option>
+                </select>
+
+                <label for="direccion-registro">Direccion</label>
+                <input type="text" id="direccion-registro" name="direccion" required max="300">
+
+                <button type="submit">Registrarse</button>
+                <p id="mensaje-confirmacion-registro"></p>
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 - Sonido Vivo</p>
+    </footer>
+    
+</body>
+</html>
