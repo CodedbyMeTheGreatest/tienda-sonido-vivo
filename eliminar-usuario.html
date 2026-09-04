@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar usuario</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/funciones.js" defer></script>
+</head>
+<body>
+    <nav>
+            <a href="vista-admin.html">Inicio Administrador</a>
+            <a href="editar-usuario.html">Editar usuario</a>
+            <a href="nuevo-usuario.html">Nuevo usuario</a>
+    </nav>
+    <section>
+            <h2>Eliminar usuario via administrador</h2>
+            <form id="form-eliminar-admin" novalidate>
+                <label for="run-completo">RUN</label>
+                <input id="run-completo" type="text" required min="7" max="9" name="run">
+
+                <button type="submit">Eliminar usuario</button>
+                <p id="mensaje-confirmacion-eliminacion"></p>
+            </form>
+        </section>
+    
+</body>
+</html>

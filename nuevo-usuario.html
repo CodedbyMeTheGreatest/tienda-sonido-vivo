@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo usuario</title>
+        <link rel="stylesheet" href="css/style.css">
+    <script src="js/funciones.js" defer></script>
+</head>
+<body>
+    <nav>
+            <a href="vista-admin.html">Inicio Administrador</a>
+            <a href="editar-usuario.html">Editar usuario</a>
+            <a href="eliminar-usuario.html">Eliminar usuario</a>
+    </nav>
+    <section>
+            <h2>Registro de usuario via administrador</h2>
+            <form id="form-registro-admin" novalidate>
+                <label for="run-completo">RUN</label>
+                <input id="run-completo" type="text" required min="7" max="9" name="run">
+
+                <label for="nombres">Nombres</label>
+                <input id="nombres" type="text" required max="50" name="nombres">
+
+                <label for="apellidos">Apellidos</label>
+                <input id="apellidos" type="text" max="100" name="apellidos" required>
+
+                <label for="correo">Correo</label>
+                <input id="correo" type="email" name="correo" required max="100">
+
+                <label for="fecha-nacimiento">Fecha de nacimiento</label>
+                <input id="nombre-completo" name="fecha-nacimiento" type="date">
+
+                <label for="contraseña">Contraseña</label>
+                <input type="password" name="contraseña" id="contraseña" required min="4" max="10">
+
+                <label for="confirmar-contraseña">Confirmar contraseña</label>
+                <input type="password" name="confirmar-contraseña" id="confirmar-contraseña" required min="4" max="10">                
+
+                <label for="region-registro">Región</label>
+                <select name="region" id="region-registro" required>
+                    <option value="">Seleccione su región</option>
+                </select>
+
+                <label for="comuna-registro">Comuna</label>
+                <select name="comuna" id="comuna-registro">
+                    <option value="">Seleccione su comuna</option>
+                </select>
+                <label for="rol">Rol</label>
+                <select name="rol" id="rol" required>
+                    <option value="">Seleccione su rol</option>
+                    <option value="cliente">Cliente</option>
+                    <option value="administrador">Administrador</option>
+                    <option value="vendedor">Vendedor</option>
+                </select>
+
+                <label for="direccion-registro">Direccion</label>
+                <input type="text" id="direccion-registro" name="direccion" required max="300">
+
+                <button type="submit">Registrar usuario</button>
+                <p id="mensaje-confirmacion-registro-admin"></p>
+            </form>
+        </section>
+</body>
+</html>
