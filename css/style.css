@@ -404,3 +404,152 @@ body.vista-admin > .btn-enlace:hover {
     font-size: 13px;
     border-top: 2px solid #d32f2f;
 }
+
+
+/*Nuevo usuario vista admin  */
+body > nav {
+    background-color: #1a1a1a;
+    padding: 15px 5%;
+    display: flex;
+    gap: 15px;
+    border-bottom: 4px solid #d32f2f;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+body > nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+body > nav a:hover {
+    background-color: #d32f2f;
+}
+
+
+body > section {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e0e0e0;
+}
+
+body > section h2 {
+    text-align: center;
+    display: block;
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+
+#form-registro-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#form-registro-admin label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #1a1a1a;
+    margin-bottom: -5px; 
+}
+
+#form-registro-admin input,
+#form-registro-admin select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    background-color: #f8f9fa;
+    transition: border-color 0.2s;
+}
+
+
+#form-registro-admin input:focus,
+#form-registro-admin select:focus {
+    outline: none;
+    border-color: #d32f2f;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px rgba(211, 47, 47, 0.2);
+}
+
+#form-registro-admin button {
+    padding: 14px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+#form-registro-admin button:hover {
+    background-color: #b71c1c;
+}
+
+/* Editar-usuario */
+#form-editar-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#form-editar-admin label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #1a1a1a;
+    margin-bottom: -5px; 
+}
+
+#form-editar-admin input,
+#form-editar-admin select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    background-color: #f8f9fa;
+    transition: border-color 0.2s;
+}
+
+#form-editar-admin input:focus,
+#form-editar-admin select:focus {
+    outline: none;
+    border-color: #d32f2f;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px rgba(211, 47, 47, 0.2);
+}
+
+#form-editar-admin button {
+    padding: 14px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+#form-editar-admin button:hover {
+    background-color: #b71c1c;
+}
