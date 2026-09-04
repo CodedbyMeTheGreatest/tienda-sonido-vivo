@@ -304,7 +304,7 @@ footer {
 
 /* Vista admin */
 body.vista-admin {
-    background-color: #f8f9fa;
+    background-color: #e9ecef;
     padding: 20px 5%;
 }
 
@@ -318,9 +318,8 @@ body.vista-admin > .btn-enlace:hover {
     background-color: #d32f2f;
 }
 
-
 .admin-container {
-    max-width: 1000px;
+    max-width: 1400px; 
     margin: 0 auto;
 }
 
@@ -345,36 +344,40 @@ body.vista-admin > .btn-enlace:hover {
     margin: 0;
 }
 
-
 .admin-content {
-    padding: 30px;
     display: flex;
-    flex-direction: column;
-    gap: 25px;
+    flex-direction: row; 
+    gap: 30px; 
+    padding: 40px; 
+}
+
+.admin-mitad-superior,
+.admin-mitad-inferior {
+    flex: 1;
 }
 
 .admin-section {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
-    border-radius: 6px;
-    padding: 20px;
+    border-radius: 8px;
+    padding: 35px; 
+    min-height: 280px; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .admin-section h2 {
-    font-size: 20px;
-    color: #1a1a1a;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #d32f2f;
-    display: inline-block;
-    padding-bottom: 4px;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
 
 .admin-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 10px;
+    gap: 15px;
+}
+
+.admin-actions .btn-enlace {
+    padding: 12px 22px; 
+    font-size: 15px;
 }
 
 .btn-enlace {
