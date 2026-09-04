@@ -1,7 +1,7 @@
 const formularioC = document.querySelector("#form-contacto");
 const patronCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const patronTelefono = /^\+?[0-9]{8,15}$/;
-
+if(formularioC) {
 formularioC.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -70,3 +70,215 @@ formularioC.addEventListener("submit", function (e) {
         confirmacion.classList.add('texto-error');
     }
 });
+}
+
+/* INICIO SESION Y REGISTRO VISTA TIENDA*/
+
+const dominiosPermitidos = ['duoc.cl', 'profesor.duoc.cl', 'gmail.com']
+const datosRegiones = [
+    { nombre: "Arica y Parinacota", comunas: ["Arica", "Camarones", "Putre", "General Lagos"] },
+    { nombre: "Tarapacá", comunas: ["Iquique", "Alto Hospicio", "Pozo Almonte", "Pica", "Huara"] },
+    { nombre: "Antofagasta", comunas: ["Antofagasta", "Calama", "Tocopilla", "Mejillones", "San Pedro de Atacama"] },
+    { nombre: "Atacama", comunas: ["Copiapó", "Vallenar", "Caldera", "Huasco", "Chañaral"] },
+    { nombre: "Coquimbo", comunas: ["La Serena", "Coquimbo", "Ovalle", "Illapel", "Vicuña"] },
+    { nombre: "Valparaíso", comunas: ["Valparaíso", "Viña del Mar", "Quilpué", "Villa Alemana", "San Antonio", "Los Andes"] },
+    { nombre: "Región Metropolitana", comunas: ["Santiago", "La Pintana", "El Bosque", "San Bernardo", "Maipú", "Providencia", "Las Condes", "Florida"] },
+    { nombre: "O'Higgins", comunas: ["Rancagua", "Machalí", "San Fernando", "Rengo", "Pichilemu"] },
+    { nombre: "Maule", comunas: ["Talca", "Curicó", "Linares", "Constitución", "Cauquenes"] },
+    { nombre: "Ñuble", comunas: ["Chillán", "San Carlos", "Bulnes", "Quillón", "Coihueco"] },
+    { nombre: "Biobío", comunas: ["Concepción", "Talcahuano", "Los Ángeles", "San Pedro de la Paz", "Coronel", "Lota"] },
+    { nombre: "La Araucanía", comunas: ["Temuco", "Padre Las Casas", "Villarrica", "Pucón", "Angol"] },
+    { nombre: "Los Ríos", comunas: ["Valdivia", "La Unión", "Río Bueno", "Panguipulli", "Futrono"] },
+    { nombre: "Los Lagos", comunas: ["Puerto Montt", "Osorno", "Castro", "Ancud", "Puerto Varas"] },
+    { nombre: "Aysén", comunas: ["Coyhaique", "Puerto Aysén", "Cochrane", "Chile Chico"] },
+    { nombre: "Magallanes", comunas: ["Punta Arenas", "Puerto Natales", "Porvenir", "Cabo de Hornos"] }];
+
+const patronRun = /^\d{6,8}[0-9K]$/
+
+function validar(variable, esValido) {
+    if (esValido) {
+        variable.classList.remove('campo-error');
+        return true;
+    } else {
+        variable.classList.add('campo-error');
+        return false;
+    }
+}
+
+function validarCorreo(correo) {
+    
+    if(!patronCorreo.test(correo)) return false
+    const dominio = correo.split('@')[1]?.toLowerCase()
+    return dominiosPermitidos.includes(dominio)
+}
+
+function validarRun(run){
+    const runLimpio = run.trim().toUpperCase()
+    if(!patronRun.test(runLimpio)) return false
+    return true
+
+}
+
+function cargarRegiones() {
+    const region = document.querySelector("#region-registro");
+    if (!region) return;
+
+    datosRegiones.forEach(reg => {
+        const opcion = document.createElement("option");
+        opcion.value = reg.nombre;
+        opcion.textContent = reg.nombre;
+        region.appendChild(opcion);
+    });
+}
+
+function cargarComunas(regionSeleccionada) {
+    const comuna = document.querySelector("#comuna-registro");
+    comuna.innerHTML = '<option value="">Seleccione su comuna</option>';
+
+    const regionEncontrada = datosRegiones.find(r => r.nombre === regionSeleccionada);
+    
+    if (regionEncontrada) {
+        regionEncontrada.comunas.forEach(com => {
+            const opcion = document.createElement("option");
+            opcion.value = com;
+            opcion.textContent = com;
+            comuna.appendChild(opcion);
+        });
+    }
+}
+
+
+if(document.querySelector("#inicio-sesion")) {
+
+    const formularioIS = document.querySelector("#inicio-sesion")
+
+    formularioIS.addEventListener("submit", function(e) {
+        e.preventDefault()
+
+        const correo = document.querySelector("#correo")
+        const contraseña = document.querySelector("#contraseña")
+        const mensaje = document.querySelector("#mensaje-confirmacion-login")
+
+        let formularioValido = true
+
+        if(!validar(correo,validarCorreo(correo.value))){
+            formularioValido = false
+        }
+
+
+        const contraseñaLimpia = contraseña.value.trim()
+        if (!validar(contraseña, contraseñaLimpia.length >= 4 && contraseñaLimpia.length <= 10)){
+            formularioValido = false
+        }
+
+        if (formularioValido){
+            mensaje.textContent = "Validacion exitosa. Iniciando sesion..."
+            mensaje.classList.remove('texto-error')
+            mensaje.classList.add('texto-exito')
+        } else{
+            mensaje.textContent = "Por favor, revise los campos marcados."
+            mensaje.classList.remove('texto-exito')
+            mensaje.classList.add('texto-error')
+            
+        }
+    }
+)}
+
+
+if(document.querySelector("#form-registro")){
+
+    const formularioReg = document.querySelector("#form-registro")
+    cargarRegiones();
+
+    const selectRegion = document.querySelector("#region-registro")
+    selectRegion.addEventListener("change", function(e) {
+        cargarComunas(e.target.value);
+    });
+
+
+    formularioReg.addEventListener("submit", function (e) {
+        e.preventDefault()
+
+        let formularioValido = true
+
+        const run = document.querySelector("#run-completo")
+        const nombres = document.querySelector("#nombres")
+        const apellidos = document.querySelector("#apellidos")
+        const correo = document.querySelector("#correo")
+        const fechaNac = document.querySelector("#fecha-nacimiento")
+        const region = document.querySelector("#region-registro")
+        const comuna = document.querySelector("#comuna-registro")        
+        const direccion = document.querySelector("#direccion-registro")
+        const contraseña = document.querySelector("#contraseña")
+        const confirmarContra = document.querySelector("#confirmar-contraseña")
+
+
+        const mensajeReg = document.querySelector("#mensaje-confirmacion-registro")
+        
+        if(!validar(run,validarRun(run.value))){
+            formularioValido = false
+        }
+
+        const nombresLimpios = nombres.value.trim()
+        if(!validar(nombres, nombresLimpios.length >0 && nombresLimpios.length<=50)){
+            formularioValido=false
+        }
+
+        if(!validar(correo,validarCorreo(correo.value) && correo.value.length > 0 && correo.value.length <=100)){
+            formularioValido=false
+        }
+
+        const apellidosLimpios = apellidos.value.trim()
+        if(!validar(apellidos,apellidosLimpios.length>0 && apellidosLimpios.length<=100)){
+            formularioValido=false
+        }
+
+        if(fechaNac.value !== ""){
+            validar(fechaNac, true)
+        }
+
+        const direccionLimpia = direccion.value.trim()
+        if(!validar(direccion,direccionLimpia.length > 0 && direccionLimpia.length <= 300)){
+            formularioValido=false
+        }
+
+        const contraseñaLimpia=contraseña.value.trim()
+        const confirmarContraLimpia = confirmarContra.value.trim()
+        const contraseñasValidas = contraseñaLimpia.length >=4 && contraseñaLimpia.length <=10 && contraseñaLimpia == confirmarContraLimpia;
+
+        if(!validar(contraseña, contraseñasValidas)){
+            formularioValido=false
+        }
+        if(!validar(confirmarContra, contraseñasValidas)){
+            formularioValido=false
+        }
+
+
+        if(!validar(region,region.value !=="")){
+            formularioValido=false
+        }
+
+        if(!validar(comuna,comuna.value !=="")){
+            formularioValido=false
+        }
+
+        if(formularioValido){
+            mensajeReg.textContent="Registro validado exitosamente."
+            mensajeReg.classList.remove('texto-error')
+            mensajeReg.classList.add('texto-exito')
+        } else {
+            mensajeReg.textContent="Hay errores en el formulario. Por favor verifique los campos marcados."
+            mensajeReg.classList.remove('texto-exito')
+            mensajeReg.classList.add('texto-error')
+        }
+
+
+
+        
+            
+    
+    })
+
+    }
+
+
