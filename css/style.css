@@ -16,6 +16,22 @@
     font-weight: bold;
 }
 
+/*PAGINA PRINCIPAL*/
+
+/*Categorias*/
+
+.grilla-categorias {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 30px, 10%;
+}
+
+.categoria p, .categoria img{
+    width: 100%;
+    text-align: center;
+}
+
 /*CATALOGO Y PRODUCTOS*/
 
 .grilla-productos {
@@ -44,8 +60,6 @@
 }
 
 /*DETALLE PRODUCTOS*/
-
-/*test*/
 
 /* Contenedor del producto (Layout de 2 columnas) */
 .detalle-producto {
