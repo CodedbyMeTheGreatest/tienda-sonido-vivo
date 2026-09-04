@@ -553,3 +553,54 @@ body > section h2 {
 #form-editar-admin button:hover {
     background-color: #b71c1c;
 }
+
+/* eliminar-usuario */
+#form-eliminar-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#form-eliminar-admin label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #1a1a1a;
+    margin-bottom: -5px; 
+}
+
+#form-eliminar-admin input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    background-color: #f8f9fa;
+    transition: border-color 0.2s;
+}
+
+#form-eliminar-admin input:focus {
+    outline: none;
+    border-color: #d32f2f;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px rgba(211, 47, 47, 0.2);
+}
+
+
+#form-eliminar-admin button {
+    padding: 14px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+#form-eliminar-admin button:hover {
+    background-color: #b71c1c;
+}
