@@ -13,6 +13,9 @@
         <nav>
             <a href="index.html">Página Principal</a>
             <a href="catalogo.html">Catálogo</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="blog.html">Blogs</a>
+            <a href="#contacto">Contacto</a>
             <a href="compra.html">Carrito</a>
         </nav>        
     </header>
@@ -21,11 +24,11 @@
         <section>
             <h2>Inicio de sesion</h2>
             <form id="inicio-sesion" novalidate>
-                <label for="correo-login">Correo</label>
-                <input type="email" name="correo" id="correo" max="100" required>
+                <label for="correo">Correo</label>
+                <input type="email" name="correo" id="correo" minlength="5" maxlength="100" required>
 
-                <label for="contraseña-login">Contraseña</label>
-                <input type="password" id="contraseña" name="contraseña" min="4" max="10" required>
+                <label for="contraseña">Contraseña</label>
+                <input type="password" id="contraseña" name="contraseña" minlength="4" maxlength="10" required>
 
                 <button type="submit">Iniciar sesion</button>
                 <p id="mensaje-confirmacion-login"></p>
