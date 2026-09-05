@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Productos - Sonido Vivo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/funciones.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <nav class="nav-admin-productos">
+            <a href="vista-admin.html">Inicio Administrador</a>
+            <a href="agregar-producto.html">Agregar Productos</a>
+            <a href="editar-producto.html">Editar Productos</a>
+            <a href="eliminar-producto.html">Eliminar Productos</a>
+        </nav>
+    </header>
+    <main>
+           <section>
+            <h2>Nuevo Producto</h2>
+            <form class="admin-form" id="form-registro-admin" novalidate>
+                <label for="codigo-producto">Código</label>
+                <input id="codigo-producto" type="text" min="3" name="codigo-producto" required>
+
+                <label for="nombre-producto">Nombre</label>
+                <input id="nombre-producto" type="text" max="100" name="nombre-producto" required>
+
+                <label for="descripcion-producto">Descripción</label>
+                <input id="descripcion-producto" type="text" max="500" name="descripcion-producto" required>
+
+                <label for="precio-producto">Precio</label>
+                <input id="precio-producto" type="number" name="precio-producto"  max="100" required>
+
+                <label for="stock-producto">Stock</label>
+                <input id="stock-producto" name="stock-producto" type="number" min=0 required>
+
+                <label for="stock-critico-producto">Stock Crítico</label>
+                <input id="stock-critico-producto" name="stock-critico-producto" type="number" min=0>
+
+                <label for="categoria-producto">Categoría</label>
+                <input name="categoria-producto" id="categoria-producto" type="password" min="4" max="10" required>
+
+                <label for="categoria-producto">Categoría</label>
+                <select name="categoria-producto" id="categoria-producto" required>
+                    <option value="0">Seleccione la categoría</option>
+                    <option value="1">Guitarras Acústicas</option>
+                    <option value="2">Guitarras Eléctricas</option>
+                    <option value="3">Bajos Eléctricos</option>
+                    <option value="4">Baterias</option>
+                    <option value="5">Teclados y Pianos</option>
+                    <option value="6">Amplificadores</option>
+                    <option value="7">Micrófonos</option>
+                    <option value="8">Pedales de Efectos</option>
+                    <option value="9">Accesorios</option>
+                    <option value="10">Estudio y Grabación</option>
+                </select>
+
+                <label for="imagen-producto">Imagen</label>
+                <input id="imagen-producto" name="imagen-producto" type="file" accept="image/*">
+
+                <button type="submit">Agregar Producto</button>
+                <p id="mensaje-confirmacion-registro-admin"></p>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>© 2026 - Sonido Vivo</p>
+    </footer>
+</body>
+
+</html>

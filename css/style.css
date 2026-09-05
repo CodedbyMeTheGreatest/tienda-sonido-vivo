@@ -1,16 +1,19 @@
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
 #form-contacto .campo-error {
-  border: 2px solid #e53935;
-  background-color: #ffebee;
+    border: 2px solid #e53935;
+    background-color: #ffebee;
 }
+
 .texto-exito {
     color: green;
     font-weight: bold;
 }
+
 .texto-error {
     color: red;
     font-weight: bold;
@@ -27,10 +30,7 @@
     padding: 30px, 10%;
 }
 
-.categoria p, .categoria img{
-    width: 100%;
-    text-align: center;
-}
+
 /* Tipografía y fondo general */
 body {
     font-family: Arial, sans-serif;
@@ -85,7 +85,6 @@ main section h2 {
     margin-bottom: 20px;
 }
 
-
 .categoria {
     background-color: #f1f1f1;
     border: 1px solid #e0e0e0;
@@ -99,13 +98,13 @@ main section h2 {
     border-color: #d32f2f;
 }
 
+.categoria p,
 .categoria img {
-    max-height: 100px;
-    object-fit: contain;
-    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
 }
 
-#categorias > a {
+#categorias>a {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 20px;
@@ -116,7 +115,7 @@ main section h2 {
     border-radius: 4px;
 }
 
-#categorias > a:hover {
+#categorias>a:hover {
     background-color: #b71c1c;
 }
 
@@ -175,28 +174,51 @@ footer {
 /*CATALOGO Y PRODUCTOS*/
 
 .grilla-productos {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
-  padding: 30px 10%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    padding: 10px;
 }
 
-.grilla-productos > a{
-  text-decoration: none;
-  color: inherit;
+.grilla-productos>a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .producto {
-  background: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  padding: 20px;
-  text-align: center;
+    background-color: #f1f1f1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    transition: transform 0.2s, border-color 0.2s;
 }
 
 .producto:hover {
-  box-shadow: 0 6px 18px rgba(0,0,0,0.14);
-  transform: translateY(-2px);
-  text-decoration: underline;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+    transform: translateY(-4px);
+    text-decoration: underline;
+}
+
+.producto{
+    height: 100%;
+}
+
+.boton-catalogo-añadir-producto {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 5px 10px;
+    background-color: #d32f2f;
+    transition: background-color 0.2s;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.boton-catalogo-añadir-producto:hover {
+    background-color: #b71c1c;
 }
 
 /*DETALLE PRODUCTOS*/
@@ -271,12 +293,17 @@ footer {
 /* Columna Derecha: Botón */
 .boton-detalle-producto button {
     width: 100%;
-    background-color: #3b82f6;
+    background-color: #d32f2f;
     color: white;
-    border: 2px solid grey;
+    border-radius: 4px;
     padding: 15px;
     font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.boton-detalle-producto button:hover {
+    background-color: #b71c1c;
 }
 
 
@@ -309,17 +336,17 @@ body.vista-admin {
 }
 
 
-body.vista-admin > .btn-enlace {
+body.vista-admin>.btn-enlace {
     background-color: #1a1a1a;
     margin-bottom: 20px;
 }
 
-body.vista-admin > .btn-enlace:hover {
+body.vista-admin>.btn-enlace:hover {
     background-color: #d32f2f;
 }
 
 .admin-container {
-    max-width: 1400px; 
+    max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -346,9 +373,9 @@ body.vista-admin > .btn-enlace:hover {
 
 .admin-content {
     display: flex;
-    flex-direction: row; 
-    gap: 30px; 
-    padding: 40px; 
+    flex-direction: row;
+    gap: 30px;
+    padding: 40px;
 }
 
 .admin-mitad-superior,
@@ -360,8 +387,8 @@ body.vista-admin > .btn-enlace:hover {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    padding: 35px; 
-    min-height: 280px; 
+    padding: 35px;
+    min-height: 280px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -376,7 +403,7 @@ body.vista-admin > .btn-enlace:hover {
 }
 
 .admin-actions .btn-enlace {
-    padding: 12px 22px; 
+    padding: 12px 22px;
     font-size: 15px;
 }
 
@@ -407,7 +434,7 @@ body.vista-admin > .btn-enlace:hover {
 
 
 /*Nuevo usuario vista admin  */
-body > nav {
+body>nav {
     background-color: #1a1a1a;
     padding: 15px 5%;
     display: flex;
@@ -417,7 +444,7 @@ body > nav {
     justify-content: center;
 }
 
-body > nav a {
+body>nav a {
     color: white;
     text-decoration: none;
     font-weight: bold;
@@ -427,12 +454,12 @@ body > nav a {
     transition: background-color 0.3s;
 }
 
-body > nav a:hover {
+body>nav a:hover {
     background-color: #d32f2f;
 }
 
 
-body > section {
+body>section {
     max-width: 800px;
     margin: 0 auto;
     background-color: #ffffff;
@@ -442,7 +469,7 @@ body > section {
     border: 1px solid #e0e0e0;
 }
 
-body > section h2 {
+body>section h2 {
     text-align: center;
     display: block;
     margin-bottom: 25px;
@@ -450,7 +477,7 @@ body > section h2 {
 }
 
 
-#form-registro-admin {
+.admin-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -458,15 +485,15 @@ body > section h2 {
     margin: 0 auto;
 }
 
-#form-registro-admin label {
+.admin-form label {
     font-weight: bold;
     font-size: 14px;
     color: #1a1a1a;
-    margin-bottom: -5px; 
+    margin-bottom: -5px;
 }
 
-#form-registro-admin input,
-#form-registro-admin select {
+.admin-form input,
+.admin-form select {
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -476,16 +503,15 @@ body > section h2 {
     transition: border-color 0.2s;
 }
 
-
-#form-registro-admin input:focus,
-#form-registro-admin select:focus {
+.admin-form input:focus,
+.admin-form select:focus {
     outline: none;
     border-color: #d32f2f;
     background-color: #ffffff;
     box-shadow: 0 0 5px rgba(211, 47, 47, 0.2);
 }
 
-#form-registro-admin button {
+.admin-form button {
     padding: 14px;
     background-color: #d32f2f;
     color: white;
@@ -498,113 +524,34 @@ body > section h2 {
     transition: background-color 0.2s;
 }
 
-#form-registro-admin button:hover {
+.admin-form button:hover {
     background-color: #b71c1c;
 }
 
-/* Editar-usuario */
-#form-editar-admin {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 600px;
-    margin: 0 auto;
-}
+/** ADMIN Productos**/
 
-#form-editar-admin label {
-    font-weight: bold;
-    font-size: 14px;
-    color: #1a1a1a;
-    margin-bottom: -5px; 
-}
-
-#form-editar-admin input,
-#form-editar-admin select {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
+.nav-admin-productos {
+    background-color: rgb(26, 26, 26);
     width: 100%;
-    background-color: #f8f9fa;
-    transition: border-color 0.2s;
-}
-
-#form-editar-admin input:focus,
-#form-editar-admin select:focus {
-    outline: none;
-    border-color: #d32f2f;
-    background-color: #ffffff;
-    box-shadow: 0 0 5px rgba(211, 47, 47, 0.2);
-}
-
-#form-editar-admin button {
-    padding: 14px;
-    background-color: #d32f2f;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.2s;
-}
-
-#form-editar-admin button:hover {
-    background-color: #b71c1c;
-}
-
-/* eliminar-usuario */
-#form-eliminar-admin {
     display: flex;
-    flex-direction: column;
     gap: 15px;
-    max-width: 600px;
-    margin: 0 auto;
+    justify-content: center;
 }
 
-#form-eliminar-admin label {
-    font-weight: bold;
-    font-size: 14px;
-    color: #1a1a1a;
-    margin-bottom: -5px; 
-}
-
-#form-eliminar-admin input {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    width: 100%;
-    background-color: #f8f9fa;
-    transition: border-color 0.2s;
-}
-
-#form-eliminar-admin input:focus {
-    outline: none;
-    border-color: #d32f2f;
-    background-color: #ffffff;
-    box-shadow: 0 0 5px rgba(211, 47, 47, 0.2);
-}
-
-
-#form-eliminar-admin button {
-    padding: 14px;
-    background-color: #d32f2f;
+.nav-admin-productos a {
     color: white;
-    border: none;
-    border-radius: 4px;
+    justify-content: center;
+    text-decoration: none;
     font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.2s;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s;
 }
 
-#form-eliminar-admin button:hover {
-    background-color: #b71c1c;
+.nav-admin-productos a:hover {
+    background-color: rgb(211, 47, 47);
 }
-
 
 /*BLOG*/
 .blog-header {
@@ -660,7 +607,6 @@ body > section h2 {
     padding-bottom: 8px;
 }
 
-
 .blog-entries {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -669,7 +615,6 @@ body > section h2 {
     margin: 0 auto;
     text-align: left;
 }
-
 
 .blog-entry {
     background-color: #ffffff;
@@ -681,7 +626,6 @@ body > section h2 {
     flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 
 .blog-entry:hover {
     transform: translateY(-5px);
@@ -703,7 +647,6 @@ body > section h2 {
     flex-grow: 1;
 }
 
-
 .blog-entry a {
     display: inline-block;
     align-self: flex-start;
@@ -720,4 +663,3 @@ body > section h2 {
 .blog-entry a:hover {
     background-color: #b71c1c;
 }
-
