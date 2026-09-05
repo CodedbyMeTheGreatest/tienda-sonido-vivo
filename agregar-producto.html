@@ -24,30 +24,37 @@
             <form class="admin-form" id="form-registro-producto-admin" novalidate>
                 <label for="codigo-producto">Código</label>
                 <input id="codigo-producto" name="codigo-producto" type="text" minlength="3" required>
+                <span class="error" id="error-codigo-producto"></span>
 
                 <label for="nombre-producto">Nombre</label>
                 <input id="nombre-producto" name="nombre-producto" type="text" maxlength="100" required>
+                <span class="error" id="error-nombre-producto"></span>
 
                 <label for="descripcion-producto">Descripción</label>
                 <input id="descripcion-producto" name="descripcion-producto" type="text" maxlength="500" required>
+                <span class="error" id="error-descripcion-producto"></span>
 
                 <label for="precio-producto">Precio</label>
-                <input id="precio-producto" name="precio-producto" type="number" min="0" max="10000000" step="1"
-                    required>
+                <input id="precio-producto" name="precio-producto" type="number" min="0" max="10000000" step="1" required>
+                <span class="error" id="error-precio-producto"></span>
 
                 <label for="stock-producto">Stock</label>
                 <input id="stock-producto" name="stock-producto" type="number" min="0" required>
+                <span class="error" id="error-stock-producto"></span>
 
                 <label for="stock-critico-producto">Stock Crítico</label>
                 <input id="stock-critico-producto" name="stock-critico-producto" type="number" min="0">
+                <span class="error" id="error-stock-critico-producto"></span>
 
                 <label for="categoria-producto">Categoría</label>
                 <select id="categoria-producto" name="categoria-producto" required>
                     <option value="">Seleccione la categoría</option>
                 </select>
+                <span class="error" id="error-categoria-producto"></span>
 
                 <label for="imagen-producto">Imagen</label>
                 <input id="imagen-producto" name="imagen-producto" type="file" accept="image/*">
+                <span class="error" id="error-imagen-producto"></span>
 
                 <button type="submit">Agregar Producto</button>
                 <p class="mensaje-confirmacion-admin-form" id="mensaje-confirmacion-registro-producto-admin"></p>

@@ -23,7 +23,9 @@
             <h2>Eliminar Producto</h2>
             <form class="admin-form" id="form-eliminar-producto-admin" novalidate>
                 <label for="codigo-producto">Código</label>
-                <input id="codigo-producto" type="text" required min="7" max="9" name="run">
+                <input id="codigo-producto" name="codigo-producto" type="text" minlength="3" required>
+                <span class="error" id="error-codigo-producto"></span>
+
 
                 <button type="submit">Eliminar usuario</button>
                 <p class="mensaje-confirmacion-admin-form" id="mensaje-confirmacion-eliminar-producto-admin"></p>

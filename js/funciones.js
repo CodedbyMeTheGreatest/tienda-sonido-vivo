@@ -74,7 +74,7 @@ const validador = {
 };
 
 const UI = {
-marcarCampo: (elemento, esValido, idError = null, mensaje = '') => {
+    marcarCampo: (elemento, esValido, idError = null, mensaje = '') => {
         if (!elemento) return;
         elemento.classList.toggle('campo-error', !esValido);
 
@@ -208,64 +208,64 @@ if (formRegistro) {
 
     formRegistro.addEventListener("submit", (e) => {
         e.preventDefault();
-        const el = formRegistro.elements;
+        const elementos = formRegistro.elements;
         const mensajeReg = document.querySelector("#mensaje-confirmacion-registro");
 
-        const passCoincide = validador.coinciden(el["contraseña"]?.value, el["confirmar-contraseña"]?.value);
-        const passLongitud = validador.esTextoValido(el["contraseña"]?.value, 4, 10);
+        const passCoincide = validador.coinciden(elementos["contraseña"]?.value, elementos["confirmar-contraseña"]?.value);
+        const passLongitud = validador.esTextoValido(elementos["contraseña"]?.value, 4, 10);
 
         const validaciones = [
             {
-                elemento: el["run-completo"] || el["run"],
-                estado: validador.esRunValido((el["run-completo"] || el["run"])?.value),
+                elemento: elementos["run-completo"] || elementos["run"],
+                estado: validador.esRunValido((elementos["run-completo"] || elementos["run"])?.value),
                 idError: "error-run",
                 mensaje: "RUN inválido. Ingrese su RUN sin puntos ni guion (7 a 9 caracteres)."
             },
             {
-                elemento: el["nombres"],
-                estado: validador.esTextoValido(el["nombres"]?.value, 1, 50),
+                elemento: elementos["nombres"],
+                estado: validador.esTextoValido(elementos["nombres"]?.value, 1, 50),
                 idError: "error-nombres",
                 mensaje: "Los nombres tienen un máximo de 50 caracteres."
             },
             {
-                elemento: el["apellidos"],
-                estado: validador.esTextoValido(el["apellidos"]?.value, 1, 100),
+                elemento: elementos["apellidos"],
+                estado: validador.esTextoValido(elementos["apellidos"]?.value, 1, 100),
                 idError: "error-apellidos",
                 mensaje: "Los apellidos tienen un máximo de 100 caracteres."
             },
             {
-                elemento: el["correo"],
-                estado: validador.esCorreoValido(el["correo"]?.value) && (el["correo"]?.value.length <= 100),
+                elemento: elementos["correo"],
+                estado: validador.esCorreoValido(elementos["correo"]?.value) && (elementos["correo"]?.value.length <= 100),
                 idError: "error-correo",
                 mensaje: "Correo inválido. Solo dominios @duocuc.cl, @profesor.duoc.cl, @gmail.com, @example.com."
             },
             {
-                elemento: el["direccion-registro"] || el["direccion"],
-                estado: validador.esTextoValido((el["direccion-registro"] || el["direccion"])?.value, 1, 300),
+                elemento: elementos["direccion-registro"] || elementos["direccion"],
+                estado: validador.esTextoValido((elementos["direccion-registro"] || elementos["direccion"])?.value, 1, 300),
                 idError: "error-direccion",
                 mensaje: "La dirección tiene un máximo de 300 caracteres."
             },
             {
-                elemento: el["region-registro"],
-                estado: validador.esTextoValido(el["region-registro"]?.value),
+                elemento: elementos["region-registro"],
+                estado: validador.esTextoValido(elementos["region-registro"]?.value),
                 idError: "error-region",
                 mensaje: "Por favor seleccione una región."
             },
             {
-                elemento: el["comuna-registro"],
-                estado: validador.esTextoValido(el["comuna-registro"]?.value),
+                elemento: elementos["comuna-registro"],
+                estado: validador.esTextoValido(elementos["comuna-registro"]?.value),
                 idError: "error-comuna",
                 mensaje: "Por favor seleccione una comuna."
             },
             {
-                elemento: el["contraseña"],
+                elemento: elementos["contraseña"],
                 estado: passLongitud,
                 idError: "error-contraseña",
                 mensaje: "La contraseña debe tener entre 4 y 10 caracteres."
             },
             {
-                elemento: el["confirmar-contraseña"] || el["confirmarContra"],
-                estado: passCoincide && validador.esTextoValido((el["confirmar-contraseña"] || el["confirmarContra"])?.value),
+                elemento: elementos["confirmar-contraseña"] || elementos["confirmarContra"],
+                estado: passCoincide && validador.esTextoValido((elementos["confirmar-contraseña"] || elementos["confirmarContra"])?.value),
                 idError: "error-confirmar-con",
                 mensaje: "Las contraseñas no coinciden."
             }
@@ -291,7 +291,7 @@ function validadorFormularioProducto(idForm, idMensaje, mensajeExito, limpiarAlE
     const form = document.querySelector(idForm);
     if (!form) return;
 
-    const selectCategoria = form.querySelector("[name='categoria-producto']");
+    const selectCategoria = form.querySelector("#categoria-producto");
     if (selectCategoria) {
         UI.poblarSelect(selectCategoria, CATEGORIAS_PRODUCTO, "Seleccione la categoría");
     }
@@ -382,3 +382,35 @@ validadorFormularioProducto(
     "Producto actualizado correctamente.",
     false
 );
+
+const formEliminarProducto = document.querySelector("#form-eliminar-producto-admin");
+
+if (formEliminarProducto) {
+    formEliminarProducto.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const elementos = formEliminarProducto.elements;
+        const mensajeEliminar = document.querySelector("#mensaje-confirmacion-eliminar-producto-admin");
+
+        const validaciones = [
+            {
+                elemento: elementos["codigo-producto"],
+                estado: validador.esTextoValido(elementos["codigo-producto"]?.value, 3),
+                idError: "error-codigo-producto",
+                mensaje: "El código del producto debe tener al menos 3 caracteres."
+            }
+        ];
+
+        let esFormularioValido = true;
+        validaciones.forEach(({ elemento, estado, idError, mensaje }) => {
+            UI.marcarCampo(elemento, estado, idError, mensaje);
+            if (!estado) esFormularioValido = false;
+        });
+
+        if (esFormularioValido) {
+            UI.mostrarMensaje(mensajeEliminar, "Producto eliminado correctamente.", true);
+            formEliminarProducto.reset();
+        } else {
+            UI.mostrarMensaje(mensajeEliminar, "Por favor verifique el código ingresado.", false);
+        }
+    });
+}
