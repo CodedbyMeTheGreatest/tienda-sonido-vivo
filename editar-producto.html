@@ -18,7 +18,43 @@
             <a href="eliminar-producto.html">Eliminar Productos</a>
         </nav>
     </header>
-    <main></main>
+    <main>
+        <section>
+            <h2>Editar Producto</h2>
+            <form class="admin-form" id="form-editar-producto-admin" novalidate>
+                <label for="codigo-producto">Código</label>
+                <input id="codigo-producto" name="codigo-producto" type="text" minlength="3" required>
+
+                <label for="nombre-producto">Nombre</label>
+                <input id="nombre-producto" name="nombre-producto" type="text" maxlength="100" required>
+
+                <label for="descripcion-producto">Descripción</label>
+                <input id="descripcion-producto" name="descripcion-producto" type="text" maxlength="500" required>
+
+                <label for="precio-producto">Precio</label>
+                <input id="precio-producto" name="precio-producto" type="number" min="0" max="10000000" step="1"
+                    required>
+
+                <label for="stock-producto">Stock</label>
+                <input id="stock-producto" name="stock-producto" type="number" min="0" required>
+
+                <label for="stock-critico-producto">Stock Crítico</label>
+                <input id="stock-critico-producto" name="stock-critico-producto" type="number" min="0">
+
+                <label for="categoria-producto">Categoría</label>
+                <select id="categoria-producto" name="categoria-producto" required>
+                    <option value="">Seleccione la categoría</option>
+                </select>
+
+                <label for="imagen-producto">Imagen</label>
+                <input id="imagen-producto" name="imagen-producto" type="file" accept="image/*">
+
+                <button type="submit">Agregar Producto</button>
+                <p class="mensaje-confirmacion-admin-form" id="mensaje-confirmacion-editar-producto-admin"></p>
+            </form>
+
+        </section>
+    </main>
     <footer>
         <p>© 2026 - Sonido Vivo</p>
     </footer>

@@ -4,7 +4,7 @@
     padding: 0;
 }
 
-#form-contacto .campo-error {
+.campo-error {
     border: 2px solid #e53935;
     background-color: #ffebee;
 }
@@ -17,6 +17,14 @@
 .texto-error {
     color: red;
     font-weight: bold;
+}
+
+/*Campo error especialmente para forms de admin*/
+.admin-form input.campo-error,
+.admin-form select.campo-error,
+.admin-form textarea.campo-error {
+    border: 2px solid #e53935;
+    background-color: #ffebee;
 }
 
 /*PAGINA PRINCIPAL*/
@@ -434,7 +442,7 @@ body.vista-admin>.btn-enlace:hover {
 
 
 /*Nuevo usuario vista admin  */
-body>nav {
+body > nav {
     background-color: #1a1a1a;
     padding: 15px 5%;
     display: flex;
@@ -444,7 +452,7 @@ body>nav {
     justify-content: center;
 }
 
-body>nav a {
+body > nav a {
     color: white;
     text-decoration: none;
     font-weight: bold;
@@ -454,12 +462,12 @@ body>nav a {
     transition: background-color 0.3s;
 }
 
-body>nav a:hover {
+body > nav a:hover {
     background-color: #d32f2f;
 }
 
 
-body>section {
+body > section {
     max-width: 800px;
     margin: 0 auto;
     background-color: #ffffff;
@@ -469,7 +477,7 @@ body>section {
     border: 1px solid #e0e0e0;
 }
 
-body>section h2 {
+body > section h2 {
     text-align: center;
     display: block;
     margin-bottom: 25px;

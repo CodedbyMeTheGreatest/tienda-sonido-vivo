@@ -1,81 +1,12 @@
-const formularioC = document.querySelector("#form-contacto");
-const patronCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const patronTelefono = /^\+?[0-9]{8,15}$/;
-if(formularioC) {
-formularioC.addEventListener("submit", function (e) {
-    e.preventDefault();
+const DOMINIOS_PERMITIDOS = ['duocuc.cl', 'profesor.duoc.cl', 'gmail.com', 'example.com'];
 
-  
-    const camposRequeridos = document.querySelectorAll("#form-contacto [required]");
-    Array.from(camposRequeridos).forEach(function (campo) {
-        if (campo.value.trim() === "") {
-            campo.classList.add('campo-error');
-        } else {
-            campo.classList.remove('campo-error');
-        }
-    });
-
-    const correo = document.querySelector("#correo-contacto");
-    if (correo.value.trim() !== '') {
-        if (!patronCorreo.test(correo.value.trim())) {
-            correo.classList.add('campo-error');
-        } else {
-            correo.classList.remove('campo-error');
-        }
-    }
-
-  
-    const nombre = document.querySelector("#nombre-contacto");
-    if (nombre.value.trim() !== '') {
-        if (nombre.value.trim().length < 3) {
-            nombre.classList.add('campo-error');
-        } else {
-            nombre.classList.remove('campo-error');
-        }
-    }
-
-   
-    const telefono = document.querySelector("#telefono-contacto");
-    if (telefono.value.trim() !== '') {
-        if (!patronTelefono.test(telefono.value.trim())) {
-            telefono.classList.add('campo-error');
-        } else {
-            telefono.classList.remove('campo-error');
-        }
-    }
-
-   
-    const mensaje = document.querySelector("#mensaje-contacto");
-    if (mensaje.value.trim() !== '') {
-        if (mensaje.value.trim().length < 10) {
-            mensaje.classList.add('campo-error');
-        } else {
-            mensaje.classList.remove('campo-error');
-        }
-    }
-
-   
-    const errores = document.querySelectorAll("#form-contacto .campo-error");
-    const confirmacion = document.querySelector("#mensaje-confirmacion");
-
- 
-    if (errores.length === 0) {
-        confirmacion.textContent = 'Muchas gracias por contactarse con nosotros, su mensaje fue enviado con éxito.';
-        confirmacion.classList.remove('texto-error');
-        confirmacion.classList.add('texto-exito');
-        formularioC.reset(); 
-    } else {
-        confirmacion.textContent = 'Por favor, revise los campos marcados.';
-        confirmacion.classList.remove('texto-exito');
-        confirmacion.classList.add('texto-error');
-    }
-});
+const PATRONES = {
+    correo: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    telefono: /^\+?[0-9]{8,15}$/,
+    run: /^\d{6,8}[0-9K]$/i
 }
 
-/* INICIO SESION Y REGISTRO VISTA TIENDA*/
-
-const dominiosPermitidos = ['duoc.cl', 'profesor.duoc.cl', 'gmail.com']
-const datosRegiones = [
+const DATOS_REGIONES = [
     { nombre: "Arica y Parinacota", comunas: ["Arica", "Camarones", "Putre", "General Lagos"] },
     { nombre: "Tarapacá", comunas: ["Iquique", "Alto Hospicio", "Pozo Almonte", "Pica", "Huara"] },
     { nombre: "Antofagasta", comunas: ["Antofagasta", "Calama", "Tocopilla", "Mejillones", "San Pedro de Atacama"] },
@@ -86,196 +17,368 @@ const datosRegiones = [
     { nombre: "O'Higgins", comunas: ["Rancagua", "Machalí", "San Fernando", "Rengo", "Pichilemu"] },
     { nombre: "Maule", comunas: ["Talca", "Curicó", "Linares", "Constitución", "Cauquenes"] },
     { nombre: "Ñuble", comunas: ["Chillán", "San Carlos", "Bulnes", "Quillón", "Coihueco"] },
-    { nombre: "Biobío", comunas: ["Concepción", "Talcahuano", "Los Ángeles", "San Pedro de la Paz", "Coronel", "Lota"] },
+    { nombre: "Biobío", comunas: ["Concepción", "Talcahuano", "Los Ángeles", "San Pedro de La Paz", "Coronel", "Lota"] },
     { nombre: "La Araucanía", comunas: ["Temuco", "Padre Las Casas", "Villarrica", "Pucón", "Angol"] },
     { nombre: "Los Ríos", comunas: ["Valdivia", "La Unión", "Río Bueno", "Panguipulli", "Futrono"] },
     { nombre: "Los Lagos", comunas: ["Puerto Montt", "Osorno", "Castro", "Ancud", "Puerto Varas"] },
     { nombre: "Aysén", comunas: ["Coyhaique", "Puerto Aysén", "Cochrane", "Chile Chico"] },
-    { nombre: "Magallanes", comunas: ["Punta Arenas", "Puerto Natales", "Porvenir", "Cabo de Hornos"] }];
+    { nombre: "Magallanes", comunas: ["Punta Arenas", "Puerto Natales", "Porvenir", "Cabo de Hornos"] }
+];
 
-const patronRun = /^\d{6,8}[0-9K]$/
+const CATEGORIAS_PRODUCTO = [
+    { id: "GT-ACU", nombre: "Guitarras Acústicas" },
+    { id: "GT-ELE", nombre: "Guitarras Eléctricas" },
+    { id: "BJ-ELE", nombre: "Bajos Eléctricos" },
+    { id: "BAT-PERC", nombre: "Baterias" },
+    { id: "TC-PIA", nombre: "Teclados y Pianos" },
+    { id: "AMP", nombre: "Amplificadores" },
+    { id: "MIC", nombre: "Micrófonos" },
+    { id: "PD-FX", nombre: "Pedales de Efectos" },
+    { id: "ACC-MUS", nombre: "Accesorios" },
+    { id: "EST-GRAB", nombre: "Estudio y Grabación" }
+]
 
-function validar(variable, esValido,idError, mensaje) {
-    const spanError = document.getElementById(idError)
-    if (esValido) {
-        variable.classList.remove('campo-error');
-        if(spanError)spanError.textContent = ''
-        return true;
-    } else {
-        variable.classList.add('campo-error');
-        if(spanError)spanError.textContent = mensaje
-        return false;
+
+const validador = {
+    esTextoValido: (val, min = 1, max = Infinity) => {
+        const texto = val.trim();
+        return texto.length >= min && texto.length <= max;
+    },
+    esCorreoValido: (correo) => {
+        const valor = correo.trim();
+        if (!PATRONES.correo.test(valor)) return false;
+        const dominio = valor.split('@')[1]?.toLowerCase()
+        return DOMINIOS_PERMITIDOS.includes(dominio);
+    },
+    esRunValido: (run) => PATRONES.run.test(run.trim()),
+    esTelefonoValido: (tel) => tel.trim() === '' || PATRONES.telefono.test(tel.trim()),
+    coinciden: (val1, val2) => val1.trim() === val2.trim(),
+    esNumeroValido: (val, min = 0, max = Infinity) => {
+        if (val === '' || val === null) return false;
+        const num = Number(val);
+        return !Number.isNaN(num) && num >= min && num <= max;
+    },
+    esImagenValida: (archivoInput, maxMB = 2, esRequerido = false) => {
+        const archivo = archivoInput?.files[0];
+
+        if (!archivo) {
+            return !esRequerido;
+        }
+
+        const esTipoImagen = archivo.type.startsWith('image/');
+        const tamanoEnBytes = maxMB * 1024 * 1024;
+        const tamanoValido = archivo.size <= tamanoEnBytes;
+
+        return esTipoImagen && tamanoValido;
+    }
+};
+
+const UI = {
+marcarCampo: (elemento, esValido, idError = null, mensaje = '') => {
+        if (!elemento) return;
+        elemento.classList.toggle('campo-error', !esValido);
+
+        if (idError) {
+            const spanError = document.getElementById(idError);
+            if (spanError) {
+                spanError.textContent = esValido ? '' : mensaje;
+                spanError.classList.toggle('texto-error', !esValido);
+            }
+        }
+    },
+    mostrarMensaje: (elemento, mensaje, esExito) => {
+        if (!elemento) return;
+        elemento.textContent = mensaje;
+        elemento.classList.toggle('texto-exito', esExito);
+        elemento.classList.toggle('texto-error', !esExito);
+    },
+    poblarSelect: (select, opciones, textoDefault) => {
+        if (!select) return;
+        select.textContent = '';
+        if (textoDefault) {
+            select.appendChild(new Option(textoDefault, ""));
+        }
+        opciones.forEach(opt => {
+            const valor = typeof opt === 'string' ? opt : opt.nombre;
+            select.appendChild(new Option(valor, valor));
+        })
     }
 }
 
-function validarCorreo(correo) {
-    
-    if(!patronCorreo.test(correo)) return false
-    const dominio = correo.split('@')[1]?.toLowerCase()
-    return dominiosPermitidos.includes(dominio)
-}
+const formContacto = document.querySelector("#form-contacto");
+if (formContacto) {
+    formContacto.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const { elementos } = formContacto;
+        const confirmacion = document.querySelector("#mensaje-confirmacion");
 
-function validarRun(run){
-    const runLimpio = run.trim().toUpperCase()
-    if(!patronRun.test(runLimpio)) return false
-    return true
+        const validaciones = [
+            {
+                elemento: elementos["nombre-contacto"],
+                estado: validador.esTextoValido(elementos["nombre-contacto"]?.value, 3),
+                idError: "error-nombre",
+                mensaje: "El nombre debe tener al menos 3 caracteres."
+            },
+            {
+                elemento: elementos["correo-contacto"],
+                estado: validador.esCorreoValido(elementos["correo-contacto"]?.value),
+                idError: "error-correo",
+                mensaje: "Correo inválido. Solo dominios @duoc.cl, @profesor.duoc.cl o @gmail.com."
+            },
+            {
+                elemento: elementos["telefono-contacto"],
+                estado: validador.esTelefonoValido(elementos["telefono-contacto"]?.value),
+                idError: "error-telefono",
+                mensaje: "Número de teléfono no válido."
+            },
+            {
+                elemento: elementos["mensaje-contacto"],
+                estado: validador.esTextoValido(elementos["mensaje-contacto"]?.value, 10),
+                idError: "error-mensaje",
+                mensaje: "El mensaje debe tener al menos 10 caracteres."
+            }
+        ];
 
-}
+        let esFormularioValido = true;
+        validaciones.forEach(({ elemento, estado, idError, mensaje }) => {
+            UI.marcarCampo(elemento, estado, idError, mensaje);
+            if (!estado) esFormularioValido = false;
+        });
 
-function cargarRegiones() {
-    const region = document.querySelector("#region-registro");
-    if (!region) return;
-
-    datosRegiones.forEach(reg => {
-        const opcion = document.createElement("option");
-        opcion.value = reg.nombre;
-        opcion.textContent = reg.nombre;
-        region.appendChild(opcion);
+        if (esFormularioValido) {
+            UI.mostrarMensaje(confirmacion, 'Muchas gracias por contactarse con nosotros, su mensaje fue enviado con éxito.', true);
+            formContacto.reset();
+        } else {
+            UI.mostrarMensaje(confirmacion, 'Por favor, revise los campos marcados.', false);
+        }
     });
 }
 
-function cargarComunas(regionSeleccionada) {
-    const comuna = document.querySelector("#comuna-registro");
-    comuna.innerHTML = '<option value="">Seleccione su comuna</option>';
+/* INICIO SESION Y REGISTRO VISTA TIENDA*/
+const formLogin = document.querySelector("#inicio-sesion");
+if (formLogin) {
+    formLogin.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const { correo, contraseña } = formLogin.elements;
+        const mensaje = document.querySelector("#mensaje-confirmacion-login");
 
-    const regionEncontrada = datosRegiones.find(r => r.nombre === regionSeleccionada);
-    
-    if (regionEncontrada) {
-        regionEncontrada.comunas.forEach(com => {
-            const opcion = document.createElement("option");
-            opcion.value = com;
-            opcion.textContent = com;
-            comuna.appendChild(opcion);
+        const validaciones = [
+            {
+                elemento: correo,
+                estado: validador.esCorreoValido(correo.value),
+                idError: "error-correo",
+                mensaje: "Correo inválido. Solo se aceptan los dominios de @duoc.cl, @profesor.duoc.cl o @gmail.com."
+            },
+            {
+                elemento: contraseña,
+                estado: validador.esTextoValido(contraseña.value, 4, 10),
+                idError: "error-contraseña",
+                mensaje: "Contraseña incorrecta. Asegúrese de que tenga entre 4 y 10 caracteres."
+            }
+        ];
+
+        let esFormularioValido = true;
+        validaciones.forEach(({ elemento, estado, idError, mensaje }) => {
+            UI.marcarCampo(elemento, estado, idError, mensaje);
+            if (!estado) esFormularioValido = false;
+        });
+
+        if (esFormularioValido) {
+            UI.mostrarMensaje(mensaje, "Validación exitosa. Iniciando sesión...", true);
+        } else {
+            UI.mostrarMensaje(mensaje, "Por favor, revise los campos marcados.", false);
+        }
+    });
+}
+
+const formRegistro = document.querySelector("#form-registro");
+if (formRegistro) {
+    const selectRegion = formRegistro.querySelector("#region-registro");
+    const selectComuna = formRegistro.querySelector("#comuna-registro");
+
+    if (selectRegion && selectComuna) {
+        UI.poblarSelect(selectRegion, DATOS_REGIONES, "Seleccione su región");
+
+        selectRegion.addEventListener("change", (e) => {
+            const regionEncontrada = DATOS_REGIONES.find(r => r.nombre === e.target.value);
+            const comunas = regionEncontrada ? regionEncontrada.comunas : [];
+            UI.poblarSelect(selectComuna, comunas, "Seleccione su comuna");
         });
     }
+
+    formRegistro.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const el = formRegistro.elements;
+        const mensajeReg = document.querySelector("#mensaje-confirmacion-registro");
+
+        const passCoincide = validador.coinciden(el["contraseña"]?.value, el["confirmar-contraseña"]?.value);
+        const passLongitud = validador.esTextoValido(el["contraseña"]?.value, 4, 10);
+
+        const validaciones = [
+            {
+                elemento: el["run-completo"] || el["run"],
+                estado: validador.esRunValido((el["run-completo"] || el["run"])?.value),
+                idError: "error-run",
+                mensaje: "RUN inválido. Ingrese su RUN sin puntos ni guion (7 a 9 caracteres)."
+            },
+            {
+                elemento: el["nombres"],
+                estado: validador.esTextoValido(el["nombres"]?.value, 1, 50),
+                idError: "error-nombres",
+                mensaje: "Los nombres tienen un máximo de 50 caracteres."
+            },
+            {
+                elemento: el["apellidos"],
+                estado: validador.esTextoValido(el["apellidos"]?.value, 1, 100),
+                idError: "error-apellidos",
+                mensaje: "Los apellidos tienen un máximo de 100 caracteres."
+            },
+            {
+                elemento: el["correo"],
+                estado: validador.esCorreoValido(el["correo"]?.value) && (el["correo"]?.value.length <= 100),
+                idError: "error-correo",
+                mensaje: "Correo inválido. Solo dominios @duocuc.cl, @profesor.duoc.cl, @gmail.com, @example.com."
+            },
+            {
+                elemento: el["direccion-registro"] || el["direccion"],
+                estado: validador.esTextoValido((el["direccion-registro"] || el["direccion"])?.value, 1, 300),
+                idError: "error-direccion",
+                mensaje: "La dirección tiene un máximo de 300 caracteres."
+            },
+            {
+                elemento: el["region-registro"],
+                estado: validador.esTextoValido(el["region-registro"]?.value),
+                idError: "error-region",
+                mensaje: "Por favor seleccione una región."
+            },
+            {
+                elemento: el["comuna-registro"],
+                estado: validador.esTextoValido(el["comuna-registro"]?.value),
+                idError: "error-comuna",
+                mensaje: "Por favor seleccione una comuna."
+            },
+            {
+                elemento: el["contraseña"],
+                estado: passLongitud,
+                idError: "error-contraseña",
+                mensaje: "La contraseña debe tener entre 4 y 10 caracteres."
+            },
+            {
+                elemento: el["confirmar-contraseña"] || el["confirmarContra"],
+                estado: passCoincide && validador.esTextoValido((el["confirmar-contraseña"] || el["confirmarContra"])?.value),
+                idError: "error-confirmar-con",
+                mensaje: "Las contraseñas no coinciden."
+            }
+        ];
+
+        let esFormularioValido = true;
+        validaciones.forEach(({ elemento, estado, idError, mensaje }) => {
+            UI.marcarCampo(elemento, estado, idError, mensaje);
+            if (!estado) esFormularioValido = false;
+        });
+
+        if (esFormularioValido) {
+            UI.mostrarMensaje(mensajeReg, "Registro validado exitosamente.", true);
+            formRegistro.reset();
+        } else {
+            UI.mostrarMensaje(mensajeReg, "Hay errores en el formulario. Por favor verifique los campos marcados.", false);
+        }
+    });
 }
 
+/*Registro y Edicion de Producto*/
+function validadorFormularioProducto(idForm, idMensaje, mensajeExito, limpiarAlExito = true) {
+    const form = document.querySelector(idForm);
+    if (!form) return;
 
-if(document.querySelector("#inicio-sesion")) {
-
-    const formularioIS = document.querySelector("#inicio-sesion")
-
-    formularioIS.addEventListener("submit", function(e) {
-        e.preventDefault()
-
-        const correo = document.querySelector("#correo")
-        const contraseña = document.querySelector("#contraseña")
-        const mensaje = document.querySelector("#mensaje-confirmacion-login")
-
-        let formularioValido = true
-
-        if(!validar(correo,validarCorreo(correo.value), 'error-correo', 'Correo invalido. Solo se aceptan los dominios de @duoc.cl, @profesor.duoc.cl o @gmail.com')){
-            formularioValido = false
-        }
-
-
-        const contraseñaLimpia = contraseña.value.trim()
-        if (!validar(contraseña, contraseñaLimpia.length >= 4 && contraseñaLimpia.length <= 10,'error-contraseña','Contraseña incorrecta. Asegurese de que la contraseña tenga entre 4 y 10 caracteres')){
-            formularioValido = false
-        }
-
-        if (formularioValido){
-            mensaje.textContent = "Validacion exitosa. Iniciando sesion..."
-            mensaje.classList.remove('texto-error')
-            mensaje.classList.add('texto-exito')
-        } else{
-            mensaje.textContent = "Por favor, revise los campos marcados."
-            mensaje.classList.remove('texto-exito')
-            mensaje.classList.add('texto-error')
-            
-        }
+    const selectCategoria = form.querySelector("[name='categoria-producto']");
+    if (selectCategoria) {
+        UI.poblarSelect(selectCategoria, CATEGORIAS_PRODUCTO, "Seleccione la categoría");
     }
-)}
 
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const elementos = form.elements;
+        const contenedorMensaje = document.querySelector(idMensaje);
 
-if(document.querySelector("#form-registro")){
+        const validaciones = [
+            {
+                elemento: elementos["codigo-producto"],
+                estado: validador.esTextoValido(elementos["codigo-producto"]?.value, 3),
+                idError: "error-codigo-producto",
+                mensaje: "El código debe tener al menos 3 caracteres."
+            },
+            {
+                elemento: elementos["nombre-producto"],
+                estado: validador.esTextoValido(elementos["nombre-producto"]?.value, 1, 100),
+                idError: "error-nombre-producto",
+                mensaje: "El nombre es obligatorio y debe tener máximo 100 caracteres."
+            },
+            {
+                elemento: elementos["descripcion-producto"],
+                estado: validador.esTextoValido(elementos["descripcion-producto"]?.value, 1, 500),
+                idError: "error-descripcion-producto",
+                mensaje: "La descripción es obligatoria y debe tener máximo 500 caracteres."
+            },
+            {
+                elemento: elementos["precio-producto"],
+                estado: validador.esNumeroValido(elementos["precio-producto"]?.value, 0, 10000000),
+                idError: "error-precio-producto",
+                mensaje: "El precio debe ser un número entre 0 y $10.000.000."
+            },
+            {
+                elemento: elementos["stock-producto"],
+                estado: validador.esNumeroValido(elementos["stock-producto"]?.value, 0),
+                idError: "error-stock-producto",
+                mensaje: "El stock debe ser un número igual o mayor a 0."
+            },
+            {
+                elemento: elementos["stock-critico-producto"],
+                estado: elementos["stock-critico-producto"]?.value === '' || validador.esNumeroValido(elementos["stock-critico-producto"]?.value, 0),
+                idError: "error-stock-critico-producto",
+                mensaje: "El stock crítico debe ser un número positivo."
+            },
+            {
+                elemento: elementos["categoria-producto"],
+                estado: validador.esTextoValido(elementos["categoria-producto"]?.value),
+                idError: "error-categoria-producto",
+                mensaje: "Debe seleccionar una categoría."
+            },
+            {
+                elemento: elementos["imagen-producto"],
+                estado: validador.esImagenValida(elementos["imagen-producto"], 2, false),
+                idError: "error-imagen-producto",
+                mensaje: "El archivo debe ser una imagen válida y pesar menos de 2MB."
+            }
+        ];
 
-    const formularioReg = document.querySelector("#form-registro")
-    cargarRegiones();
+        let esFormularioValido = true;
+        validaciones.forEach(({ elemento, estado, idError, mensaje }) => {
+            UI.marcarCampo(elemento, estado, idError, mensaje);
+            if (!estado) esFormularioValido = false;
+        });
 
-    const selectRegion = document.querySelector("#region-registro")
-    selectRegion.addEventListener("change", function(e) {
-        cargarComunas(e.target.value);
-    });
-
-
-    formularioReg.addEventListener("submit", function (e) {
-        e.preventDefault()
-
-        let formularioValido = true
-
-        const run = document.querySelector("#run-completo")
-        const nombres = document.querySelector("#nombres")
-        const apellidos = document.querySelector("#apellidos")
-        const correo = document.querySelector("#correo")
-        const fechaNac = document.querySelector("#fecha-nacimiento")
-        const region = document.querySelector("#region-registro")
-        const comuna = document.querySelector("#comuna-registro")        
-        const direccion = document.querySelector("#direccion-registro")
-        const contraseña = document.querySelector("#contraseña")
-        const confirmarContra = document.querySelector("#confirmar-contraseña")
-
-
-        const mensajeReg = document.querySelector("#mensaje-confirmacion-registro")
-        
-        if(!validar(run,validarRun(run.value),'error-run','RUN invalido. Por favor ingrese su RUN sin puntos ni guion y que tenga entre 7 y 9 caracteres.')){
-            formularioValido = false
-        }
-
-        const nombresLimpios = nombres.value.trim()
-        if(!validar(nombres, nombresLimpios.length >0 && nombresLimpios.length<=50,'error-nombres','Los nombres tienen un maximo de 50 caracteres. Por favor intentelo de nuevo')){
-            formularioValido=false
-        }
-
-        if(!validar(correo,validarCorreo(correo.value) && correo.value.length > 0 && correo.value.length <=100,'error-correo', 'Correo invalido. Solo se aceptan los dominios de @duoc.cl, @profesor.duoc.cl o @gmail.com')){
-            formularioValido=false
-        }
-
-        const apellidosLimpios = apellidos.value.trim()
-        if(!validar(apellidos,apellidosLimpios.length>0 && apellidosLimpios.length<=100,'error-apellidos','Los apellidos tienen un maximo de 100 caracteres. Por favor intentelo de nuevo.')){
-            formularioValido=false
-        }
-
-        if(fechaNac.value !== ""){
-            validar(fechaNac, true)
-        }
-
-        const direccionLimpia = direccion.value.trim()
-        if(!validar(direccion,direccionLimpia.length > 0 && direccionLimpia.length <= 300,'error-direccion','La direccion tiene un maximo de 300 caracteres. Por favor intentelo de nuevo.')){
-            formularioValido=false
-        }
-
-        const contraseñaLimpia=contraseña.value.trim()
-        const confirmarContraLimpia = confirmarContra.value.trim()
-        const contraseñaValida = contraseñaLimpia.length >= 4 && contraseñaLimpia.length <= 10;
-        const confirmacionValida = contraseñaLimpia === confirmarContraLimpia && confirmarContraLimpia.length > 0;
-
-        if(!validar(contraseña, contraseñaValida, 'error-contraseña','La contraseña debe tener entre 4 y 10 caracteres.')){
-            formularioValido = false
-        }
-        if(!validar(confirmarContra, confirmacionValida, 'error-confirmar-con','Las contraseñas no coinciden.')){
-            formularioValido = false
-        }
-
-        if(!validar(region,region.value !=="")){
-            formularioValido=false
-        }
-
-        if(!validar(comuna,comuna.value !=="")){
-            formularioValido=false
-        }
-
-        if(formularioValido){
-            mensajeReg.textContent="Registro validado exitosamente."
-            mensajeReg.classList.remove('texto-error')
-            mensajeReg.classList.add('texto-exito')
+        if (esFormularioValido) {
+            UI.mostrarMensaje(contenedorMensaje, mensajeExito, true);
+            if (limpiarAlExito) {
+                form.reset();
+            }
         } else {
-            mensajeReg.textContent="Hay errores en el formulario. Por favor verifique los campos marcados."
-            mensajeReg.classList.remove('texto-exito')
-            mensajeReg.classList.add('texto-error')
-        }     
-    })
+            UI.mostrarMensaje(contenedorMensaje, "Por favor revise los datos del producto.", false);
+        }
+    });
+}
 
-    }
+validadorFormularioProducto(
+    "#form-registro-producto-admin",
+    "#mensaje-confirmacion-registro-producto-admin",
+    "Producto registrado correctamente",
+    true
+);
 
-
+validadorFormularioProducto(
+    "#form-editar-producto-admin",
+    "#mensaje-confirmacion-editar-producto-admin",
+    "Producto actualizado correctamente.",
+    false
+);

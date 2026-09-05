@@ -19,50 +19,38 @@
         </nav>
     </header>
     <main>
-           <section>
+        <section>
             <h2>Nuevo Producto</h2>
-            <form class="admin-form" id="form-registro-admin" novalidate>
+            <form class="admin-form" id="form-registro-producto-admin" novalidate>
                 <label for="codigo-producto">Código</label>
-                <input id="codigo-producto" type="text" min="3" name="codigo-producto" required>
+                <input id="codigo-producto" name="codigo-producto" type="text" minlength="3" required>
 
                 <label for="nombre-producto">Nombre</label>
-                <input id="nombre-producto" type="text" max="100" name="nombre-producto" required>
+                <input id="nombre-producto" name="nombre-producto" type="text" maxlength="100" required>
 
                 <label for="descripcion-producto">Descripción</label>
-                <input id="descripcion-producto" type="text" max="500" name="descripcion-producto" required>
+                <input id="descripcion-producto" name="descripcion-producto" type="text" maxlength="500" required>
 
                 <label for="precio-producto">Precio</label>
-                <input id="precio-producto" type="number" name="precio-producto"  max="100" required>
+                <input id="precio-producto" name="precio-producto" type="number" min="0" max="10000000" step="1"
+                    required>
 
                 <label for="stock-producto">Stock</label>
-                <input id="stock-producto" name="stock-producto" type="number" min=0 required>
+                <input id="stock-producto" name="stock-producto" type="number" min="0" required>
 
                 <label for="stock-critico-producto">Stock Crítico</label>
-                <input id="stock-critico-producto" name="stock-critico-producto" type="number" min=0>
+                <input id="stock-critico-producto" name="stock-critico-producto" type="number" min="0">
 
                 <label for="categoria-producto">Categoría</label>
-                <input name="categoria-producto" id="categoria-producto" type="password" min="4" max="10" required>
-
-                <label for="categoria-producto">Categoría</label>
-                <select name="categoria-producto" id="categoria-producto" required>
-                    <option value="0">Seleccione la categoría</option>
-                    <option value="1">Guitarras Acústicas</option>
-                    <option value="2">Guitarras Eléctricas</option>
-                    <option value="3">Bajos Eléctricos</option>
-                    <option value="4">Baterias</option>
-                    <option value="5">Teclados y Pianos</option>
-                    <option value="6">Amplificadores</option>
-                    <option value="7">Micrófonos</option>
-                    <option value="8">Pedales de Efectos</option>
-                    <option value="9">Accesorios</option>
-                    <option value="10">Estudio y Grabación</option>
+                <select id="categoria-producto" name="categoria-producto" required>
+                    <option value="">Seleccione la categoría</option>
                 </select>
 
                 <label for="imagen-producto">Imagen</label>
                 <input id="imagen-producto" name="imagen-producto" type="file" accept="image/*">
 
                 <button type="submit">Agregar Producto</button>
-                <p id="mensaje-confirmacion-registro-admin"></p>
+                <p class="mensaje-confirmacion-admin-form" id="mensaje-confirmacion-registro-producto-admin"></p>
             </form>
         </section>
     </main>
