@@ -26,9 +26,11 @@
             <form id="inicio-sesion" novalidate>
                 <label for="correo">Correo</label>
                 <input type="email" name="correo" id="correo" minlength="5" maxlength="100" required>
+                <span class="error" id="error-correo"></span>
 
                 <label for="contraseña">Contraseña</label>
                 <input type="password" id="contraseña" name="contraseña" minlength="4" maxlength="10" required>
+                <span class="error" id="error-contraseña"></span>
 
                 <button type="submit">Iniciar sesion</button>
                 <p id="mensaje-confirmacion-login"></p>

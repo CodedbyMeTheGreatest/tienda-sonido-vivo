@@ -95,12 +95,15 @@ const datosRegiones = [
 
 const patronRun = /^\d{6,8}[0-9K]$/
 
-function validar(variable, esValido) {
+function validar(variable, esValido,idError, mensaje) {
+    const spanError = document.getElementById(idError)
     if (esValido) {
         variable.classList.remove('campo-error');
+        if(spanError)spanError.textContent = ''
         return true;
     } else {
         variable.classList.add('campo-error');
+        if(spanError)spanError.textContent = mensaje
         return false;
     }
 }
@@ -161,13 +164,13 @@ if(document.querySelector("#inicio-sesion")) {
 
         let formularioValido = true
 
-        if(!validar(correo,validarCorreo(correo.value))){
+        if(!validar(correo,validarCorreo(correo.value), 'error-correo', 'Correo invalido. Solo se aceptan los dominios de @duoc.cl, @profesor.duoc.cl o @gmail.com')){
             formularioValido = false
         }
 
 
         const contraseñaLimpia = contraseña.value.trim()
-        if (!validar(contraseña, contraseñaLimpia.length >= 4 && contraseñaLimpia.length <= 10)){
+        if (!validar(contraseña, contraseñaLimpia.length >= 4 && contraseñaLimpia.length <= 10,'error-contraseña','Contraseña incorrecta. Asegurese de que la contraseña tenga entre 4 y 10 caracteres')){
             formularioValido = false
         }
 
@@ -215,21 +218,21 @@ if(document.querySelector("#form-registro")){
 
         const mensajeReg = document.querySelector("#mensaje-confirmacion-registro")
         
-        if(!validar(run,validarRun(run.value))){
+        if(!validar(run,validarRun(run.value),'error-run','RUN invalido. Por favor ingrese su RUN sin puntos ni guion y que tenga entre 7 y 9 caracteres.')){
             formularioValido = false
         }
 
         const nombresLimpios = nombres.value.trim()
-        if(!validar(nombres, nombresLimpios.length >0 && nombresLimpios.length<=50)){
+        if(!validar(nombres, nombresLimpios.length >0 && nombresLimpios.length<=50,'error-nombres','Los nombres tienen un maximo de 50 caracteres. Por favor intentelo de nuevo')){
             formularioValido=false
         }
 
-        if(!validar(correo,validarCorreo(correo.value) && correo.value.length > 0 && correo.value.length <=100)){
+        if(!validar(correo,validarCorreo(correo.value) && correo.value.length > 0 && correo.value.length <=100,'error-correo', 'Correo invalido. Solo se aceptan los dominios de @duoc.cl, @profesor.duoc.cl o @gmail.com')){
             formularioValido=false
         }
 
         const apellidosLimpios = apellidos.value.trim()
-        if(!validar(apellidos,apellidosLimpios.length>0 && apellidosLimpios.length<=100)){
+        if(!validar(apellidos,apellidosLimpios.length>0 && apellidosLimpios.length<=100,'error-apellidos','Los apellidos tienen un maximo de 100 caracteres. Por favor intentelo de nuevo.')){
             formularioValido=false
         }
 
@@ -238,21 +241,21 @@ if(document.querySelector("#form-registro")){
         }
 
         const direccionLimpia = direccion.value.trim()
-        if(!validar(direccion,direccionLimpia.length > 0 && direccionLimpia.length <= 300)){
+        if(!validar(direccion,direccionLimpia.length > 0 && direccionLimpia.length <= 300,'error-direccion','La direccion tiene un maximo de 300 caracteres. Por favor intentelo de nuevo.')){
             formularioValido=false
         }
 
         const contraseñaLimpia=contraseña.value.trim()
         const confirmarContraLimpia = confirmarContra.value.trim()
-        const contraseñasValidas = contraseñaLimpia.length >=4 && contraseñaLimpia.length <=10 && contraseñaLimpia == confirmarContraLimpia;
+        const contraseñaValida = contraseñaLimpia.length >= 4 && contraseñaLimpia.length <= 10;
+        const confirmacionValida = contraseñaLimpia === confirmarContraLimpia && confirmarContraLimpia.length > 0;
 
-        if(!validar(contraseña, contraseñasValidas)){
-            formularioValido=false
+        if(!validar(contraseña, contraseñaValida, 'error-contraseña','La contraseña debe tener entre 4 y 10 caracteres.')){
+            formularioValido = false
         }
-        if(!validar(confirmarContra, contraseñasValidas)){
-            formularioValido=false
+        if(!validar(confirmarContra, confirmacionValida, 'error-confirmar-con','Las contraseñas no coinciden.')){
+            formularioValido = false
         }
-
 
         if(!validar(region,region.value !=="")){
             formularioValido=false
@@ -270,13 +273,7 @@ if(document.querySelector("#form-registro")){
             mensajeReg.textContent="Hay errores en el formulario. Por favor verifique los campos marcados."
             mensajeReg.classList.remove('texto-exito')
             mensajeReg.classList.add('texto-error')
-        }
-
-
-
-        
-            
-    
+        }     
     })
 
     }

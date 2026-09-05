@@ -26,24 +26,31 @@
             <form id="form-registro" novalidate>
                 <label for="run-completo">RUN</label>
                 <input id="run-completo" type="text" required minlength="7" maxlength="9" name="run">
+                <span class="error" id="error-run"></span>
 
                 <label for="nombres">Nombres</label>
                 <input id="nombres" type="text" required minlength="2" maxlength="50" name="nombres">
+                <span class="error" id="error-nombres"></span>
 
                 <label for="apellidos">Apellidos</label>
                 <input id="apellidos" type="text" required minlength="2" maxlength="100" name="apellidos">
+                <span class="error" id="error-apellidos"></span>
 
                 <label for="correo">Correo</label>
                 <input id="correo" type="email" name="correo" required minlength="5" maxlength="100">
+                <span class="error" id="error-correo"></span>
 
                 <label for="fecha-nacimiento">Fecha de nacimiento</label>
                 <input id="fecha-nacimiento" name="fecha-nacimiento" type="date">
+                <span class="error" id="error-fecha-nac"></span>
 
                 <label for="contraseña">Contraseña</label>
                 <input type="password" name="contraseña" id="contraseña" required minlength="4" maxlength="10">
+                <span class="error" id="error-contraseña"></span>
 
                 <label for="confirmar-contraseña">Confirmar contraseña</label>
-                <input type="password" name="confirmar-contraseña" id="confirmar-contraseña" required minlength="4" maxlength="10">                
+                <input type="password" name="confirmar-contraseña" id="confirmar-contraseña" required minlength="4" maxlength="10">
+                <span class="error" id="error-confirmar-con"></span>                
 
                 <label for="region-registro">Región</label>
                 <select name="region" id="region-registro" required>
@@ -57,6 +64,7 @@
 
                 <label for="direccion-registro">Direccion</label>
                 <input type="text" id="direccion-registro" name="direccion" required minlength="5" maxlength="300">
+                <span class="error" id="error-direccion"></span>
 
                 <button type="submit">Registrarse</button>
                 <p id="mensaje-confirmacion-registro"></p>
