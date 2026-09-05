@@ -3,49 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuevo usuario</title>
-        <link rel="stylesheet" href="css/style.css">
+    <title>Nuevo usuario - Sonido Vivo</title>
+    <link rel="stylesheet" href="css/style.css">
     <script src="js/funciones.js" defer></script>
 </head>
 <body>
-    <nav>
+    <header>
+        <nav class="nav-admin-usuarios">
             <a href="vista-admin.html">Inicio Administrador</a>
+            <a href="nuevo-usuario.html">Agregar usuario</a>
             <a href="editar-usuario.html">Editar usuario</a>
             <a href="eliminar-usuario.html">Eliminar usuario</a>
-    </nav>
-    <section>
+        </nav>
+    </header>
+    <main>
+        <section>
             <h2>Registro de usuario via administrador</h2>
             <form class="admin-form" id="form-registro-admin" novalidate>
+                
                 <label for="run-completo">RUN</label>
-                <input id="run-completo" type="text" required min="7" max="9" name="run">
+                <input id="run-completo" type="text" name="run" required minlength="7" maxlength="10" placeholder="123456789">
+                <span class="error" id="error-run-completo"></span>
 
                 <label for="nombres">Nombres</label>
-                <input id="nombres" type="text" required max="50" name="nombres">
+                <input id="nombres" type="text" name="nombres" required maxlength="50" placeholder="Ingrese sus nombres">
+                <span class="error" id="error-nombres"></span>
 
                 <label for="apellidos">Apellidos</label>
-                <input id="apellidos" type="text" max="100" name="apellidos" required>
+                <input id="apellidos" type="text" name="apellidos" required maxlength="100" placeholder="Ingrese sus apellidos">
+                <span class="error" id="error-apellidos"></span>
 
                 <label for="correo">Correo</label>
-                <input id="correo" type="email" name="correo" required max="100">
+                <input id="correo" type="email" name="correo" required maxlength="100" placeholder="Ingrese su correo">
+                <span class="error" id="error-correo"></span>
 
                 <label for="fecha-nacimiento">Fecha de nacimiento</label>
-                <input id="nombre-completo" name="fecha-nacimiento" type="date">
+                <input id="fecha-nacimiento" name="fecha-nacimiento" type="date" required>
+                <span class="error" id="error-fecha-nacimiento"></span>
 
-                <label for="contraseña">Contraseña</label>
-                <input type="password" name="contraseña" id="contraseña" required min="4" max="10">
+                <label for="contrasena">Contraseña</label>
+                <input type="password" name="contraseña" id="contraseña" required minlength="8" maxlength="64" placeholder="Ingrese su contraseña">
+                <span class="error" id="error-contraseña"></span>
 
                 <label for="confirmar-contraseña">Confirmar contraseña</label>
-                <input type="password" name="confirmar-contraseña" id="confirmar-contraseña" required min="4" max="10">                
+                <input type="password" name="confirmar-contraseña" id="confirmar-contraseña" required minlength="8" maxlength="64" placeholder="Confirme su contraseña">
+                <span class="error" id="error-confirmar-contraseña"></span>
 
                 <label for="region-registro">Región</label>
                 <select name="region" id="region-registro" required>
                     <option value="">Seleccione su región</option>
+                   
                 </select>
+                <span class="error" id="error-region-registro"></span>
 
                 <label for="comuna-registro">Comuna</label>
-                <select name="comuna" id="comuna-registro">
+                <select name="comuna" id="comuna-registro" required>
                     <option value="">Seleccione su comuna</option>
                 </select>
+                <span class="error" id="error-comuna-registro"></span>
+
                 <label for="rol">Rol</label>
                 <select name="rol" id="rol" required>
                     <option value="">Seleccione su rol</option>
@@ -53,13 +69,16 @@
                     <option value="administrador">Administrador</option>
                     <option value="vendedor">Vendedor</option>
                 </select>
+                <span class="error" id="error-rol"></span>
 
-                <label for="direccion-registro">Direccion</label>
-                <input type="text" id="direccion-registro" name="direccion" required max="300">
+                <label for="direccion-registro">Dirección</label>
+                <input type="text" id="direccion-registro" name="direccion" required maxlength="300" placeholder="Ingrese su dirección">
+                <span class="error" id="error-direccion-registro"></span>
 
                 <button type="submit">Registrar usuario</button>
-                <p id="mensaje-confirmacion-registro-admin"></p>
+                <p class="mensaje-confirmacion-admin-form" id="mensaje-confirmacion-registro-admin"></p>
             </form>
         </section>
+    </main>
 </body>
 </html>

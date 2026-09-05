@@ -414,3 +414,192 @@ if (formEliminarProducto) {
         }
     });
 }
+
+/* Registro y Edición de Usuario */
+function validadorFormularioUsuario(idForm, idMensaje, mensajeExito, limpiarAlExito = true) {
+    const form = document.querySelector(idForm);
+    if (!form) return;
+
+    const selectRegion = form.querySelector("#region-registro");
+    const selectComuna = form.querySelector("#comuna-registro");
+
+    if (selectRegion && selectComuna) {
+        UI.poblarSelect(selectRegion, DATOS_REGIONES, "Seleccione su región");
+        selectRegion.addEventListener("change", (e) => {
+            const regionEncontrada = DATOS_REGIONES.find(r => r.nombre === e.target.value);
+            const comunas = regionEncontrada ? regionEncontrada.comunas : [];
+            UI.poblarSelect(selectComuna, comunas, "Seleccione su comuna");
+        });
+    }
+
+
+    function obtenerValidaciones() {
+        const elementos = form.elements;
+        const contrasena = elementos["contraseña"]?.value ?? '';
+        const confirmarContrasena = elementos["confirmar-contraseña"]?.value ?? '';
+        const passLongitud = validador.esTextoValido(contrasena, 8, 64);
+        const passCoincide = validador.coinciden(contrasena, confirmarContrasena);
+
+        return [
+            {
+                elemento: elementos["run-completo"] || elementos["run"],
+                estado: validador.esRunValido((elementos["run-completo"] || elementos["run"])?.value),
+                idError: "error-run-completo",
+                mensaje: "RUN inválido. Ingrese su RUN sin puntos ni guion (7 a 9 caracteres)."
+            },
+            {
+                elemento: elementos["nombres"],
+                estado: validador.esTextoValido(elementos["nombres"]?.value, 1, 50),
+                idError: "error-nombres",
+                mensaje: "Los nombres tienen un máximo de 50 caracteres."
+            },
+            {
+                elemento: elementos["apellidos"],
+                estado: validador.esTextoValido(elementos["apellidos"]?.value, 1, 100),
+                idError: "error-apellidos",
+                mensaje: "Los apellidos tienen un máximo de 100 caracteres."
+            },
+            {
+                elemento: elementos["correo"],
+                estado: validador.esCorreoValido(elementos["correo"]?.value) && (elementos["correo"]?.value.length <= 100),
+                idError: "error-correo",
+                mensaje: "Correo inválido. Solo dominios @duocuc.cl, @profesor.duoc.cl, @gmail.com, @example.com."
+            },
+            {
+                elemento: elementos["fecha-nacimiento"],
+                estado: elementos["fecha-nacimiento"]?.value !== '',
+                idError: "error-fecha-nacimiento",
+                mensaje: "La fecha de nacimiento es obligatoria."
+            },
+            {
+                elemento: elementos["contraseña"],
+                estado: passLongitud,
+                idError: "error-contraseña",
+                mensaje: "La contraseña debe tener entre 8 y 64 caracteres."
+            },
+            {
+                elemento: elementos["confirmar-contraseña"] || elementos["confirmarContra"],
+                estado: passCoincide && validador.esTextoValido((elementos["confirmar-contraseña"] || elementos["confirmarContra"])?.value),
+                idError: "error-confirmar-contraseña",
+                mensaje: "Las contraseñas no coinciden."
+            },
+            {
+                elemento: elementos["region-registro"],
+                estado: validador.esTextoValido(elementos["region-registro"]?.value),
+                idError: "error-region-registro",
+                mensaje: "Por favor seleccione una región."
+            },
+            {
+                elemento: elementos["comuna-registro"],
+                estado: validador.esTextoValido(elementos["comuna-registro"]?.value),
+                idError: "error-comuna-registro",
+                mensaje: "Por favor seleccione una comuna."
+            },
+            {
+                elemento: elementos["rol"],
+                estado: validador.esTextoValido(elementos["rol"]?.value),
+                idError: "error-rol",
+                mensaje: "Por favor seleccione un rol."
+            },
+            {
+                elemento: elementos["direccion-registro"] || elementos["direccion"],
+                estado: validador.esTextoValido((elementos["direccion-registro"] || elementos["direccion"])?.value, 1, 300),
+                idError: "error-direccion-registro",
+                mensaje: "La dirección tiene un máximo de 300 caracteres."
+            }
+        ];
+    }
+
+   
+    function validarCampoEnVivo(elemento) {
+        if (!elemento) return;
+        const validaciones = obtenerValidaciones();
+        const propia = validaciones.find(v => v.elemento === elemento);
+        if (propia) {
+            UI.marcarCampo(propia.elemento, propia.estado, propia.idError, propia.mensaje);
+        }
+    }
+
+
+    Array.from(form.elements).forEach((campo) => {
+        if (!campo.id) return;
+        const evento = (campo.tagName === "SELECT") ? "change" : "input";
+        campo.addEventListener(evento, () => validarCampoEnVivo(campo));
+    });
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const contenedorMensaje = document.querySelector(idMensaje);
+        const validaciones = obtenerValidaciones();
+
+        let esFormularioValido = true;
+        validaciones.forEach(({ elemento, estado, idError, mensaje }) => {
+            UI.marcarCampo(elemento, estado, idError, mensaje);
+            if (!estado) esFormularioValido = false;
+        });
+
+        if (esFormularioValido) {
+            UI.mostrarMensaje(contenedorMensaje, mensajeExito, true);
+            if (limpiarAlExito) form.reset();
+        } else {
+            UI.mostrarMensaje(contenedorMensaje, "Hay errores en el formulario. Por favor verifique los campos marcados.", false);
+        }
+    });
+}
+
+validadorFormularioUsuario(
+    "#form-registro-admin",
+    "#mensaje-confirmacion-registro-admin",
+    "Usuario registrado correctamente en el sistema.",
+    true
+);
+
+validadorFormularioUsuario(
+    "#form-editar-admin",
+    "#mensaje-confirmacion-edicion",
+    "Usuario editado correctamente en el sistema.",
+    false
+);
+
+const formEliminarUsuario = document.querySelector("#form-eliminar-admin");
+
+if (formEliminarUsuario) {
+    const campoRun = formEliminarUsuario.elements["run-usuario"];
+
+    campoRun.addEventListener("input", () => {
+        UI.marcarCampo(
+            campoRun,
+            validador.esRunValido(campoRun.value),
+            "error-run-usuario",
+            "RUN inválido. Ingrese el RUN del usuario sin puntos ni guion (7 a 9 caracteres)."
+        );
+    });
+
+    formEliminarUsuario.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const elementos = formEliminarUsuario.elements;
+        const mensajeEliminar = document.querySelector("#mensaje-confirmacion-eliminacion");
+
+        const validaciones = [
+            {
+                elemento: elementos["run-usuario"],
+                estado: validador.esRunValido(elementos["run-usuario"]?.value),
+                idError: "error-run-usuario",
+                mensaje: "RUN inválido. Ingrese el RUN del usuario sin puntos ni guion (7 a 9 caracteres)."
+            }
+        ];
+
+        let esFormularioValido = true;
+        validaciones.forEach(({ elemento, estado, idError, mensaje }) => {
+            UI.marcarCampo(elemento, estado, idError, mensaje);
+            if (!estado) esFormularioValido = false;
+        });
+
+        if (esFormularioValido) {
+            UI.mostrarMensaje(mensajeEliminar, "Usuario eliminado correctamente.", true);
+            formEliminarUsuario.reset();
+        } else {
+            UI.mostrarMensaje(mensajeEliminar, "Por favor verifique el RUN ingresado.", false);
+        }
+    });
+}
