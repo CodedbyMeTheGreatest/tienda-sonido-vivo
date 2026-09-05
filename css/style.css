@@ -671,3 +671,21 @@ body > section h2 {
 .blog-entry a:hover {
     background-color: #b71c1c;
 }
+
+/*INICIO DE SESION*/
+
+#inicio-sesion {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+/*Errores por campos especificos segun pagina*/
+
+.error {
+    color: #e53935;
+    font-size: 13px;
+    display: block;
+    margin-top: -8px;
+    margin-bottom: 4px;
+    min-height: 16px; 
+}
