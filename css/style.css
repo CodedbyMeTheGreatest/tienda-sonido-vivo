@@ -141,6 +141,7 @@ main section h2 {
     display: grid;
     gap: 20px;
     padding: 30px 10%;
+    grid-template-columns: repeat(5, 1fr);
 }
 
 .categoria {
@@ -157,7 +158,7 @@ main section h2 {
 }
 
 .categoria img {
-    width: 80%;
+    width: 100%;
     height: 155px;
     object-fit: cover;
     border-radius: 6px;
