@@ -436,7 +436,7 @@ if (formRegistro) {
                 elemento: elementos["correo"],
                 estado: validador.esCorreoValido(elementos["correo"]?.value) && (elementos["correo"]?.value.length <= 100),
                 idError: "error-correo",
-                mensaje: "Correo inválido. Solo dominios @duoc.cl, @profesor.duoc.cl, @gmail.com, @example.com."
+                mensaje: "Correo inválido. Solo dominios @duoc.cl, @profesor.duoc.cl, @gmail.com."
             },
             {
                 elemento: elementos["direccion-registro"] || elementos["direccion"],
@@ -662,7 +662,7 @@ function validadorFormularioUsuario(idForm, idMensaje, mensajeExito, limpiarAlEx
                 elemento: elementos["correo"],
                 estado: validador.esCorreoValido(elementos["correo"]?.value) && (elementos["correo"]?.value.length <= 100),
                 idError: "error-correo",
-                mensaje: "Correo inválido. Solo dominios @duoc.cl, @profesor.duoc.cl, @gmail.com, @example.com."
+                mensaje: "Correo inválido. Solo dominios @duoc.cl, @profesor.duoc.cl, @gmail.com."
             },
             {
                 elemento: elementos["contraseña"],
