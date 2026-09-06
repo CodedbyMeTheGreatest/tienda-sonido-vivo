@@ -830,6 +830,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+/*CARRITO DE COMPRAS */
+
 const carritoKey = "sv_carrito"
 
 const carritoStorage = {
@@ -895,7 +897,11 @@ const carritoStorage = {
 
 function actualizarContadorCarrito() {
     const contador = document.querySelector('#contador-carrito')
-    if (contador) contador.textContent = carritoStorage.totalItems()
+        if(contador) {
+        const total = carritoStorage.totalItems();
+        contador.textContent = total;
+        contador.hidden = total === 0;
+    }
 }
 
 document.addEventListener("DOMContentLoaded", actualizarContadorCarrito)

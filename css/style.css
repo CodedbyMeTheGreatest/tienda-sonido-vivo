@@ -91,6 +91,49 @@ nav a:hover {
     background-color: #d32f2f;
 }
 
+/*Icono carrito*/
+
+.enlace-carrito {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagen-carrito {
+    display: block;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+.contador-carrito {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background-color: #d32f2f;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    border: 1px solid #1a1a1a;
+}
+
+
+
+.contador-carrito[hidden] {
+    display: none;
+}
+
+
+
 main section {
     padding: 40px 10%;
     background-color: #ffffff;
