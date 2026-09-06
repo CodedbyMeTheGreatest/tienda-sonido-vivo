@@ -1153,3 +1153,25 @@ document.addEventListener("DOMContentLoaded", () => {
     renderizarListadoUsuarios();
     renderizarListadoProductos();
 });
+
+/* MENU HAMBURGESA */
+
+const botonMenu = document.querySelector("#boton-menu");
+const navPrincipal = document.querySelector("#nav-principal");
+
+if (botonMenu && navPrincipal) {
+    botonMenu.addEventListener("click", () => {
+        const estaAbierto = navPrincipal.classList.toggle("activo");
+        botonMenu.classList.toggle("activo", estaAbierto);
+        botonMenu.setAttribute("aria-expanded", estaAbierto);
+        botonMenu.setAttribute("aria-label", estaAbierto ? "Cerrar menú" : "Abrir menú");
+    });
+
+    navPrincipal.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            navPrincipal.classList.remove("activo");
+            botonMenu.classList.remove("activo");
+            botonMenu.setAttribute("aria-expanded", "false");
+        });
+    });
+}
