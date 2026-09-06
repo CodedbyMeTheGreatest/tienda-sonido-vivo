@@ -50,7 +50,7 @@ body {
 header {
     background-color: #1a1a1a;
     color: white;
-    padding: 15px 5%;
+    padding: 20px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -59,7 +59,9 @@ header {
 .logo-enlace {
     display: flex;
     align-items: center;
+    gap: 12px;
     text-decoration: none;
+    color: white;
 }
 
 .logo-completo {
@@ -67,14 +69,6 @@ header {
     width: auto;
 }
 
-.visualmente-oculto {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-}
 
 header h1 {
     font-size: 24px;
