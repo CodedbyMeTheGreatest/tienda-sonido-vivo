@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,31 +8,39 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/funciones.js" defer></script>
 </head>
+
 <body>
     <header>
+        <a href="index.html" class="logo-enlace">
+            <img src="img/logo.png" alt="Sonido Vivo" class="logo-completo">
+            <h1>Sonido Vivo</h1>
+        </a>
         <nav class="nav-admin-usuarios">
             <a href="vista-admin.html">Inicio Administrador</a>
             <a href="nuevo-usuario.html">Agregar usuario</a>
             <a href="editar-usuario.html">Editar usuario</a>
             <a href="eliminar-usuario.html">Eliminar usuario</a>
-     <a href="listado-usuario.html" class="btn-enlace">Listado de usuarios</a>
+            <a href="listado-usuario.html" class="btn-enlace">Listado de usuarios</a>
         </nav>
     </header>
     <main>
         <section>
             <h2>Registro de usuario via administrador</h2>
             <form class="admin-form" id="form-registro-admin" novalidate>
-                
+
                 <label for="run-completo">RUN</label>
-                <input id="run-completo" type="text" name="run" required minlength="7" maxlength="10" placeholder="123456789">
+                <input id="run-completo" type="text" name="run" required minlength="7" maxlength="10"
+                    placeholder="123456789">
                 <span class="error" id="error-run-completo"></span>
 
                 <label for="nombres">Nombres</label>
-                <input id="nombres" type="text" name="nombres" required maxlength="50" placeholder="Ingrese sus nombres">
+                <input id="nombres" type="text" name="nombres" required maxlength="50"
+                    placeholder="Ingrese sus nombres">
                 <span class="error" id="error-nombres"></span>
 
                 <label for="apellidos">Apellidos</label>
-                <input id="apellidos" type="text" name="apellidos" required maxlength="100" placeholder="Ingrese sus apellidos">
+                <input id="apellidos" type="text" name="apellidos" required maxlength="100"
+                    placeholder="Ingrese sus apellidos">
                 <span class="error" id="error-apellidos"></span>
 
                 <label for="correo">Correo</label>
@@ -43,17 +52,19 @@
                 <span class="error" id="error-fecha-nacimiento"></span>
 
                 <label for="contrasena">Contraseña</label>
-                <input type="password" name="contraseña" id="contraseña" required minlength="8" maxlength="64" placeholder="Ingrese su contraseña">
+                <input type="password" name="contraseña" id="contraseña" required minlength="8" maxlength="64"
+                    placeholder="Ingrese su contraseña">
                 <span class="error" id="error-contraseña"></span>
 
                 <label for="confirmar-contraseña">Confirmar contraseña</label>
-                <input type="password" name="confirmar-contraseña" id="confirmar-contraseña" required minlength="8" maxlength="64" placeholder="Confirme su contraseña">
+                <input type="password" name="confirmar-contraseña" id="confirmar-contraseña" required minlength="8"
+                    maxlength="64" placeholder="Confirme su contraseña">
                 <span class="error" id="error-confirmar-contraseña"></span>
 
                 <label for="region-registro">Región</label>
                 <select name="region" id="region-registro" required>
                     <option value="">Seleccione su región</option>
-                   
+
                 </select>
                 <span class="error" id="error-region-registro"></span>
 
@@ -73,7 +84,8 @@
                 <span class="error" id="error-rol"></span>
 
                 <label for="direccion-registro">Dirección</label>
-                <input type="text" id="direccion-registro" name="direccion" required maxlength="300" placeholder="Ingrese su dirección">
+                <input type="text" id="direccion-registro" name="direccion" required maxlength="300"
+                    placeholder="Ingrese su dirección">
                 <span class="error" id="error-direccion-registro"></span>
 
                 <button type="submit">Registrar usuario</button>
@@ -82,4 +94,5 @@
         </section>
     </main>
 </body>
+
 </html>
