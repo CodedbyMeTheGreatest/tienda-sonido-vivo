@@ -56,6 +56,25 @@ header {
     align-items: center;
     border-bottom: 4px solid #d32f2f;
 }
+.logo-enlace {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo-completo {
+    height: 60px;
+    width: auto;
+}
+
+.visualmente-oculto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
 
 header h1 {
     font-size: 24px;
