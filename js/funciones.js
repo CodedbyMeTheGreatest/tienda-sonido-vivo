@@ -1,4 +1,4 @@
-const DOMINIOS_PERMITIDOS = ['duocuc.cl', 'profesor.duoc.cl', 'gmail.com', 'example.com'];
+const DOMINIOS_PERMITIDOS = ['duoc.cl', 'profesor.duoc.cl', 'gmail.com'];
 
 const PATRONES = {
     correo: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -290,7 +290,7 @@ if (formRegistro) {
                 elemento: elementos["correo"],
                 estado: validador.esCorreoValido(elementos["correo"]?.value) && (elementos["correo"]?.value.length <= 100),
                 idError: "error-correo",
-                mensaje: "Correo inválido. Solo dominios @duocuc.cl, @profesor.duoc.cl, @gmail.com, @example.com."
+                mensaje: "Correo inválido. Solo dominios @duoc.cl, @profesor.duoc.cl, @gmail.com, @example.com."
             },
             {
                 elemento: elementos["direccion-registro"] || elementos["direccion"],
@@ -490,7 +490,7 @@ function validadorFormularioUsuario(idForm, idMensaje, mensajeExito, limpiarAlEx
         const elementos = form.elements;
         const contrasena = elementos["contraseña"]?.value ?? '';
         const confirmarContrasena = elementos["confirmar-contraseña"]?.value ?? '';
-        const passLongitud = validador.esTextoValido(contrasena, 8, 64);
+        const passLongitud = validador.esTextoValido(contrasena, 4, 10);
         const passCoincide = validador.coinciden(contrasena, confirmarContrasena);
 
         return [
@@ -516,19 +516,13 @@ function validadorFormularioUsuario(idForm, idMensaje, mensajeExito, limpiarAlEx
                 elemento: elementos["correo"],
                 estado: validador.esCorreoValido(elementos["correo"]?.value) && (elementos["correo"]?.value.length <= 100),
                 idError: "error-correo",
-                mensaje: "Correo inválido. Solo dominios @duocuc.cl, @profesor.duoc.cl, @gmail.com, @example.com."
-            },
-            {
-                elemento: elementos["fecha-nacimiento"],
-                estado: elementos["fecha-nacimiento"]?.value !== '',
-                idError: "error-fecha-nacimiento",
-                mensaje: "La fecha de nacimiento es obligatoria."
+                mensaje: "Correo inválido. Solo dominios @duoc.cl, @profesor.duoc.cl, @gmail.com, @example.com."
             },
             {
                 elemento: elementos["contraseña"],
                 estado: passLongitud,
                 idError: "error-contraseña",
-                mensaje: "La contraseña debe tener entre 8 y 64 caracteres."
+                mensaje: "La contraseña debe tener entre 4 y 10 caracteres."
             },
             {
                 elemento: elementos["confirmar-contraseña"] || elementos["confirmarContra"],
@@ -731,3 +725,226 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+
+const carritoKey = "sv_carrito"
+
+const carritoStorage = {
+    obtener: () => {
+        try {
+            const datos = JSON.parse(localStorage.getItem(carritoKey));
+            // Verificamos que sea un arreglo válido. Si el navegador guardó basura, devuelve vacío.
+            return Array.isArray(datos) ? datos : [];
+        } catch (error) {
+            return [];
+        }
+    },
+    guardar: (carrito) => localStorage.setItem(carritoKey, JSON.stringify(carrito)),
+    
+    agregar: (codigo) => {
+        const producto = catalogoProductos.find(p => p.codigo === codigo);
+        // CRÍTICO: Si el producto no se encuentra, detenemos la función para evitar colapsos
+        if (!producto) return;
+
+        // Traemos el carrito y filtramos por si había objetos "null" guardados de antes
+        let carrito = carritoStorage.obtener().filter(item => item && item.codigo);
+        const itemExistente = carrito.find(item => item.codigo === codigo);
+
+        if (itemExistente) {
+            itemExistente.cantidad += 1;
+        } else {
+            carrito.push({
+                codigo: producto.codigo,
+                nombre: `${producto.nombre} ${producto.marca} ${producto.modelo}`,
+                precio: producto.precio,
+                cantidad: 1
+            });
+        }
+        carritoStorage.guardar(carrito);
+        actualizarContadorCarrito();
+    },
+
+    actualizarCantidad: (codigo, nuevaCantidad) => {
+        let carrito = carritoStorage.obtener().filter(item => item && item.codigo);
+        if (nuevaCantidad <= 0) {
+            carrito = carrito.filter(item => item.codigo !== codigo);
+        } else {
+            const item = carrito.find(i => i.codigo === codigo);
+            if (item) item.cantidad = nuevaCantidad;
+        }
+        carritoStorage.guardar(carrito);
+    },
+    
+    quitar: (codigo) => {
+        const carritoLimpio = carritoStorage.obtener().filter(item => item && item.codigo !== codigo);
+        carritoStorage.guardar(carritoLimpio);
+    },
+    
+    vaciar: () => carritoStorage.guardar([]),
+    
+    total: () => {
+        const carrito = carritoStorage.obtener().filter(item => item && item.precio);
+        return carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
+    },
+    
+    totalItems: () => {
+        const carrito = carritoStorage.obtener().filter(item => item && item.cantidad);
+        return carrito.reduce((acc, item) => acc + item.cantidad, 0);
+    }
+};
+
+function actualizarContadorCarrito() {
+    const contador = document.querySelector('#contador-carrito')
+    if(contador) contador.textContent = carritoStorage.totalItems()
+}
+
+document.addEventListener("DOMContentLoaded", actualizarContadorCarrito)
+
+document.addEventListener("click", (e) => {
+    const boton = e.target.closest("[data-codigo]")
+    if(!boton) return
+
+    const esBotonCatalogo = boton.classList.contains("boton-catalogo-añadir-producto");
+    const esBotonDetalle = boton.id === "boton-agregar-carrito";
+
+    if (esBotonCatalogo || esBotonDetalle) {
+        e.preventDefault();
+        carritoStorage.agregar(boton.dataset.codigo);
+
+        const textoOriginal = boton.textContent;
+        boton.textContent = "¡Agregado!";
+        setTimeout(() => boton.textContent = textoOriginal, 1000);
+    }
+})
+
+/*COMPRA */
+
+const contenedorCarrito = document.querySelector("#carrito")
+if(contenedorCarrito){
+    function renderizarCarrito(){
+        const carrito = carritoStorage.obtener()
+        const carritoVacioMsg = document.querySelector("#carrito-vacio")
+        const totalCompra = document.querySelector("#total-compra")
+
+        contenedorCarrito.querySelectorAll(".item-carrito").forEach(e1 => e1.remove())
+
+        if(carrito.length === 0) {
+            carritoVacioMsg.hidden = false
+            totalCompra.textContent= "Total: $0"
+            return
+        }
+        carritoVacioMsg.hidden = true
+
+        carrito.forEach(item => {
+            const fila = document.createElement("article");
+            fila.className = "item-carrito";
+            fila.innerHTML = `
+                <p>${item.nombre}</p>
+                <p>$${item.precio.toLocaleString('es-CL')} c/u</p>
+                <div class="cantidad-carrito">
+                    <button type="button" class="btn-restar" data-codigo="${item.codigo}">-</button>
+                    <span>${item.cantidad}</span>
+                    <button type="button" class="btn-sumar" data-codigo="${item.codigo}">+</button>
+                </div>
+                <p>Subtotal: $${(item.precio * item.cantidad).toLocaleString('es-CL')}</p>
+                <button type="button" class="btn-quitar" data-codigo="${item.codigo}">Quitar</button>
+            `
+            contenedorCarrito.appendChild(fila);
+        })
+
+        totalCompra.textContent = "Total: $" + carritoStorage.total().toLocaleString('es-CL')       
+    }
+
+    renderizarCarrito()
+
+    contenedorCarrito.addEventListener("click", (e) => {
+        const codigo = e.target.dataset.codigo;
+        if (!codigo) return;
+
+        const item = carritoStorage.obtener().find(i => i.codigo === codigo);
+        if (e.target.classList.contains("btn-sumar") && item) {
+            carritoStorage.actualizarCantidad(codigo, item.cantidad + 1);
+        } else if (e.target.classList.contains("btn-restar") && item) {
+            carritoStorage.actualizarCantidad(codigo, item.cantidad - 1);
+        } else if (e.target.classList.contains("btn-quitar")) {
+            carritoStorage.quitar(codigo);
+        }
+        renderizarCarrito();
+        actualizarContadorCarrito();
+    });
+
+    const grupoDireccion = document.querySelector("#direccion");
+    document.querySelectorAll('input[name="entrega"]').forEach(radio => {
+        radio.addEventListener("change", () => {
+            const esDespacho = document.querySelector('input[name="entrega"]:checked').value === "despacho";
+            grupoDireccion.hidden = !esDespacho;
+            document.querySelector("#direccion-compra").required = esDespacho;
+        });
+    });
+
+const formCompra = document.querySelector("#form-compra");
+if (formCompra) {
+    formCompra.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const elementos = formCompra.elements;
+        const confirmacion = document.querySelector("#confirmacion-compra");
+        const esDespacho = elementos["entrega"].value === "despacho";
+
+        const validaciones = [
+            {
+                elemento: elementos["nombre"],
+                estado: validador.esTextoValido(elementos["nombre"]?.value, 3, 100),
+                idError: "error-nombre-compra",
+                mensaje: "Ingresa tu nombre completo (mínimo 3 caracteres)."
+            },
+            {
+                elemento: elementos["correo"],
+                estado: validador.esCorreoValido(elementos["correo"]?.value)&& (elementos["correo"]?.value.length <= 100),
+                idError: "error-correo-compra",
+                mensaje: "Ingresa un correo válido."
+            },
+            {
+                elemento: elementos["telefono"],
+                estado: validador.esTelefonoValido(elementos["telefono"]?.value) && elementos["telefono"]?.value.trim() !== '',
+                idError: "error-telefono-compra",
+                mensaje: "Ingresa un teléfono válido (8 a 15 dígitos)."
+            },
+            {
+                elemento: elementos["pago"],
+                estado: validador.esTextoValido(elementos["pago"]?.value),
+                idError: "error-pago-compra",
+                mensaje: "Selecciona una forma de pago."
+            }
+        ];
+
+        if (esDespacho) {
+            validaciones.push({
+                elemento: elementos["direccion"],
+                estado: validador.esTextoValido(elementos["direccion"]?.value, 5, 300),
+                idError: "error-direccion-compra",
+                mensaje: "Ingresa una dirección de despacho válida."
+            });
+        }
+
+        let esFormularioValido = true;
+        validaciones.forEach(({ elemento, estado, idError, mensaje }) => {
+            UI.marcarCampo(elemento, estado, idError, mensaje);
+            if (!estado) esFormularioValido = false;
+        });
+
+        if (carritoStorage.obtener().length === 0) {
+            UI.mostrarMensaje(confirmacion, "No puedes confirmar un pedido sin productos en el carrito.", false);
+            return;
+        }
+
+        if (esFormularioValido) {
+            UI.mostrarMensaje(confirmacion, "¡Pedido confirmado! Te contactaremos para coordinar la entrega.", true);
+            carritoStorage.vaciar();
+            formCompra.reset();
+            renderizarCarrito();
+            actualizarContadorCarrito();
+        } else {
+            UI.mostrarMensaje(confirmacion, "Revisa los campos marcados.", false);
+        }
+    })
+}
+}

@@ -24,8 +24,7 @@
         <section>
             <h2 id="titulo-resumen">Resumen de tu pedido</h2>
             <div id="carrito">
-            <!--vacio por mientras, we need el catalogo-->
-            <p id="carrito-vacio" hidden>Tu carrito esta vacio. <a href="index.html">Ir al catalogo.</a></p>
+            <p id="carrito-vacio" hidden>Tu carrito esta vacio. <a href="catalogo.html">Ir al catalogo.</a></p>
             </div>
             <p id="total-compra">Total: </p>
         </section>
@@ -35,10 +34,15 @@
             <form id="form-compra" novalidate>
                 <label for="nombre-compra">Nombre completo</label>
                 <input id="nombre-compra" name="nombre" type="text" required>
+                <span class="error" id="error-nombre-compra"></span>
+
                 <label for="correo-compra">Correo electronico</label>
                 <input id="correo-compra" name="correo" type="email" required>
+                <span class="error" id="error-correo-compra"></span>
+
                 <label for="telefono-compra">Número de teléfono</label>
                 <input id="telefono-compra" name="telefono" type="tel" required>
+                <span class="error" id="error-correo-compra"></span>
 
                 <fieldset>
                     <legend>Forma de entrega</legend>
@@ -49,6 +53,7 @@
                 <div id="direccion" hidden>
                     <label for="direccion-compra">Direccion de despacho</label>
                     <input id="direccion-compra" name="direccion" type="text">
+                    <span class="error" id="error-direccion-compra"></span>
                 </div>
 
                 <label for="pago-compra">Forma de pago</label>
@@ -58,6 +63,7 @@
                     <option value="webpay">Webpay</option>
                     <option value="efectivo">Efectivo en tienda</option>
                 </select>
+                <span class="error" id="error-pago-compra"></span>
 
                 <button type="submit">Confirmar pedido</button>
                 <p id="confirmacion-compra"></p>
