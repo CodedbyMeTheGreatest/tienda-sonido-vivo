@@ -873,43 +873,44 @@ body > section h2 {
     font-weight: bold;
     margin-top: 10px;
 }
-/* Listado de Usuarios */
-.tabla-usuarios {
+
+/* Listado de Usuarios y Productos */
+.tabla-admin {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
     font-size: 14px;
 }
 
-.tabla-usuarios thead {
+.tabla-admin thead {
     background-color: #1a1a1a;
     color: white;
 }
 
-.tabla-usuarios th {
+.tabla-admin th {
     text-align: left;
     padding: 12px 15px;
     font-weight: bold;
     border-bottom: 3px solid #d32f2f;
 }
 
-.tabla-usuarios td {
+.tabla-admin td {
     padding: 10px 15px;
     border-bottom: 1px solid #e0e0e0;
 }
 
-.tabla-usuarios tbody tr:nth-child(even) {
+.tabla-admin tbody tr:nth-child(even) {
     background-color: #f8f9fa;
 }
 
-.tabla-usuarios tbody tr:hover {
+.tabla-admin tbody tr:hover {
     background-color: #ffebee;
 }
-.admin-listado-usuarios {
+.listado-admin {
     padding: 40px 3%;
 }
 
 /* Responsive: en pantallas chicas permite scroll horizontal en vez de aplastar la tabla */
-.tabla-usuarios-contenedor {
+.contenedor-tabla-admin {
     overflow-x: auto;
 }

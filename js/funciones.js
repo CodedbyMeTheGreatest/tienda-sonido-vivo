@@ -92,6 +92,111 @@ const catalogoProductos = [
     { codigo: "ES005", categoria: "Estudio y Grabación", nombre: "Pop Filter para Micrófono", marca: "Sennheiser", modelo: "MZP 40", stock: 8, precio: 14990, descripcion: "Doble malla, brazo flexible con clip." }
 ];
 
+/* Listado-usuario*/
+
+const USUARIOS = [
+    {
+        run: "123456785",
+        nombres: "Camila",
+        apellidos: "Rojas Muñoz",
+        correo: "camila.rojas@gmail.com",
+        region: "Valparaíso",
+        comuna: "Viña del Mar",
+        rol: "Administrador",
+        direccion: "Av. Libertad 450"
+    },
+    {
+        run: "198765432",
+        nombres: "Matías",
+        apellidos: "Fernández Soto",
+        correo: "matias.fernandez@gmail.com",
+        region: "Valparaíso",
+        comuna: "Viña del Mar",
+        rol: "Vendedor",
+        direccion: "Calle Condell 120"
+    },
+    {
+        run: "156789123",
+        nombres: "Javiera",
+        apellidos: "Contreras Díaz",
+        correo: "javiera.contreras@duoc.cl",
+        region: "Región Metropolitana",
+        comuna: "Maipú",
+        rol: "Cliente",
+        direccion: "Pasaje Los Aromos 88"
+    },
+    {
+        run: "145678912",
+        nombres: "Ignacio",
+        apellidos: "González Rojas",
+        correo: "ignacio.gonzalez@gmail.com",
+        region: "Región Metropolitana",
+        comuna: "Santiago",
+        rol: "Cliente",
+        direccion: "Avenida Providencia 123"
+    },
+    {
+        run: "134567891",
+        nombres: "Valentina",
+        apellidos: "Martínez López",
+        correo: "valentina.martinez@gmail.com",
+        region: "Valparaíso",
+        comuna: "Viña del Mar",
+        rol: "Vendedor",
+        direccion: "Calle Los Leones 456"
+    },
+    {
+        run: "123456789",
+        nombres: "Sebastián",
+        apellidos: "Pérez Torres",
+        correo: "sebastian.perez@gmail.com",
+        region: "Valparaíso",
+        comuna: "Viña del Mar",
+        rol: "Vendedor",
+        direccion: "Calle Los Pinos 789"
+    },
+    {
+        run: "112233445",
+        nombres: "Isidora",
+        apellidos: "Vargas Rojas",
+        correo: "isidora.vargas@gmail.com",
+        region: "Región Metropolitana",
+        comuna: "Talagante",
+        rol: "Cliente",
+        direccion: "Calle Los Pinos 789"
+    },
+    {
+        run: "223344556",
+        nombres: "Diego",
+        apellidos: "Castillo Fernández",
+        correo: "diego.castillo@gmail.com",
+        region: "Región Metropolitana",
+        comuna: "Calera de tango",
+        rol: "Cliente",
+        direccion: "Calle Los Pinos 789"
+    },
+    {
+        run: "334455667",
+        nombres: "Antonia",
+        apellidos: "Rojas Muñoz",
+        correo: "antonia.rojas@gmail.com",
+        region: "Valparaíso",
+        comuna: "Viña del Mar",
+        rol: "Administrador",
+        direccion: "Calle Los Pinos 789"
+    },
+    {
+        run: "445566778",
+        nombres: "Tomás",
+        apellidos: "González Pérez",
+        correo: "tomas.gonzalez@gmail.com",
+        region: "Región Metropolitana",
+        comuna: "San bernardo",
+        rol: "Cliente",
+        direccion: "Calle Los Pinos 789"
+    }
+];
+
 const validador = {
     esTextoValido: (val, min = 1, max = Infinity) => {
         const texto = val.trim();
@@ -557,7 +662,6 @@ function validadorFormularioUsuario(idForm, idMensaje, mensajeExito, limpiarAlEx
         ];
     }
 
-   
     function validarCampoEnVivo(elemento) {
         if (!elemento) return;
         const validaciones = obtenerValidaciones();
@@ -708,7 +812,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (productoActivo) {
             document.getElementById("breadcrumb-nombre").textContent = productoActivo.nombre;
-            
+
             tituloDetalle.textContent = productoActivo.nombre;
 
             const precioFormateado = "$" + productoActivo.precio.toLocaleString('es-CL');
@@ -738,7 +842,7 @@ const carritoStorage = {
         }
     },
     guardar: (carrito) => localStorage.setItem(carritoKey, JSON.stringify(carrito)),
-    
+
     agregar: (codigo) => {
         const producto = catalogoProductos.find(p => p.codigo === codigo);
         if (!producto) return;
@@ -770,19 +874,19 @@ const carritoStorage = {
         }
         carritoStorage.guardar(carrito);
     },
-    
+
     quitar: (codigo) => {
         const carritoLimpio = carritoStorage.obtener().filter(item => item && item.codigo !== codigo);
         carritoStorage.guardar(carritoLimpio);
     },
-    
+
     vaciar: () => carritoStorage.guardar([]),
-    
+
     total: () => {
         const carrito = carritoStorage.obtener().filter(item => item && item.precio);
         return carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
     },
-    
+
     totalItems: () => {
         const carrito = carritoStorage.obtener().filter(item => item && item.cantidad);
         return carrito.reduce((acc, item) => acc + item.cantidad, 0);
@@ -791,14 +895,14 @@ const carritoStorage = {
 
 function actualizarContadorCarrito() {
     const contador = document.querySelector('#contador-carrito')
-    if(contador) contador.textContent = carritoStorage.totalItems()
+    if (contador) contador.textContent = carritoStorage.totalItems()
 }
 
 document.addEventListener("DOMContentLoaded", actualizarContadorCarrito)
 
 document.addEventListener("click", (e) => {
     const boton = e.target.closest("[data-codigo]")
-    if(!boton) return
+    if (!boton) return
 
     const esBotonCatalogo = boton.classList.contains("boton-catalogo-añadir-producto");
     const esBotonDetalle = boton.id === "boton-agregar-carrito";
@@ -816,17 +920,17 @@ document.addEventListener("click", (e) => {
 /*COMPRA */
 
 const contenedorCarrito = document.querySelector("#carrito")
-if(contenedorCarrito){
-    function renderizarCarrito(){
+if (contenedorCarrito) {
+    function renderizarCarrito() {
         const carrito = carritoStorage.obtener()
         const carritoVacioMsg = document.querySelector("#carrito-vacio")
         const totalCompra = document.querySelector("#total-compra")
 
         contenedorCarrito.querySelectorAll(".item-carrito").forEach(e1 => e1.remove())
 
-        if(carrito.length === 0) {
+        if (carrito.length === 0) {
             carritoVacioMsg.hidden = false
-            totalCompra.textContent= "Total: $0"
+            totalCompra.textContent = "Total: $0"
             return
         }
         carritoVacioMsg.hidden = true
@@ -848,7 +952,7 @@ if(contenedorCarrito){
             contenedorCarrito.appendChild(fila);
         })
 
-        totalCompra.textContent = "Total: $" + carritoStorage.total().toLocaleString('es-CL')       
+        totalCompra.textContent = "Total: $" + carritoStorage.total().toLocaleString('es-CL')
     }
 
     renderizarCarrito()
@@ -878,198 +982,127 @@ if(contenedorCarrito){
         });
     });
 
-const formCompra = document.querySelector("#form-compra");
-if (formCompra) {
-    formCompra.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const elementos = formCompra.elements;
-        const confirmacion = document.querySelector("#confirmacion-compra");
-        const esDespacho = elementos["entrega"].value === "despacho";
+    const formCompra = document.querySelector("#form-compra");
+    if (formCompra) {
+        formCompra.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const elementos = formCompra.elements;
+            const confirmacion = document.querySelector("#confirmacion-compra");
+            const esDespacho = elementos["entrega"].value === "despacho";
 
-        const validaciones = [
-            {
-                elemento: elementos["nombre"],
-                estado: validador.esTextoValido(elementos["nombre"]?.value, 3, 100),
-                idError: "error-nombre-compra",
-                mensaje: "Ingresa tu nombre completo (mínimo 3 caracteres)."
-            },
-            {
-                elemento: elementos["correo"],
-                estado: validador.esCorreoValido(elementos["correo"]?.value)&& (elementos["correo"]?.value.length <= 100),
-                idError: "error-correo-compra",
-                mensaje: "Ingresa un correo válido."
-            },
-            {
-                elemento: elementos["telefono"],
-                estado: validador.esTelefonoValido(elementos["telefono"]?.value) && elementos["telefono"]?.value.trim() !== '',
-                idError: "error-telefono-compra",
-                mensaje: "Ingresa un teléfono válido (8 a 15 dígitos)."
-            },
-            {
-                elemento: elementos["pago"],
-                estado: validador.esTextoValido(elementos["pago"]?.value),
-                idError: "error-pago-compra",
-                mensaje: "Selecciona una forma de pago."
+            const validaciones = [
+                {
+                    elemento: elementos["nombre"],
+                    estado: validador.esTextoValido(elementos["nombre"]?.value, 3, 100),
+                    idError: "error-nombre-compra",
+                    mensaje: "Ingresa tu nombre completo (mínimo 3 caracteres)."
+                },
+                {
+                    elemento: elementos["correo"],
+                    estado: validador.esCorreoValido(elementos["correo"]?.value) && (elementos["correo"]?.value.length <= 100),
+                    idError: "error-correo-compra",
+                    mensaje: "Ingresa un correo válido."
+                },
+                {
+                    elemento: elementos["telefono"],
+                    estado: validador.esTelefonoValido(elementos["telefono"]?.value) && elementos["telefono"]?.value.trim() !== '',
+                    idError: "error-telefono-compra",
+                    mensaje: "Ingresa un teléfono válido (8 a 15 dígitos)."
+                },
+                {
+                    elemento: elementos["pago"],
+                    estado: validador.esTextoValido(elementos["pago"]?.value),
+                    idError: "error-pago-compra",
+                    mensaje: "Selecciona una forma de pago."
+                }
+            ];
+
+            if (esDespacho) {
+                validaciones.push({
+                    elemento: elementos["direccion"],
+                    estado: validador.esTextoValido(elementos["direccion"]?.value, 5, 300),
+                    idError: "error-direccion-compra",
+                    mensaje: "Ingresa una dirección de despacho válida."
+                });
             }
-        ];
 
-        if (esDespacho) {
-            validaciones.push({
-                elemento: elementos["direccion"],
-                estado: validador.esTextoValido(elementos["direccion"]?.value, 5, 300),
-                idError: "error-direccion-compra",
-                mensaje: "Ingresa una dirección de despacho válida."
+            let esFormularioValido = true;
+            validaciones.forEach(({ elemento, estado, idError, mensaje }) => {
+                UI.marcarCampo(elemento, estado, idError, mensaje);
+                if (!estado) esFormularioValido = false;
             });
-        }
 
-        let esFormularioValido = true;
-        validaciones.forEach(({ elemento, estado, idError, mensaje }) => {
-            UI.marcarCampo(elemento, estado, idError, mensaje);
-            if (!estado) esFormularioValido = false;
-        });
+            if (carritoStorage.obtener().length === 0) {
+                UI.mostrarMensaje(confirmacion, "No puedes confirmar un pedido sin productos en el carrito.", false);
+                return;
+            }
 
-        if (carritoStorage.obtener().length === 0) {
-            UI.mostrarMensaje(confirmacion, "No puedes confirmar un pedido sin productos en el carrito.", false);
-            return;
-        }
-
-        if (esFormularioValido) {
-            UI.mostrarMensaje(confirmacion, "¡Pedido confirmado! Te contactaremos para coordinar la entrega.", true);
-            carritoStorage.vaciar();
-            formCompra.reset();
-            renderizarCarrito();
-            actualizarContadorCarrito();
-        } else {
-            UI.mostrarMensaje(confirmacion, "Revisa los campos marcados.", false);
-        }
-    })
-}
-}
-/* Listado-usuario*/
-const USUARIOS = [
-    {
-        run: "123456785",
-        nombres: "Camila",
-        apellidos: "Rojas Muñoz",
-        correo: "camila.rojas@gmail.com",
-        region: "Valparaíso",
-        comuna: "Viña del Mar",
-        rol: "Administrador",
-        direccion: "Av. Libertad 450"
-    },
-    {
-        run: "198765432",
-        nombres: "Matías",
-        apellidos: "Fernández Soto",
-        correo: "matias.fernandez@gmail.com",
-        region: "Valparaíso",
-        comuna: "Viña del Mar",
-        rol: "Vendedor",
-        direccion: "Calle Condell 120"
-    },
-    {
-        run: "156789123",
-        nombres: "Javiera",
-        apellidos: "Contreras Díaz",
-        correo: "javiera.contreras@duocuc.cl",
-        region: "Región Metropolitana",
-        comuna: "Maipú",
-        rol: "Cliente",
-        direccion: "Pasaje Los Aromos 88"
-    },
-    {
-        run: "145678912",
-        nombres: "Ignacio",
-        apellidos: "González Rojas",
-        correo: "ignacio.gonzalez@gmail.com",
-        region: "Región Metropolitana",
-        comuna: "Santiago",
-        rol: "Cliente",
-        direccion: "Avenida Providencia 123"
-    },
-    {
-        run: "134567891",
-        nombres: "Valentina",
-        apellidos: "Martínez López",
-        correo: "valentina.martinez@gmail.com",
-        region: "Valparaíso",
-        comuna: "Viña del Mar",
-        rol: "Vendedor",
-        direccion: "Calle Los Leones 456"
-    },
-    {
-        run: "123456789",
-        nombres: "Sebastián",
-        apellidos: "Pérez Torres",
-        correo: "sebastian.perez@gmail.com",
-        region: "Valparaíso",
-        comuna: "Viña del Mar",
-        rol: "Vendedor",
-        direccion: "Calle Los Pinos 789"
-    },
-    {
-        run: "112233445",
-        nombres: "Isidora",
-        apellidos: "Vargas Rojas",
-        correo: "isidora.vargas@gmail.com",
-        region: "Región Metropolitana",
-        comuna: "Talagante",
-        rol: "Cliente",
-        direccion: "Calle Los Pinos 789"
-    },
-    {
-        run: "223344556",
-        nombres: "Diego",
-        apellidos: "Castillo Fernández",
-        correo: "diego.castillo@gmail.com",
-        region: "Región Metropolitana",
-        comuna: "Calera de tango",
-        rol: "Cliente",
-        direccion: "Calle Los Pinos 789"
-    },
-    {
-        run: "334455667",
-        nombres: "Antonia",
-        apellidos: "Rojas Muñoz",
-        correo: "antonia.rojas@gmail.com",
-        region: "Valparaíso",
-        comuna: "Viña del Mar",
-        rol: "Administrador",
-        direccion: "Calle Los Pinos 789"
-    },
-    {
-        run: "445566778",
-        nombres: "Tomás",
-        apellidos: "González Pérez",
-        correo: "tomas.gonzalez@gmail.com",
-        region: "Región Metropolitana",
-        comuna: "San bernardo",
-        rol: "Cliente",
-        direccion: "Calle Los Pinos 789"
+            if (esFormularioValido) {
+                UI.mostrarMensaje(confirmacion, "¡Pedido confirmado! Te contactaremos para coordinar la entrega.", true);
+                carritoStorage.vaciar();
+                formCompra.reset();
+                renderizarCarrito();
+                actualizarContadorCarrito();
+            } else {
+                UI.mostrarMensaje(confirmacion, "Revisa los campos marcados.", false);
+            }
+        })
     }
+}
 
-];
+/*Listado de Usarios y Productos*/
 
-function renderizarListadoUsuarios() {
-    const cuerpoTabla = document.querySelector("#cuerpo-tabla-usuarios");
+function renderizarTabla(selectorTbody, datos, columnas) {
+    const cuerpoTabla = document.querySelector(selectorTbody);
     if (!cuerpoTabla) return;
 
     cuerpoTabla.textContent = '';
 
-    USUARIOS.forEach((usuario) => {
+    datos.forEach(item => {
         const fila = document.createElement("tr");
-        fila.innerHTML = `
-            <td>${usuario.run}</td>
-            <td>${usuario.nombres}</td>
-            <td>${usuario.apellidos}</td>
-            <td>${usuario.correo}</td>
-            <td>${usuario.region}</td>
-            <td>${usuario.comuna}</td>
-            <td>${usuario.rol}</td>
-            <td>${usuario.direccion}</td>
-        `;
+
+        columnas.forEach(columna => {
+            const td = document.createElement("td");
+
+            const valor = typeof columna === 'function' ? columna(item) : (item[columna] ?? '-');
+
+            td.textContent = valor;
+            fila.appendChild(td);
+        })
         cuerpoTabla.appendChild(fila);
     });
 }
 
-renderizarListadoUsuarios();
+function renderizarListadoUsuarios() {
+    const columnasUsuarios = [
+        'run',
+        'nombres',
+        'apellidos',
+        'correo',
+        'region',
+        'comuna',
+        'rol',
+        'direccion'
+    ];
+    renderizarTabla('#cuerpo-tabla-usuarios-admin', USUARIOS, columnasUsuarios);
+}
+
+function renderizarListadoProductos() {
+    const columnasProductos = [
+        'codigo',
+        'categoria',
+        'nombre',
+        'marca',
+        'modelo',
+        'stock',
+        producto => producto.stockCritico ?? '-',
+        producto => '$' + producto.precio.toLocaleString('es-CL'),
+        'descripcion'
+    ];
+    renderizarTabla('#cuerpo-tabla-productos-admin', catalogoProductos, columnasProductos);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    renderizarListadoUsuarios();
+    renderizarListadoProductos();
+});
