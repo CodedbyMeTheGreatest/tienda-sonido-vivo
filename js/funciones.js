@@ -732,7 +732,6 @@ const carritoStorage = {
     obtener: () => {
         try {
             const datos = JSON.parse(localStorage.getItem(carritoKey));
-            // Verificamos que sea un arreglo válido. Si el navegador guardó basura, devuelve vacío.
             return Array.isArray(datos) ? datos : [];
         } catch (error) {
             return [];
@@ -742,10 +741,8 @@ const carritoStorage = {
     
     agregar: (codigo) => {
         const producto = catalogoProductos.find(p => p.codigo === codigo);
-        // CRÍTICO: Si el producto no se encuentra, detenemos la función para evitar colapsos
         if (!producto) return;
 
-        // Traemos el carrito y filtramos por si había objetos "null" guardados de antes
         let carrito = carritoStorage.obtener().filter(item => item && item.codigo);
         const itemExistente = carrito.find(item => item.codigo === codigo);
 
