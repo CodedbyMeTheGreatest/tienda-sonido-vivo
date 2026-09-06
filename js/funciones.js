@@ -313,6 +313,41 @@ if (formContacto) {
 }
 
 /* INICIO SESION Y REGISTRO VISTA TIENDA*/
+
+const sesionKey = "sv_sesion";
+
+const sesionStorage = {
+    iniciar: (usuario) => {
+        const datos = {
+            nombres: usuario.nombres,
+            correo: usuario.correo,
+            rol: usuario.rol
+        };
+        localStorage.setItem(sesionKey, JSON.stringify(datos));
+    },
+
+    obtener: () => {
+        try {
+            return JSON.parse(localStorage.getItem(sesionKey));
+        } catch {
+            return null;
+        }
+    },
+
+    cerrar: () => localStorage.removeItem(sesionKey)
+
+};
+
+function redirigirSegunRol(rol) {
+
+    if (rol === "Administrador" || rol === "Vendedor") {
+        window.location.href = "vista-admin.html";
+    } else {
+        window.location.href = "index.html";
+    }
+
+}
+
 const formLogin = document.querySelector("#inicio-sesion");
 if (formLogin) {
     formLogin.addEventListener("submit", (e) => {
@@ -342,7 +377,13 @@ if (formLogin) {
         });
 
         if (esFormularioValido) {
+            const usuarioEncontrado = USUARIOS.find(u => u.correo.toLowerCase() === correo.value.toLowerCase());
+            const rol = usuarioEncontrado ? usuarioEncontrado.rol : "Cliente";
+            
+            sesionStorage.iniciar(usuarioEncontrado || { nombres: "Invitado", correo: correo.value, rol });
+            
             UI.mostrarMensaje(mensaje, "Validación exitosa. Iniciando sesión...", true);
+            setTimeout(() => redirigirSegunRol(rol), 800);
         } else {
             UI.mostrarMensaje(mensaje, "Por favor, revise los campos marcados.", false);
         }
