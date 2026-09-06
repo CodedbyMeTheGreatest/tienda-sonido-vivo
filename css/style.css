@@ -598,9 +598,9 @@ body > section h2 {
     background-color: #b71c1c;
 }
 
-/** ADMIN Productos**/
+/** ADMIN**/
 
-.nav-admin-productos {
+.nav-admin-productos, .nav-admin-usuarios {
     background-color: rgb(26, 26, 26);
     width: 100%;
     display: flex;
@@ -608,7 +608,7 @@ body > section h2 {
     justify-content: center;
 }
 
-.nav-admin-productos a {
+.nav-admin-productos a, .nav-admin-usuarios a {
     color: white;
     justify-content: center;
     text-decoration: none;
@@ -619,7 +619,7 @@ body > section h2 {
     transition: background-color 0.3s;
 }
 
-.nav-admin-productos a:hover {
+.nav-admin-productos a:hover, .nav-admin-usuarios a:hover{
     background-color: rgb(211, 47, 47);
 }
 
@@ -958,4 +958,102 @@ body > section h2 {
 /* Responsive: en pantallas chicas permite scroll horizontal en vez de aplastar la tabla */
 .contenedor-tabla-admin {
     overflow-x: auto;
+}
+
+/* MENU HAMBURGUESA */
+.boton-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.boton-menu span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.boton-menu.activo span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+.boton-menu.activo span:nth-child(2) { opacity: 0; }
+.boton-menu.activo span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
+
+/* Responsividad */
+@media (max-width: 768px) {
+    header {
+        flex-wrap: wrap;
+        position: relative;
+    }
+
+    .boton-menu {
+        display: flex;
+    }
+
+    #nav-principal {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+        margin-top: 15px;
+    }
+
+    #nav-principal.activo {
+        display: flex;
+    }
+
+    #nav-principal a {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        border-radius: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .grilla-productos {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 15px;
+    }
+
+    .grilla-categorias {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .detalle-producto {
+        grid-template-columns: 1fr;
+    }
+    .imagenes-producto {
+        grid-column: 1;
+        grid-row: auto;
+        min-height: 280px;
+    }
+    .informacion-producto,
+    .descripcion-detalle-producto,
+    .cantidad-detalle-producto {
+        grid-column: 1;
+    }
+
+    .admin-content {
+        flex-direction: column;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    main section,
+    body > section {
+        padding: 25px 5%;
+    }
+
+    .admin-form,
+    #form-contacto {
+        max-width: 100%;
+    }
 }
