@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de usuarios - Sonido Vivo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/funciones.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <nav class="nav-admin-usuarios">
+            <a href="vista-admin.html">Inicio Administrador</a>
+            <a href="nuevo-usuario.html">Nuevo usuario</a>
+            <a href="editar-usuario.html">Editar usuario</a>
+            <a href="eliminar-usuario.html">Eliminar usuario</a>
+            <a href="listado-usuarios.html">Listado de usuarios</a>
+        </nav>
+    </header>
+    <main>
+        <section class = "admin-listado-usuarios">
+            <h2>Listado de Usuarios</h2>
+            <div class="tabla-usuario-contenedor">
+            <table class="tabla-usuarios">
+                <thead>
+                    <tr>
+                        <th>RUN</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Correo</th>
+                        <th>Región</th>
+                        <th>Comuna</th>
+                        <th>Rol</th>
+                        <th>Dirección</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo-tabla-usuarios">
+                    <!-- Las filas se generan por JS -->
+                </tbody>
+            </table>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2026 - Sonido Vivo</p>
+    </footer>
+</body>
+
+</html>

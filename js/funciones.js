@@ -945,3 +945,131 @@ if (formCompra) {
     })
 }
 }
+/* Listado-usuario*/
+const USUARIOS = [
+    {
+        run: "123456785",
+        nombres: "Camila",
+        apellidos: "Rojas Muñoz",
+        correo: "camila.rojas@gmail.com",
+        region: "Valparaíso",
+        comuna: "Viña del Mar",
+        rol: "Administrador",
+        direccion: "Av. Libertad 450"
+    },
+    {
+        run: "198765432",
+        nombres: "Matías",
+        apellidos: "Fernández Soto",
+        correo: "matias.fernandez@gmail.com",
+        region: "Valparaíso",
+        comuna: "Viña del Mar",
+        rol: "Vendedor",
+        direccion: "Calle Condell 120"
+    },
+    {
+        run: "156789123",
+        nombres: "Javiera",
+        apellidos: "Contreras Díaz",
+        correo: "javiera.contreras@duocuc.cl",
+        region: "Región Metropolitana",
+        comuna: "Maipú",
+        rol: "Cliente",
+        direccion: "Pasaje Los Aromos 88"
+    },
+    {
+        run: "145678912",
+        nombres: "Ignacio",
+        apellidos: "González Rojas",
+        correo: "ignacio.gonzalez@gmail.com",
+        region: "Región Metropolitana",
+        comuna: "Santiago",
+        rol: "Cliente",
+        direccion: "Avenida Providencia 123"
+    },
+    {
+        run: "134567891",
+        nombres: "Valentina",
+        apellidos: "Martínez López",
+        correo: "valentina.martinez@gmail.com",
+        region: "Valparaíso",
+        comuna: "Viña del Mar",
+        rol: "Vendedor",
+        direccion: "Calle Los Leones 456"
+    },
+    {
+        run: "123456789",
+        nombres: "Sebastián",
+        apellidos: "Pérez Torres",
+        correo: "sebastian.perez@gmail.com",
+        region: "Valparaíso",
+        comuna: "Viña del Mar",
+        rol: "Vendedor",
+        direccion: "Calle Los Pinos 789"
+    },
+    {
+        run: "112233445",
+        nombres: "Isidora",
+        apellidos: "Vargas Rojas",
+        correo: "isidora.vargas@gmail.com",
+        region: "Región Metropolitana",
+        comuna: "Talagante",
+        rol: "Cliente",
+        direccion: "Calle Los Pinos 789"
+    },
+    {
+        run: "223344556",
+        nombres: "Diego",
+        apellidos: "Castillo Fernández",
+        correo: "diego.castillo@gmail.com",
+        region: "Región Metropolitana",
+        comuna: "Calera de tango",
+        rol: "Cliente",
+        direccion: "Calle Los Pinos 789"
+    },
+    {
+        run: "334455667",
+        nombres: "Antonia",
+        apellidos: "Rojas Muñoz",
+        correo: "antonia.rojas@gmail.com",
+        region: "Valparaíso",
+        comuna: "Viña del Mar",
+        rol: "Administrador",
+        direccion: "Calle Los Pinos 789"
+    },
+    {
+        run: "445566778",
+        nombres: "Tomás",
+        apellidos: "González Pérez",
+        correo: "tomas.gonzalez@gmail.com",
+        region: "Región Metropolitana",
+        comuna: "San bernardo",
+        rol: "Cliente",
+        direccion: "Calle Los Pinos 789"
+    }
+
+];
+
+function renderizarListadoUsuarios() {
+    const cuerpoTabla = document.querySelector("#cuerpo-tabla-usuarios");
+    if (!cuerpoTabla) return;
+
+    cuerpoTabla.textContent = '';
+
+    USUARIOS.forEach((usuario) => {
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+            <td>${usuario.run}</td>
+            <td>${usuario.nombres}</td>
+            <td>${usuario.apellidos}</td>
+            <td>${usuario.correo}</td>
+            <td>${usuario.region}</td>
+            <td>${usuario.comuna}</td>
+            <td>${usuario.rol}</td>
+            <td>${usuario.direccion}</td>
+        `;
+        cuerpoTabla.appendChild(fila);
+    });
+}
+
+renderizarListadoUsuarios();
