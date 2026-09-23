@@ -95,21 +95,30 @@
             <form id="form-contacto" novalidate>
                 <label for="nombre-contacto">Nombre Completo</label>
                 <input id="nombre-contacto" type="text" required>
-                <label for="correo-contacto">Correo Eléctrico</label>
+                <span class="error" id="error-nombre"></span>
+
+                <label for="correo-contacto">Correo Electrónico</label>
                 <input id="correo-contacto" type="email" required>
+                <span class="error" id="error-correo"></span>
+
                 <label for="telefono-contacto">Teléfono</label>
                 <input id="telefono-contacto" type="tel" required>
+                <span class="error" id="error-telefono"></span>
+
                 <label for="motivo-contacto">Motivo de la consulta</label>
-                <select id="motivo-contacto" required>
-                    <option value="">Selecciona una opción</option>
-                    <option>Consulta general</option>
-                    <option>Compra especial</option>
-                    <option>Reclamo</option>
-                    <option>Otro</option>
-                    ::picker-icon
-                </select>
+                 <select id="motivo-contacto" required>
+                 <option value="">Selecciona una opción</option>
+                 <option>Consulta general</option>
+                <option>Compra especial</option>
+                <option>Reclamo</option>
+                <option>Otro</option>
+                ::picker-icon
+                 </select>
+
                 <label for="mensaje-contacto">Mensaje</label>
                 <textarea id="mensaje-contacto" required></textarea>
+                <span class="error" id="error-mensaje"></span>
+
                 <button type="submit">Enviar consulta</button>
                 <p id="mensaje-confirmacion"></p>
             </form>

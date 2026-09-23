@@ -267,7 +267,7 @@ const formContacto = document.querySelector("#form-contacto");
 if (formContacto) {
     formContacto.addEventListener("submit", function (e) {
         e.preventDefault();
-        const { elementos } = formContacto;
+        const  elementos  = formContacto.elements;
         const confirmacion = document.querySelector("#mensaje-confirmacion");
 
         const validaciones = [
