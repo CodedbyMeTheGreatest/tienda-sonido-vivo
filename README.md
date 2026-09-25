@@ -3,7 +3,7 @@
 
 ## Integrantes
 - Nombre Apellido (correo@duocuc.cl)
-- Nombre Apellido (correo@duocuc.cl)
+- Felix Rojas (fn.rojas@duocuc.cl)
 - Corina Urrutia (cor.urrutia@duocuc.cl)
 
 ## Caso
@@ -16,8 +16,13 @@ Tienda Sonido Vivo
 src/
 ├── components/
 │   ├── atoms/
+│   │     ├──BotonDeEnviar.jsx
+│   │     ├──InputLabel.jsx
+│   │     └──Label.jsx 
 │   ├── molecules/
+│   │     └──CampoLogin.jsx 
 │   ├── organisms/
+│   │     └──FormularioLogin.jsx 
 │   └── templates/
 └── pages/
 
