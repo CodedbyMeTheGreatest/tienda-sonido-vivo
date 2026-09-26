@@ -12,6 +12,7 @@ function CampoLogin(props) {
         alCambiar={props.alCambiar}
         requerido={props.requerido}
         esInvalido={props.esInvalido}
+        mensajeError={props.mensajeError}
       />
       {props.esInvalido && (
         <small className="texto-error">{props.mensajeError}</small>
