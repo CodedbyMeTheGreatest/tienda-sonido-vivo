@@ -33,7 +33,7 @@ function Login() {
     return (
         <Container>
             <Row>
-                <Col xs={12} ms={6} lg={4}>
+                <Col xs={12} ms={8} lg={6}>
                     <LoginTemplate titulo="Inicio de Sesión" piePagina="© 2026 - Sonido Vivo">
                         <FormularioLogin
                             valores={valores}
