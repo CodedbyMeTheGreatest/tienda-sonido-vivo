@@ -4,7 +4,7 @@ function LoginTemplate(props) {
             <main>
                 {props.titulo && (
                     <header>
-                        <h2>{props.titulo}</h2>
+                        {/*Encabezado*/}
                     </header>
                 )}
                 

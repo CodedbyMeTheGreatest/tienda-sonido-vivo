@@ -1,3 +1,4 @@
+import { Container, Row, Col } from "react-bootstrap";
 import FormularioLogin from "../components/organisms/FormularioLogin";
 import useLogin from "../hooks/useLogin.js"
 import LoginTemplate from "../components/templates/LoginTemplate.jsx";
@@ -30,15 +31,21 @@ function Login() {
     const { valores, errores, mensajeConfirmacion, alCambiar, alEnviar } = useLogin(manejarInicioSesionExitoso);
 
     return (
-        <LoginTemplate titulo="Inicio de Sesión" piePagina="© 2026 - Sonido Vivo">
-            <FormularioLogin
-                valores={valores}
-                errores={errores}
-                mensajeConfirmacion={mensajeConfirmacion}
-                alCambiar={alCambiar}
-                alEnviar={alEnviar}
-            />
-        </LoginTemplate>
+        <Container>
+            <Row>
+                <Col xs={12} ms={6} lg={4}>
+                    <LoginTemplate titulo="Inicio de Sesión" piePagina="© 2026 - Sonido Vivo">
+                        <FormularioLogin
+                            valores={valores}
+                            errores={errores}
+                            mensajeConfirmacion={mensajeConfirmacion}
+                            alCambiar={alCambiar}
+                            alEnviar={alEnviar}
+                        />
+                    </LoginTemplate>
+                </Col>
+            </Row>
+        </Container>
     );
 }
 

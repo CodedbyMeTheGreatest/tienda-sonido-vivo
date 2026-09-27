@@ -4,6 +4,7 @@ import BotonDeEnviar from "../atoms/BotonDeEnviar";
 function FormularioLogin(props) {
     return (
         <section>
+            <h2>Inicio de sesion</h2>
             <form id="inicio-sesion" className="admin-form" onSubmit={props.alEnviar} noValidate>
                 <CampoLogin 
                     id="correo" 
