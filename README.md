@@ -1,8 +1,8 @@
 # Nombre del Equipo
-
+[Ingresar nombre del equipo]
 
 ## Integrantes
-- Nombre Apellido (correo@duocuc.cl)
+- Jean Lefiman (je.lefiman@duocuc.cl)
 - Felix Rojas (fn.rojas@duocuc.cl)
 - Corina Urrutia (cor.urrutia@duocuc.cl)
 
@@ -10,21 +10,45 @@
 Tienda Sonido Vivo
 
 ## Descripción del caso
-
+[Ingresar descripción del caso]
 
 ## Estructura del proyecto
-src/
-├── components/
-│   ├── atoms/
-│   │     ├──BotonDeEnviar.jsx
-│   │     ├──InputLabel.jsx
-│   │     └──Label.jsx 
-│   ├── molecules/
-│   │     └──CampoLogin.jsx 
-│   ├── organisms/
-│   │     └──FormularioLogin.jsx 
-│   └── templates/
-└── pages/
+```
+├─ .gitignore
+├─ .oxlintrc.json
+├─ README.md
+├─ index.html
+├─ package-lock.json
+├─ package.json
+├─ public
+│  ├─ favicon.svg
+│  └─ icons.svg
+├─ src
+│  ├─ App.css
+│  ├─ App.jsx
+│  ├─ assets
+│  │  ├─ hero.png
+│  │  ├─ react.svg
+│  │  └─ vite.svg
+│  ├─ components
+│  │  ├─ atoms
+│  │  │  ├─ BotonDeEnviar.jsx
+│  │  │  ├─ InputLabel.jsx
+│  │  │  └─ Label.jsx
+│  │  ├─ molecules
+│  │  │  └─ CampoLogin.jsx
+│  │  ├─ organisms
+│  │  │  └─ FormularioLogin.jsx
+│  │  └─ templates
+│  │     └─ LoginTemplate.jsx
+│  ├─ hooks
+│  │  └─ useLogin.js
+│  ├─ index.css
+│  ├─ main.jsx
+│  └─ pages
+│     └─ Login.jsx
+└─ vite.config.js
+```
 
 ## Tecnologías
 - React + Vite
