@@ -1,5 +1,5 @@
 # Nombre del Equipo
-[Ingresar nombre del equipo]
+Jelico
 
 ## Integrantes
 - Jean Lefiman (je.lefiman@duocuc.cl)
@@ -10,7 +10,11 @@
 Tienda Sonido Vivo
 
 ## Descripción del caso
-[Ingresar descripción del caso]
+Sonido Vivo es una tienda especializada en instrumentos musicales, equipos de sonido y accesorios para músicos, ubicada en Viña del Mar, Región de Valparaíso. Tiene 11 años de funcionamiento y es atendida por el dueño y dos vendedores.
+
+El catálogo incluye guitarras, bajos, baterías, teclados, amplificadores, micrófonos, pedales de efectos y accesorios. También ofrece reparación de instrumentos de cuerda. El catálogo actual tiene 340 referencias distintas.
+
+Nuestro equipo de desarrollo se encargará de la transformación digital integral de la tienda. El propósito es ofrecer una experiencia renovada y de alto impacto, tanto para la clientela habitual como para los nuevos prospectos. Esto se ejecutará mediante la implementación de tecnologías de desarrollo web avanzadas, resultando en una plataforma robusta que centralizará la información comercial, agilizará el ciclo de ventas y proporcionará herramientas eficientes para la gestión interna."
 
 ## Estructura del proyecto
 ```
