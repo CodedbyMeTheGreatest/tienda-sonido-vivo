@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import FormularioLogin from "../components/organisms/FormularioLogin";
-import useLogin from "../hooks/useLogin.js"
-import LoginTemplate from "../components/templates/LoginTemplate.jsx";
+import useLogin from "../context/LoginContext"
+import LoginTemplate from "../components/templates/LoginTemplate";
 
 const SESION_KEY = "sv_sesion";
 
