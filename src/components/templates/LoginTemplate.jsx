@@ -1,20 +1,17 @@
 import Navbar from "../organisms/Navbar";
+import Footer from "../organisms/Footer";
 
 function LoginTemplate(props) {
     return (
         <div>
-            <header>
-                 <Navbar cantidadCarrito={props.cantidadCarrito} />
-            </header>
+            <Navbar cantidadCarrito={props.cantidadCarrito} />
             <main>
 
                 {/* props.children renderiza el Organismo pasado como contenido hijo */}
                 {props.children}
 
             </main>
-            <footer>
-                <p>{props.piePagina}</p>
-            </footer>
+            <Footer/>
         </div>
     );
 }

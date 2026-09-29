@@ -244,6 +244,30 @@ main section h2 {
     transform: translateY(-9px) rotate(-45deg);
 }
 
+/*Footer*/
+.footer {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 30px 5%;
+    border-top: 4px solid #d32f2f;
+    text-align: center;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.footer-copyright {
+    font-size: 14px;
+    color: #cccccc;
+    margin: 0;
+}
+
+
 @media (max-width: 768px) {
     header {
         position: relative;
