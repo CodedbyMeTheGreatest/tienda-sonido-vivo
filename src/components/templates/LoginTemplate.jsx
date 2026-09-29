@@ -1,8 +1,10 @@
+import Navbar from "../organisms/Navbar";
+
 function LoginTemplate(props) {
     return (
         <div>
             <header>
-                {/*Encabezado*/}
+                 <Navbar cantidadCarrito={props.cantidadCarrito} />
             </header>
             <main>
 

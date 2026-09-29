@@ -1,10 +1,11 @@
 import CatalogoProducto from "../organisms/CatalogoProducto";
+import Navbar from "../organisms/Navbar";
 
 function CatalogoTemplate(props) {
     return (
         <div>
             <header>
-            {/*Encabezado*/}
+            <Navbar cantidadCarrito={props.cantidadCarrito} />
             </header>
             <main>
                 <CatalogoProducto dataProductos={props.productos}></CatalogoProducto>
