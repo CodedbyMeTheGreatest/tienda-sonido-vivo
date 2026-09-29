@@ -100,3 +100,55 @@ main section h2 {
         max-width: 100%;
     }
 }
+
+
+/*Catalogo*/
+.grilla-productos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    padding: 10px;
+}
+
+.grilla-productos a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+
+.producto {
+    background-color: #f1f1f1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.producto:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+    transform: translateY(-4px);
+    text-decoration: underline;
+}
+
+.producto{
+    height: 100%;
+}
+
+.boton-catalogo-añadir-producto {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 5px 10px;
+    background-color: #d32f2f;
+    transition: background-color 0.2s;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.boton-catalogo-añadir-producto:hover {
+    background-color: #b71c1c;
+}

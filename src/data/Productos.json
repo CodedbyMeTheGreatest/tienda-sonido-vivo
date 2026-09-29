@@ -1,0 +1,10 @@
+[
+    { "codigo": "GA001", "categoria": "Guitarras Acústicas", "nombre": "Guitarra Acústica Folk", "marca": "Yamaha", "modelo": "F310", "stock": 8, "precio": 129990, "descripcion": "Tapa de abeto, aros y fondo de meranti. Ideal para iniciantes."
+    },
+    { "codigo": "GA002", "categoria": "Guitarras Acústicas", "nombre": "Guitarra Acústica Dreadnought", "marca": "Fender", "modelo": "CD-60S", "stock": 5, "precio": 189990, "descripcion": "Tapa de abeto macizo, brazo de caoba. Sonido cálido y proyectado."
+    },
+    { "codigo": "GA003", "categoria": "Guitarras Acústicas", "nombre": "Guitarra Acústica Clásica 4/4", "marca": "Yamaha", "modelo": "C40", "stock": 10, "precio": 89990, "descripcion": "Nailon, tapa de abeto. Ideal para estudio y flamenco."
+    },
+    { "codigo": "GA004", "categoria": "Guitarras Acústicas", "nombre": "Guitarra Electroacústica", "marca": "Takamine", "modelo": "GN20CE", "stock": 3, "precio": 349990, "descripcion": "Pickup integrado, afinador incorporado."
+    }
+]
