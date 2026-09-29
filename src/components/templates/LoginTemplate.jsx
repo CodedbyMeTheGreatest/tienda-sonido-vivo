@@ -1,22 +1,18 @@
 function LoginTemplate(props) {
     return (
         <div>
+            <header>
+                {/*Encabezado*/}
+            </header>
             <main>
-                {props.titulo && (
-                    <header>
-                        {/*Encabezado*/}
-                    </header>
-                )}
-                
+
                 {/* props.children renderiza el Organismo pasado como contenido hijo */}
                 {props.children}
 
-                {props.piePagina && (
-                    <footer>
-                        <p>{props.piePagina}</p>
-                    </footer>
-                )}
             </main>
+            <footer>
+                <p>{props.piePagina}</p>
+            </footer>
         </div>
     );
 }

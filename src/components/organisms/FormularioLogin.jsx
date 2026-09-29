@@ -1,5 +1,5 @@
 import CampoLogin from "../molecules/CampoLogin";
-import BotonDeEnviar from "../atoms/BotonDeEnviar";
+import Boton from "../atoms/Boton";
 
 function FormularioLogin(props) {
     return (
@@ -26,7 +26,7 @@ function FormularioLogin(props) {
                     esInvalido={Boolean(props.errores.contraseña)}
                     mensajeError={props.errores.contraseña}
                 />
-                <BotonDeEnviar tipo="submit" texto="Iniciar Sesión"/>
+                <Boton tipo="submit" texto="Iniciar Sesión"/>
                 {props.mensajeConfirmacion.texto && (
                     <p id="mensaje-confirmacion">{props.mensajeConfirmacion.texto}</p>
                 )}

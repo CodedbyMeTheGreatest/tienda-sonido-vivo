@@ -34,7 +34,7 @@ function Login() {
         <Container>
             <Row>
                 <Col xs={12} ms={8} lg={6}>
-                    <LoginTemplate titulo="Inicio de Sesión" piePagina="© 2026 - Sonido Vivo">
+                    <LoginTemplate>
                         <FormularioLogin
                             valores={valores}
                             errores={errores}
