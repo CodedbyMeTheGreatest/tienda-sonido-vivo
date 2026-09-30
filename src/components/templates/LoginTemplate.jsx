@@ -3,7 +3,7 @@ import Footer from "../organisms/Footer";
 
 function LoginTemplate(props) {
     return (
-        <div>
+        <div className = "pagina">
             <Navbar cantidadCarrito={props.cantidadCarrito} />
             <main>
 

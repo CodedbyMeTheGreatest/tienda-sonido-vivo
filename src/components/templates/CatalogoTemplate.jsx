@@ -4,7 +4,7 @@ import Navbar from "../organisms/Navbar";
 
 function CatalogoTemplate(props) {
     return (
-        <div>
+        <div className = "pagina">
             <Navbar cantidadCarrito={props.cantidadCarrito} />
             <main>
                 <CatalogoProducto dataProductos={props.productos}></CatalogoProducto>
