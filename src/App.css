@@ -105,7 +105,6 @@ main section h2 {
 /*Catalogo*/
 .grilla-productos {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 25px;
     padding: 10px;
 }

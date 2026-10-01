@@ -1,13 +1,13 @@
 import {Container, Row, Col} from "react-bootstrap";
-import CatalogoTemplate from "../components/templates/CatalogoTemplate";
-import dataProductos from "../data/Productos.json"
+import productos from "../data/Productos.json"
+import CatalogoProducto from "../components/organisms/CatalogoProducto";
 
 function Catalogo() { 
     return (
         <Container>
             <Row>
-                <Col xs={12} ms={8} lg={6}>
-                    <CatalogoTemplate productos={dataProductos}></CatalogoTemplate>
+                <Col xs={12} md={8} lg={6}>
+                    <CatalogoProducto dataProductos={productos}></CatalogoProducto>
                 </Col>
             </Row>
         </Container>

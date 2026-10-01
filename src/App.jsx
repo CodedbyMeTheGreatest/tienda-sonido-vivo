@@ -2,14 +2,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'
 import Login from './pages/Login'
 import Catalogo from "./pages/Catalogo";
+import PlantillaPublica from "./components/templates/PlantillaPublica";
 
 
 function App() {
-  return(
+  return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/productos" element={<Catalogo />} />
+        <Route element={<PlantillaPublica cantidadCarrito={0}/>}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/catalogo" element={<Catalogo />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
