@@ -1,13 +1,9 @@
 import { Container, Row, Col } from "react-bootstrap";
 import FormularioLogin from "../components/organisms/FormularioLogin";
-import useLogin from "../context/LoginContext"
+import LoginContext from "../context/LoginContext"
+import USUARIOS from "../data/Usuarios.json"
 
 const SESION_KEY = "sv_sesion";
-
-const USUARIOS = [
-    { nombres: "Camila Rojas", correo: "camila.rojas@gmail.com", rol: "Administrador" },
-    { nombres: "Mariano Soto", correo: "ma.soto@duoc.cl", rol: "Vendedor" }
-];
 
 function Login() {
     const manejarInicioSesionExitoso = (datosFormulario) => {
@@ -27,12 +23,12 @@ function Login() {
         /*Aqui redireccionaria, pero como no hay nada mas, no pasa nada por ahora*/
     };
 
-    const { valores, errores, mensajeConfirmacion, alCambiar, alEnviar } = useLogin(manejarInicioSesionExitoso);
+    const { valores, errores, mensajeConfirmacion, alCambiar, alEnviar } = LoginContext(manejarInicioSesionExitoso);
 
     return (
         <Container>
             <Row>
-                <Col xs={12} md={8} lg={6}>
+                <Col xs={12}>
                     <FormularioLogin
                         valores={valores}
                         errores={errores}

@@ -7,7 +7,7 @@ function FormularioLogin(props) {
             <h2>Inicio de sesion</h2>
             <form id="inicio-sesion" className="admin-form" onSubmit={props.alEnviar} noValidate>
                 <CampoLogin 
-                    id="correo" 
+                    id="correo"
                     etiqueta="Correo" 
                     tipo="email" 
                     valor={props.valores.correo} 
@@ -17,14 +17,14 @@ function FormularioLogin(props) {
                     mensajeError={props.errores.correo}
                 />
                 <CampoLogin 
-                    id="contraseña" 
+                    id="contrasenia" 
                     etiqueta="Contraseña" 
                     tipo="password" 
-                    valor={props.valores.contraseña} 
+                    valor={props.valores.contrasenia} 
                     alCambiar={props.alCambiar} 
                     requerido={true} 
-                    esInvalido={Boolean(props.errores.contraseña)}
-                    mensajeError={props.errores.contraseña}
+                    esInvalido={Boolean(props.errores.contrasenia)}
+                    mensajeError={props.errores.contrasenia}
                 />
                 <Boton tipo="submit" texto="Iniciar Sesión"/>
                 {props.mensajeConfirmacion.texto && (
