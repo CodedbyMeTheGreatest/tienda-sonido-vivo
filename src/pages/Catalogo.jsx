@@ -3,6 +3,7 @@ import productos from "../data/Productos.json"
 import CatalogoProducto from "../components/organisms/CatalogoProducto";
 
 function Catalogo() {
+
     return (
         <Container>
             <Row>
