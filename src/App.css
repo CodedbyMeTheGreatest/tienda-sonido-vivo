@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
 }
+
 header {
     background-color: #1a1a1a;
     color: white;
@@ -13,21 +14,24 @@ header {
     align-items: center;
     border-bottom: 4px solid #d32f2f;
 }
+
 header h1 {
     font-size: 24px;
 }
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
     color: #222;
     line-height: 1.6;
-    }
+}
 
 main section {
     padding: 40px 10%;
     background-color: #ffffff;
     margin-bottom: 20px;
 }
+
 main section h2 {
     font-size: 22px;
     color: #1a1a1a;
@@ -36,6 +40,7 @@ main section h2 {
     padding-bottom: 5px;
     margin-bottom: 20px;
 }
+
 /*Diseño de Formulario (Inicio Sesion / Registro / Contacto / Gestion Usuarios y Productos*/
 .admin-form input.campo-error,
 .admin-form select.campo-error,
@@ -43,6 +48,7 @@ main section h2 {
     border: 2px solid #e53935;
     background-color: #ffebee;
 }
+
 .admin-form {
     display: flex;
     flex-direction: column;
@@ -50,12 +56,14 @@ main section h2 {
     max-width: 600px;
     margin: 0 auto;
 }
+
 .admin-form label {
     font-weight: bold;
     font-size: 14px;
     color: #1a1a1a;
     margin-bottom: -5px;
 }
+
 .admin-form input,
 .admin-form select {
     padding: 12px;
@@ -66,6 +74,7 @@ main section h2 {
     background-color: #f8f9fa;
     transition: border-color 0.2s;
 }
+
 .admin-form input:focus,
 .admin-form select:focus {
     outline: none;
@@ -73,6 +82,7 @@ main section h2 {
     background-color: #ffffff;
     box-shadow: 0 0 5px rgba(211, 47, 47, 0.2);
 }
+
 .admin-form button {
     padding: 14px;
     background-color: #d32f2f;
@@ -85,13 +95,16 @@ main section h2 {
     margin-top: 20px;
     transition: background-color 0.2s;
 }
+
 .admin-form button:hover {
     background-color: #b71c1c;
 }
+
 /*Responsividad*/
 @media (max-width: 480px) {
+
     main section,
-    body > section {
+    body>section {
         padding: 25px 5%;
     }
 
@@ -105,6 +118,7 @@ main section h2 {
 /*Catalogo*/
 .grilla-productos {
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 25px;
     padding: 10px;
 }
@@ -132,7 +146,7 @@ main section h2 {
     text-decoration: underline;
 }
 
-.producto{
+.producto {
     height: 100%;
 }
 
@@ -236,9 +250,11 @@ main section h2 {
 .boton-hamburguesa.activo .linea-hamburguesa:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
 }
+
 .boton-hamburguesa.activo .linea-hamburguesa:nth-child(2) {
     opacity: 0;
 }
+
 .boton-hamburguesa.activo .linea-hamburguesa:nth-child(3) {
     transform: translateY(-9px) rotate(-45deg);
 }
@@ -278,7 +294,8 @@ main section h2 {
 }
 
 /*Layout general*/
-html, body {
+html,
+body {
     height: 100%;
 }
 

@@ -1,12 +1,12 @@
-import {Container, Row, Col} from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import productos from "../data/Productos.json"
 import CatalogoProducto from "../components/organisms/CatalogoProducto";
 
-function Catalogo() { 
+function Catalogo() {
     return (
         <Container>
             <Row>
-                <Col xs={12} md={8} lg={6}>
+                <Col xs={12}>
                     <CatalogoProducto dataProductos={productos}></CatalogoProducto>
                 </Col>
             </Row>
