@@ -6,7 +6,7 @@ function Boton(props) {
     <button
       type={tipo}
       className={props.className}
-      dataCodigo={dataCodigo} 
+      data-codigo={dataCodigo}
       onClick={props.alHacerClick}
       disabled={props.deshabilitado}
     >
