@@ -1,4 +1,4 @@
-import {Outlet} from "react-router-dom";
+import { Container } from "react-bootstrap";
 import Navbar from "../organisms/Navbar";
 import Footer from "../organisms/Footer";
 
@@ -6,9 +6,9 @@ function PlantillaPublica(props) {
     return (
         <div className="pagina">
             <Navbar cantidadCarrito={props.cantidadCarrito} />
-            <main>
-                <Outlet/>
-            </main>
+            <Container as="main">
+                {props.children}
+            </Container>
             <Footer></Footer>
         </div>
 
