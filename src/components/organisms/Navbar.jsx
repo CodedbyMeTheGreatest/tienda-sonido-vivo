@@ -3,6 +3,7 @@ import LogoMarca from "../molecules/LogoMarca";
 import EnlaceCarrito from "../molecules/EnlaceCarrito";
 import EnlaceNav from "../atoms/EnlaceNav";
 import BotonHamburguesa from "../atoms/BotonHamburguesa";
+import { useCart } from "../../context/CarritoContext";
 
 const ENLACES = [
   { texto: "Página Principal", to: "/" },
@@ -12,8 +13,9 @@ const ENLACES = [
   { texto: "Registrarse", to: "/registro" },
 ];
 
-function Navbar(props) {
+function Navbar() {
   const [menuAbierto, setMenuAbierto] = useState(false);
+  const { totalItems } = useCart();
 
   function alternarMenu() {
     setMenuAbierto(!menuAbierto);
@@ -44,8 +46,8 @@ function Navbar(props) {
         ))}
 
         <EnlaceCarrito
-          to="/compra"
-          cantidad={props.cantidadCarrito}
+          to="/carrito"
+          cantidad={totalItems}
         />
       </nav>
 
