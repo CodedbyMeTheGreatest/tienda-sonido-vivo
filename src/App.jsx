@@ -10,6 +10,7 @@ function App() {
   return (
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Inicio />} />
           <Route element={<PlantillaPublica cantidadCarrito={0}/>}>
             <Route path="/login" element={<Login />} />
             <Route path="/catalogo" element={<Catalogo />} />
