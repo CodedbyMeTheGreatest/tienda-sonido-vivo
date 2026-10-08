@@ -6,7 +6,7 @@ import BotonHamburguesa from "../atoms/BotonHamburguesa";
 
 const ENLACES = [
   { texto: "Página Principal", to: "/" },
-  { texto: "Catálogo", to: "/productos" },
+  { texto: "Catálogo", to: "/catalogo" },
   { texto: "Blogs", to: "/blog" },
   { texto: "Iniciar Sesión", to: "/login" },
   { texto: "Registrarse", to: "/registro" },
