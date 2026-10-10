@@ -8,6 +8,7 @@ function CatalogoProducto(props) {
             <div className="grilla-productos">
                 {props.productos.map((p) => (
                     <TarjetaProducto 
+                        key={p.codigo}
                         producto={p}
                         href={`detalle-producto.html?codigo=${p.codigo}`}
                         productoImagenRuta={"../../assets/react.svg"}

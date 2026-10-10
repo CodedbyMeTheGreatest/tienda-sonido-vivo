@@ -1,6 +1,8 @@
 import { Card } from "react-bootstrap";
 import Boton from "../atoms/Boton";
 import Precio from "../atoms/Precio";
+import {useCart} from "../../context/CarritoContext";
+
 function TarjetaProducto(props) {
     const producto = props.producto
     const sinStock = producto.stock === 0

@@ -5,7 +5,7 @@ import Footer from "../organisms/Footer";
 function PlantillaPublica(props) {
     return (
         <div className="pagina">
-            <Navbar cantidadCarrito={props.cantidadCarrito} />
+            <Navbar/>
             <Container as="main">
                 {props.children}
             </Container>
