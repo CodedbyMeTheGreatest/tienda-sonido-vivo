@@ -3,6 +3,7 @@ import Navbar from "../organisms/Navbar";
 import Footer from "../organisms/Footer";
 
 function PlantillaPublica(props) {
+    
     return (
         <div className="pagina">
             <Navbar/>

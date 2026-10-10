@@ -5,7 +5,7 @@ const CLASES = {
   marca: 'text-bg-primary',
 }
 
-export function Badge(props) {
+export function Insignia(props) {
   const tone = props.tone ?? 'neutral'
   return <span className={`badge ${CLASES[tone]}`}>{props.children}</span>
 }

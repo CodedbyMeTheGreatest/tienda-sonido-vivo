@@ -4,7 +4,6 @@ function CatalogoProducto(props) {
  
     return (
         <section className="catalogo">
-            <h2>Catálogo</h2>
             <div className="grilla-productos">
                 {props.productos.map((p) => (
                     <TarjetaProducto 
