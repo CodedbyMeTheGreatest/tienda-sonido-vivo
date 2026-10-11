@@ -1,7 +1,7 @@
 function InputLabel(props) {
   const tipo = props.tipo || "text";
   const clase = props.esInvalido ? "campo campo-error" : "campo";
-    
+
   if (tipo === "textarea") {
     return (
       <textarea
@@ -14,6 +14,25 @@ function InputLabel(props) {
       />
     );
   }
+
+  if (tipo === "select") {
+    return (
+      <select
+        id={props.id}
+        name={props.id}
+        value={props.valor}
+        onChange={props.alCambiar}
+        required={props.requerido}
+        className={clase}
+      >
+        <option value="">Selecciona una opción</option>
+        {props.opciones.map((opcion) => (
+          <option key={opcion} value={opcion}>{opcion}</option>
+        ))}
+      </select>
+    );
+  }
+
   return (
     <input
       id={props.id}

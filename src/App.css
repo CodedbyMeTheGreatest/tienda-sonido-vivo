@@ -102,14 +102,14 @@ main section h2 {
 
 /*Responsividad*/
 @media (max-width: 480px) {
-
     main section,
-    body>section {
+    body > section {
         padding: 25px 5%;
     }
 
     .admin-form,
-    #form-contacto {
+    #form-contacto,
+    .formulario-contacto {
         max-width: 100%;
     }
 }
@@ -342,4 +342,48 @@ body {
         border-radius: 0;
         border-bottom: 1px solid #333;
     }
+}
+
+/*Formulario de Contacto*/
+.etiqueta {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.campo {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+}
+.campo.campo-error {
+    border: 2px solid #e53935;
+    background-color: #ffebee;
+}
+
+textarea.campo {
+    height: 100px;
+    resize: vertical;
+}
+.formulario-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 500px;
+}
+
+.formulario-contacto .boton-primario {
+    padding: 12px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.formulario-contacto .boton-primario:hover {
+    background-color: #b71c1c;
 }
