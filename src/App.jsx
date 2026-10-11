@@ -5,10 +5,12 @@ import Login from './pages/Login'
 import Catalogo from "./pages/Catalogo";
 import Inicio from "./pages/Inicio";
 import { CarritoProvider } from "./context/CarritoContext";
+import { ProductosProvider } from "./context/ProductContext";
 import Carrito from "./pages/Carrito";
 
 function App() {
   return (
+    <ProductosProvider>
     <CarritoProvider>
       <BrowserRouter>
         <Routes>
@@ -19,6 +21,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </CarritoProvider>
+    </ProductosProvider>
   );
 }
 

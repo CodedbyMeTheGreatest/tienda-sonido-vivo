@@ -1,11 +1,13 @@
 import { Col, Row } from "react-bootstrap";
 import PlantillaPublica from "../components/templates/PlantillaPublica";
 import { useProductos } from "../context/ProductContext";
+import { useCart } from "../context/CarritoContext";
 import TarjetaProducto from "../components/molecules/TarjetaProducto";
 import FormularioContacto from "../components/organisms/FormularioContacto";
 
 function Inicio() {
     const { productos } = useProductos();
+    const { añadir } = useCart();
     const destacados = productos.slice(0, 4);
 
     return (
@@ -27,12 +29,11 @@ function Inicio() {
                             {destacados.map((p) => (
                                 <TarjetaProducto
                                     key={p.codigo}
+                                    producto={p}
                                     href={`/catalogo/${p.codigo}`}
-                                    productoImagenRuta=""
                                     productoTextAlt={`Imagen de ${p.nombre} ${p.marca} ${p.modelo}`}
                                     productoNombreCompleto={`${p.nombre} ${p.marca} ${p.modelo}`}
-                                    productoPrecio={p.precio}
-                                    productoCodigo={p.codigo}
+                                    onAdd={añadir}
                                 />
                             ))}
                         </div>
