@@ -36,7 +36,7 @@ function Inicio() {
                                 <TarjetaProducto
                                     key={p.codigo}
                                     producto={p}
-                                    href={`/producto/${p.codigo}`}
+                                    href={`${import.meta.env.BASE_URL}producto/${p.codigo}`}
                                     productoImagenRuta={imagen}
                                     productoTextAlt={`Imagen de ${p.nombre} ${p.marca} ${p.modelo}`}
                                     productoNombreCompleto={`${p.nombre} ${p.marca} ${p.modelo}`}
