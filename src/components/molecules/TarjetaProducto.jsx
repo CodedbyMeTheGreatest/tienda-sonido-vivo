@@ -1,7 +1,8 @@
 import { Card } from "react-bootstrap";
 import Boton from "../atoms/Boton"
 import Precio from "../atoms/Precio"
-import {Insignia} from "../atoms/Insignia"
+import { Insignia } from "../atoms/Insignia"
+import Imagen from "../atoms/Imagen";
 
 function TarjetaProducto(props) {
     const producto = props.producto
@@ -11,8 +12,12 @@ function TarjetaProducto(props) {
         <Card as="article" className="producto">
             <a href={props.href}>
                 {
-                    producto.imagen && (
-                        <Card.Img variant="top" src={producto.productoImagenRuta} alt={props.productoTextAlt} />
+                    props.productoImagenRuta && (
+                        <Imagen
+                            src={props.productoImagenRuta}
+                            alt={props.productoTextAlt || producto.nombre}
+                            className="imagen-tarjeta-producto"
+                        />
                     )}
                 <Card.Body>
                     <Insignia tone="neutral">{producto.categoria}</Insignia>
@@ -27,7 +32,7 @@ function TarjetaProducto(props) {
                     </p>
                 </Card.Body>
             </a>
-            <Boton className="boton-catalogo-añadir-producto" tipo="button" texto="Añadir al Carrito" alHacerClick={() => props.onAdd(producto)}></Boton>
+            <Boton className="boton-catalogo-añadir-producto" tipo="button" texto="Añadir al Carrito" alHacerClick={() => props.onAdd(producto)} deshabilitado={sinStock}></Boton>
         </Card >
     );
 }
