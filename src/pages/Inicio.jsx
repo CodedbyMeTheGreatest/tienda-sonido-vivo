@@ -4,11 +4,17 @@ import { useProductos } from "../context/ProductContext";
 import { useCart } from "../context/CarritoContext";
 import TarjetaProducto from "../components/molecules/TarjetaProducto";
 import FormularioContacto from "../components/organisms/FormularioContacto";
+import imagen from "../assets/placeholder.png"
+
 
 function Inicio() {
     const { productos } = useProductos();
     const { añadir } = useCart();
-    const destacados = productos.slice(0, 4);
+
+    const maxIndex = Math.max(0, productos.length - 3);
+    const randomIndex = Math.floor(Math.random() * (maxIndex + 1));
+    const destacados = productos.slice(randomIndex, randomIndex + 3);
+
 
     return (
         <PlantillaPublica>
@@ -30,7 +36,8 @@ function Inicio() {
                                 <TarjetaProducto
                                     key={p.codigo}
                                     producto={p}
-                                    href={`/catalogo/${p.codigo}`}
+                                    href={`/producto/${p.codigo}`}
+                                    productoImagenRuta={imagen}
                                     productoTextAlt={`Imagen de ${p.nombre} ${p.marca} ${p.modelo}`}
                                     productoNombreCompleto={`${p.nombre} ${p.marca} ${p.modelo}`}
                                     onAdd={añadir}
