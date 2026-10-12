@@ -6,9 +6,11 @@ import Boton from "../atoms/Boton";
 import Breadcrumb from "../molecules/MigasDePan";
 import FichaCodigoStock from "../molecules/FichaCodigoStock";
 import ControlCantidad from "../molecules/ControlCantidad";
+import imagen from "../../assets/placeholder.png"
+
 
 function DetalleProducto(props) {
- const imagenUrl = props.imagenUrl || "https://via.placeholder.com/400?text=Cargando+Imagen";
+ const imagenUrl = props.imagenUrl || imagen;
   const nombre = props.nombre || "Nombre del producto";
   const descripcion = props.descripcion || "Sin descripción disponible";
   const precio = props.precio || 0;

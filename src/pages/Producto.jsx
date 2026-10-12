@@ -5,6 +5,8 @@ import DetalleProducto from "../components/organisms/DetalleProducto";
 import { useCart } from "../context/CarritoContext";
 import { obtenerProducto } from "../services/productoService";
 import { useTituloPagina } from "../hooks/useTituloPagina";
+import imagen from "../assets/placeholder.png"
+
 
 function Producto() {
     const params = useParams();
@@ -42,7 +44,7 @@ function Producto() {
     return (
         <PlantillaPublica>
             <DetalleProducto
-                imagenUrl={producto.imagenUrl || producto.imagen}
+                imagenUrl={imagen}
                 nombre={nombreCompleto}
                 descripcion={producto.descripcion}
                 precio={producto.precio}
