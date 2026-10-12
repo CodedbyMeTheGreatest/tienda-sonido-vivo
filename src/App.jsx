@@ -13,7 +13,7 @@ function App() {
   return (
     <ProductosProvider>
     <CarritoProvider>
-      <BrowserRouter basename="/tienda-sonido-vivo">
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/login" element={<Login />} />
