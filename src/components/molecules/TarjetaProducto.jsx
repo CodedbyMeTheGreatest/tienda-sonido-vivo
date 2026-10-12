@@ -20,7 +20,7 @@ function TarjetaProducto(props) {
                         />
                     )}
                 <Card.Body>
-                    <Insignia tone="neutral">{producto.categoria}</Insignia>
+                    <Insignia tone="marca">{producto.categoria}</Insignia>
                     <Card.Title as="h3">{props.productoNombreCompleto}</Card.Title>
                     <Precio precio={producto.precio} />
                     <p className="mb-3">
