@@ -1,20 +1,22 @@
 import TarjetaProducto from "../molecules/TarjetaProducto";
+import imagen from "../../assets/placeholder.png"
 
 function CatalogoProducto(props) {
- 
+
     return (
         <section className="catalogo">
+            <h2>Catálogo</h2>
             <div className="grilla-productos">
                 {props.productos.map((p) => (
-                    <TarjetaProducto 
+                    <TarjetaProducto
                         key={p.codigo}
                         producto={p}
-                        href={`detalle-producto.html?codigo=${p.codigo}`}
-                        productoImagenRuta={"../../assets/react.svg"}
+                        href={`/producto/${p.codigo}`}
+                        productoImagenRuta={imagen}
                         productoTextAlt={`Imagen de ${p.nombre} ${p.marca} ${p.modelo}`}
                         productoNombreCompleto={`${p.nombre} ${p.marca} ${p.modelo}`}
                         onAdd={props.onAdd}
-                        >
+                    >
                     </TarjetaProducto>
                 ))}
             </div>

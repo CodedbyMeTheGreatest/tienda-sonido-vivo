@@ -115,7 +115,7 @@ main section h2 {
 }
 
 
-/*Catalogo*/
+/* Catalogo - Grilla principal */
 .grilla-productos {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -129,7 +129,6 @@ main section h2 {
 }
 
 
-
 .producto {
     background-color: #f1f1f1;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -138,6 +137,11 @@ main section h2 {
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     transition: transform 0.2s, border-color 0.2s;
+
+    
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .producto:hover {
@@ -146,24 +150,106 @@ main section h2 {
     text-decoration: none;
 }
 
-.producto {
-    height: 100%;
+
+.producto img, 
+.imagen-tarjeta-producto {
+    width: 100%;
+    height: 160px;          
+    object-fit: contain;    
+    margin-bottom: 12px;
 }
 
 .boton-catalogo-añadir-producto {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 5px 10px;
+    display: block;
+    width: 100%;            
+    margin-top: auto;       
+    padding: 10px 15px;
     background-color: #d32f2f;
-    transition: background-color 0.2s;
     color: white;
     text-decoration: none;
+    border: none;
     border-radius: 4px;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .boton-catalogo-añadir-producto:hover {
     background-color: #b71c1c;
+}
+
+/*Detalle Producto*/
+
+.detalle-producto {
+  margin-bottom: 60px;
+  padding: 10px 0;
+}
+
+.imagen-detalle-producto {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  background-color: #e0e0e0; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+#detalle-titulo-producto {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
+}
+
+.descripcion-detalle-producto {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #4a4a4a;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.bloque-compra {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.boton-detalle-añadir-producto {
+  width: 100%;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.boton-detalle-añadir-producto:hover {
+  background-color: #b71c1c;
+}
+
+.boton-detalle-añadir-producto:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+/*Fin Detalle Producto*/
+
+.ficha-codigo-stock {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 /*Navbar (Logo, Links, Carrito, Menú Hamburguesa)*/

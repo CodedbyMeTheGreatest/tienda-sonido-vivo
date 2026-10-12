@@ -7,6 +7,7 @@ import Inicio from "./pages/Inicio";
 import { CarritoProvider } from "./context/CarritoContext";
 import { ProductosProvider } from "./context/ProductContext";
 import Carrito from "./pages/Carrito";
+import Producto from "./pages/Producto";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/catalogo" element={<Catalogo />} />
           <Route path="/carrito" element={<Carrito />} />
+          <Route path="/producto/:codigo" element={<Producto />}></Route>
         </Routes>
       </BrowserRouter>
     </CarritoProvider>
