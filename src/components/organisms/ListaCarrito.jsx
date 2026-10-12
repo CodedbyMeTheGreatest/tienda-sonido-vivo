@@ -1,4 +1,3 @@
-import { useCart } from '../../context/CarritoContext'
 import { Link } from 'react-router-dom'
 import ItemCarrito from '../molecules/ItemCarrito';
 import ResumenCarrito from '../molecules/ResumenCarrito';

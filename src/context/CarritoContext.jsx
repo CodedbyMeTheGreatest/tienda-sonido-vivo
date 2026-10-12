@@ -2,8 +2,8 @@ import { createContext, useContext, useState, useEffect } from "react";
 
 const CarritoContext = createContext(null)
 
-  export function CarritoProvider(props) {
-    const [items, setItems] = useState(() => {
+export function CarritoProvider(props) {
+  const [items, setItems] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("carrito")) ?? []
     } catch {
@@ -11,20 +11,20 @@ const CarritoContext = createContext(null)
     }
   })
 
-    useEffect(() => {
-      localStorage.setItem("carrito", JSON.stringify(items))
-    }, [items])
+  useEffect(() => {
+    localStorage.setItem("carrito", JSON.stringify(items))
+  }, [items])
 
-  function añadir(producto) {
+  function añadir(producto, cantidadAñadir = 1) {
     setItems((actual) => {
       const existente = actual.find((i) => i.producto.codigo === producto.codigo)
       if (existente) {
-        if (existente.cantidad >= producto.stock) return actual
+        const nuevaCantidad = Math.min(existente.cantidad + cantidadAñadir, producto.stock)
         return actual.map((i) =>
-          i.producto.codigo === producto.codigo ? { ...i, cantidad: i.cantidad + 1 } : i,
+          i.producto.codigo === producto.codigo ? { ...i, cantidad: nuevaCantidad } : i
         )
       }
-      return [...actual, { producto, cantidad: 1 }]
+      return [...actual, { producto, cantidad: Math.min(cantidadAñadir, producto.stock) }]
     })
   }
 
@@ -45,11 +45,11 @@ const CarritoContext = createContext(null)
 
 
   function decrementar(codigo) {
-  setItems((actual) =>
-    actual
-      .map((i) => (i.producto.codigo === codigo ? { ...i, cantidad: i.cantidad - 1 } : i))
-      .filter((i) => i.cantidad > 0),
-  )
+    setItems((actual) =>
+      actual
+        .map((i) => (i.producto.codigo === codigo ? { ...i, cantidad: i.cantidad - 1 } : i))
+        .filter((i) => i.cantidad > 0),
+    )
   }
 
   function vaciar() {
