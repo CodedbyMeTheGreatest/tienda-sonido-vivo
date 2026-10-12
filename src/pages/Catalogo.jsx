@@ -11,8 +11,6 @@ function Catalogo() {
     const params = useParams()
     const nombre = params.nombre ?? ''
     const texto = params.texto ?? ''
-    //const productosCtx = useProductos()
-    //filtrar productos
 
     const carrito = useCart()
 
@@ -25,7 +23,6 @@ function Catalogo() {
 
     return (
         <PlantillaPublica>
-            <h2>{titulo}</h2>
             <CatalogoProducto productos={productos} onAdd={carrito.añadir}></CatalogoProducto>
         </PlantillaPublica>
     );
