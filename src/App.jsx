@@ -13,7 +13,7 @@ function App() {
   return (
     <ProductosProvider>
     <CarritoProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/tienda-sonido-vivo">
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/login" element={<Login />} />

@@ -18,40 +18,78 @@ Nuestro equipo de desarrollo se encargará de la transformación digital integra
 
 ## Estructura del proyecto
 ```
-├─ .gitignore
-├─ .oxlintrc.json
-├─ README.md
-├─ index.html
-├─ package-lock.json
-├─ package.json
-├─ public
-│  ├─ favicon.svg
-│  └─ icons.svg
-├─ src
-│  ├─ App.css
-│  ├─ App.jsx
-│  ├─ assets
-│  │  ├─ hero.png
-│  │  ├─ react.svg
-│  │  └─ vite.svg
-│  ├─ components
-│  │  ├─ atoms
-│  │  │  ├─ BotonDeEnviar.jsx
-│  │  │  ├─ InputLabel.jsx
-│  │  │  └─ Label.jsx
-│  │  ├─ molecules
-│  │  │  └─ CampoLogin.jsx
-│  │  ├─ organisms
-│  │  │  └─ FormularioLogin.jsx
-│  │  └─ templates
-│  │     └─ LoginTemplate.jsx
-│  ├─ hooks
-│  │  └─ useLogin.js
-│  ├─ index.css
-│  ├─ main.jsx
-│  └─ pages
-│     └─ Login.jsx
-└─ vite.config.js
+tienda-sonido-vivo/
+├── src/
+│   ├── assets/
+│   │   ├── carrito.png
+│   │   ├── hero.png
+│   │   ├── logo.png
+│   │   ├── placeholder.png
+│   │   ├── react.svg
+│   │   └── vite.svg
+│   ├── components/
+│   │   ├── atoms/
+│   │   │   ├── Boton.jsx
+│   │   │   ├── BotonHamburguesa.jsx
+│   │   │   ├── EnlaceNav.jsx
+│   │   │   ├── Imagen.jsx
+│   │   │   ├── InputLabel.jsx
+│   │   │   ├── Insignia.jsx
+│   │   │   ├── Label.jsx
+│   │   │   └── Precio.jsx
+│   │   ├── molecules/
+│   │   │   ├── CampoContacto.jsx
+│   │   │   ├── CampoLogin.jsx
+│   │   │   ├── ControlCantidad.jsx
+│   │   │   ├── EnlaceCarrito.jsx
+│   │   │   ├── FichaCodigoStock.jsx
+│   │   │   ├── ItemCarrito.jsx
+│   │   │   ├── LogoMarca.jsx
+│   │   │   ├── MigasDePan.jsx
+│   │   │   ├── ResumenCarrito.jsx
+│   │   │   └── TarjetaProducto.jsx
+│   │   ├── organisms/
+│   │   │   ├── CatalogoProducto.jsx
+│   │   │   ├── DetalleProducto.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── FormularioContacto.jsx
+│   │   │   ├── FormularioLogin.jsx
+│   │   │   ├── ListaCarrito.jsx
+│   │   │   └── Navbar.jsx
+│   │   └── templates/
+│   │       └── PlantillaPublica.jsx
+│   ├── context/
+│   │   ├── CarritoContext.jsx
+│   │   ├── LoginContext.jsx
+│   │   ├── ProductContext.jsx
+│   │   └── UsuarioContext.jsx
+│   ├── data/
+│   │   ├── Productos.json
+│   │   └── Usuarios.json
+│   ├── hooks/
+│   │   └── useTituloPagina.js
+│   ├── pages/
+│   │   ├── Carrito.jsx
+│   │   ├── Catalogo.jsx
+│   │   ├── Inicio.jsx
+│   │   ├── Login.jsx
+│   │   └── Producto.jsx
+│   ├── services/
+│   │   ├── productoService.js
+│   │   └── usuarioService.js
+│   ├── utils/
+│   │   └── validaciones.js
+│   ├── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── .gitignore
+├── .oxlintrc.json
+├── index.html
+├── package-lock.json
+├── package.json
+├── README.md
+└── vite.config.js
 ```
 
 ## Tecnologías
