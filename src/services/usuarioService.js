@@ -33,6 +33,12 @@ export function crearUsuario(datos) {
     throw new Error(`Ya existe un usuario con el RUN ${datos.run}`)
   }
 
+  const correoRepetido = lista.some((u) => u.correo.toLowerCase() === datos.correo.toLowerCase()
+  )
+  if (correoRepetido) {
+    throw new Error(`Ya existe un usuario con el correo ${datos.correo}`)
+  }
+
   guardar([...lista, datos])
   return datos
 }

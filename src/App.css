@@ -669,3 +669,20 @@ textarea.campo {
         width: 100%;
     }
 }
+
+/*Registro*/
+
+.texto-error { 
+    color: #e53935; 
+    font-size: 13px; 
+}
+
+.mensaje-exito { 
+    color: #2e7d32; 
+    font-weight: bold;
+}
+
+.mensaje-error { 
+    color: #b71c1c; 
+    font-weight: bold; 
+}
