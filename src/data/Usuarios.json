@@ -83,7 +83,7 @@
         "correo": "diego.castillo@gmail.com",
         "contrasena": "diego12",
         "region": "Región Metropolitana",
-        "comuna": "Calera de tango",
+        "comuna": "Calera de Tango",
         "rol": "Comprador",
         "direccion": "Calle Los Pinos 789"
     },
@@ -105,7 +105,7 @@
         "correo": "tomas.gonzalez@gmail.com",
         "contrasena": "tomas12",
         "region": "Región Metropolitana",
-        "comuna": "San bernardo",
+        "comuna": "San Bernardo",
         "rol": "Comprador",
         "direccion": "Calle Los Pinos 789"
     },
@@ -115,7 +115,7 @@
         "apellidos": "Gómez López",
         "correo": "maria.gomez@gmail.com",
         "contrasena": "maria123",
-        "region": "Santiago",
+        "region": "Región Metropolitana",
         "comuna": "Providencia",
         "rol": "Comprador",
         "direccion": "Avenida Libertador 456"
