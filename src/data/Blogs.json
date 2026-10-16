@@ -1,0 +1,35 @@
+[
+    {
+        "id": 1,
+        "titulo": "Cómo elegir la guitarra perfecta para ti",
+        "resumen": "Elegir la guitarra adecuada puede ser un desafío. En este artículo, te damos consejos sobre cómo seleccionar la guitarra que mejor se adapte a tu estilo y necesidades.",
+        "introduccion": "Elegir la guitarra adecuada puede ser un desafío. En este artículo, te damos consejos sobre cómo seleccionar la guitarra que mejor se adapte a tu estilo y necesidades.",
+        "secciones": [
+            { "subtitulo": "1. Decide entre Acústica o Eléctrica", "texto": "Si te gusta el rock pesado, probablemente quieras una eléctrica. Si prefieres algo para tocar en fogatas o baladas, la acústica es tu mejor opción." },
+            { "subtitulo": "2. Define tu presupuesto", "texto": "No necesitas gastar una fortuna en tu primera guitarra. Hay opciones excelentes para principiantes que no vaciarán tu billetera." },
+            { "subtitulo": "3. Pruébala antes de comprar", "texto": "El mástil debe sentirse cómodo en tu mano y el peso de la guitarra no debe lastimarte la espalda." }
+        ]
+    },
+    {
+        "id": 2,
+        "titulo": "Los mejores pedales de efectos para principiantes",
+        "resumen": "Si estás empezando en el mundo de la música, los pedales de efectos pueden mejorar tu sonido. Descubre cuáles son los mejores para principiantes.",
+        "introduccion": "Si estás empezando en el mundo de la música, los pedales de efectos pueden mejorar tu sonido. Descubre cuáles son los mejores para principiantes.",
+        "secciones": [
+            { "subtitulo": "1. Pedal de distorsión", "texto": "Un pedal de distorsión es esencial para los guitarristas que buscan un sonido más agresivo y potente." },
+            { "subtitulo": "2. Pedal de delay", "texto": "El delay añade ecos a tu sonido, creando una sensación de espacio y profundidad en tu música." },
+            { "subtitulo": "3. Pedal de reverb", "texto": "La reverb simula la acústica de diferentes espacios, desde una pequeña habitación hasta una gran sala de conciertos." }
+        ]
+    },
+    {
+        "id": 3,
+        "titulo": "Consejos para mantener tu equipo musical en buen estado",
+        "resumen": "Mantener tu equipo musical en buen estado es esencial para su durabilidad. Aquí te ofrecemos algunos consejos prácticos para cuidar tus instrumentos y accesorios.",
+        "introduccion": "Mantener tu equipo musical en buen estado es fundamental para garantizar un rendimiento óptimo. Aquí tienes algunos consejos prácticos.",
+        "secciones": [
+            { "subtitulo": "1. Limpieza regular", "texto": "La limpieza frecuente de tu equipo musical es esencial para prevenir la acumulación de polvo y suciedad que puede afectar el rendimiento." },
+            { "subtitulo": "2. Almacenamiento adecuado", "texto": "Almacena tu equipo en un lugar seco y protegido de la humedad y las fluctuaciones de temperatura." },
+            { "subtitulo": "3. Revisa cables y conexiones", "texto": "Inspecciona con frecuencia cables, conectores y jacks. Un cable dañado puede generar ruido o cortes de sonido y, si no se corrige a tiempo, puede dañar el equipo." }
+        ]
+    }
+]
