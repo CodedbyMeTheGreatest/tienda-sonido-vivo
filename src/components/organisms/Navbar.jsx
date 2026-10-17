@@ -4,18 +4,24 @@ import EnlaceCarrito from "../molecules/EnlaceCarrito";
 import EnlaceNav from "../atoms/EnlaceNav";
 import BotonHamburguesa from "../atoms/BotonHamburguesa";
 import { useCart } from "../../context/CarritoContext";
+import { useSesion } from "../../context/SesionContext";
 
 const ENLACES = [
   { texto: "Página Principal", to: "/" },
   { texto: "Catálogo", to: "/catalogo" },
-  { texto: "Blogs", to: "/blog" },
+  { texto: "Blogs", to: "/blog" }
+];
+
+const ENLACES_INVITADO = [
   { texto: "Iniciar Sesión", to: "/login" },
   { texto: "Registrarse", to: "/registro" },
-];
+]
 
 function Navbar() {
   const [menuAbierto, setMenuAbierto] = useState(false);
   const { totalItems } = useCart();
+  const { usuario, cerrarSesion } = useSesion();
+const enlacesIniciado = usuario ? ENLACES : [...ENLACES, ...ENLACES_INVITADO]
 
   function alternarMenu() {
     setMenuAbierto(!menuAbierto);
@@ -36,7 +42,7 @@ function Navbar() {
       />
 
       <nav className={claseNav}>
-        {ENLACES.map((enlace) => (
+        {enlacesIniciado.map((enlace) => (
           <EnlaceNav
             key={enlace.texto}
             to={enlace.to}
@@ -44,6 +50,20 @@ function Navbar() {
             alHacerClick={cerrarMenu}
           />
         ))}
+
+        {usuario && (
+        <>
+          <span className="saludo-usuario">Hola, {usuario.nombres}</span>
+          <EnlaceNav
+            to="/"
+            texto="Cerrar sesión"
+            alHacerClick={() => {
+                cerrarSesion();
+                cerrarMenu();
+              }}
+            />
+          </>
+        )}
 
         <EnlaceCarrito
           to="/carrito"

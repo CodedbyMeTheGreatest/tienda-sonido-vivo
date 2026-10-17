@@ -52,3 +52,15 @@ export function actualizarUsuario(run, cambios) {
 export function eliminarUsuario(run) {
   guardar(leer().filter((u) => u.run !== run))
 }
+
+export function autenticarUsuario(correo, contraseña) {
+  const usuario = leer().find(
+    (u) =>
+      u.correo.toLowerCase() === correo.trim().toLowerCase() &&
+      u.contrasena === contraseña
+  )
+  if (!usuario) return null
+
+  const { contraseña: omitida, ...sinContraseña } = usuario
+  return sinContraseña
+}

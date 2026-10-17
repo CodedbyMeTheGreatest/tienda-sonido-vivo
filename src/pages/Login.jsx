@@ -1,44 +1,36 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import PlantillaPublica from "../components/templates/PlantillaPublica";
 import FormularioLogin from "../components/organisms/FormularioLogin";
-import LoginContext from "../context/LoginContext"
-import USUARIOS from "../data/Usuarios.json"
+import useLogin from "../hooks/useLogin";
+import { useSesion } from "../context/SesionContext";
+import { useTituloPagina } from "../hooks/useTituloPagina";
 
-const SESION_KEY = "sv_sesion";
 
 function Login() {
-    const manejarInicioSesionExitoso = (datosFormulario) => {
-        const usuarioEncontrado = USUARIOS.find(
-            u => u.correo.toLowerCase() === datosFormulario.correo.toLowerCase()
-        );
+    const navigate = useNavigate()
+    const { iniciarSesion } = useSesion()
 
-        const rol = usuarioEncontrado ? usuarioEncontrado.rol : "Cliente";
-        const datosSesion = usuarioEncontrado || {
-            nombres: "Invitado",
-            correo: datosFormulario.correo,
-            rol
-        };
+    useTituloPagina("Iniciar Sesion");
 
-        localStorage.setItem(SESION_KEY, JSON.stringify(datosSesion));
 
-        /*Aqui redireccionaria, pero como no hay nada mas, no pasa nada por ahora*/
-    };
+    function manejarInicioSesionExitoso(valores) {
+        const exito = iniciarSesion(valores.correo, valores.contrasenia)
+        if (exito) navigate ("/")
+        return exito
+    }
 
-    const { valores, errores, mensajeConfirmacion, alCambiar, alEnviar } = LoginContext(manejarInicioSesionExitoso);
+    const { valores, errores, mensajeConfirmacion, alCambiar, alEnviar } = useLogin(manejarInicioSesionExitoso);
 
     return (
-        <Container>
-            <Row>
-                <Col xs={12}>
-                    <FormularioLogin
-                        valores={valores}
-                        errores={errores}
-                        mensajeConfirmacion={mensajeConfirmacion}
-                        alCambiar={alCambiar}
-                        alEnviar={alEnviar}
-                    />
-                </Col>
-            </Row>
-        </Container>
+        <PlantillaPublica>
+            <FormularioLogin
+                valores={valores}
+                errores={errores}
+                mensajeConfirmacion={mensajeConfirmacion}
+                alCambiar={alCambiar}
+                alEnviar={alEnviar}
+            />
+        </PlantillaPublica>
     );
 }
 

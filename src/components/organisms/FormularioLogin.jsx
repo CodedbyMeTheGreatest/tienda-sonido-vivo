@@ -1,4 +1,4 @@
-import CampoLogin from "../molecules/CampoLogin";
+import CampoFormulario from "../molecules/CampoFormulario";
 import Boton from "../atoms/Boton";
 
 function FormularioLogin(props) {
@@ -6,7 +6,7 @@ function FormularioLogin(props) {
         <section>
             <h2>Inicio de sesion</h2>
             <form id="inicio-sesion" className="admin-form" onSubmit={props.alEnviar} noValidate>
-                <CampoLogin 
+                <CampoFormulario 
                     id="correo"
                     etiqueta="Correo" 
                     tipo="email" 
@@ -16,7 +16,7 @@ function FormularioLogin(props) {
                     esInvalido={Boolean(props.errores.correo)}
                     mensajeError={props.errores.correo}
                 />
-                <CampoLogin 
+                <CampoFormulario
                     id="contrasenia" 
                     etiqueta="Contraseña" 
                     tipo="password" 
@@ -28,7 +28,9 @@ function FormularioLogin(props) {
                 />
                 <Boton tipo="submit" texto="Iniciar Sesión"/>
                 {props.mensajeConfirmacion.texto && (
-                    <p id="mensaje-confirmacion">{props.mensajeConfirmacion.texto}</p>
+                    <p className={props.mensajeConfirmacion.esExito ? "mensaje-exito" : "mensaje-error"}>
+                        {props.mensajeConfirmacion.texto}
+                    </p>
                 )}
             </form>
         </section>

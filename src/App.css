@@ -341,6 +341,28 @@ main section h2 {
     transform: translateY(-9px) rotate(-45deg);
 }
 
+.saludo-usuario {
+    color: white;
+    font-weight: bold;
+    padding: 6px 12px;
+    border: 1px solid #d32f2f;
+    border-radius: 20px;
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .saludo-usuario {
+        padding: 14px 5%;
+        border: none;
+        border-bottom: 1px solid #333;
+        border-radius: 0;
+        max-width: none;
+    }
+}
+
 /*Footer*/
 .footer {
     background-color: #1a1a1a;
