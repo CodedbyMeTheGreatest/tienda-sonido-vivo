@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { puedeAgregar } from "../utils/pedidos"
 
 const CarritoContext = createContext(null)
 
@@ -18,20 +19,21 @@ export function CarritoProvider(props) {
   function añadir(producto, cantidadAñadir = 1) {
     setItems((actual) => {
       const existente = actual.find((i) => i.producto.codigo === producto.codigo)
+      if (!puedeAgregar(existente ? existente.cantidad : 0, producto.stock)) return actual
+
       if (existente) {
-        const nuevaCantidad = Math.min(existente.cantidad + cantidadAñadir, producto.stock)
         return actual.map((i) =>
           i.producto.codigo === producto.codigo ? { ...i, cantidad: nuevaCantidad } : i
         )
       }
-      return [...actual, { producto, cantidad: Math.min(cantidadAñadir, producto.stock) }]
+      return [...actual, { producto, cantidad: 1 }]
     })
   }
 
   function increment(codigo) {
     setItems((actual) =>
       actual.map((i) =>
-        i.producto.codigo === codigo && i.cantidad < i.producto.stock
+        i.producto.codigo === codigo && puedeAgregar(i.cantidad, i.producto.stock)
           ? { ...i, cantidad: i.cantidad + 1 }
           : i,
       ),

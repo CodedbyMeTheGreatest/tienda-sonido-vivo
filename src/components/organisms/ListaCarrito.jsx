@@ -25,7 +25,10 @@ function ListaCarrito(props) {
           />
         ))}
       </ul>
-       <ResumenCarrito total={props.total} onClear={props.onClear}/>    
+       <ResumenCarrito 
+       total={props.total} 
+       onClear={props.onClear} 
+       onCheckout={props.onCheckout}/>    
     </>
   )
 }

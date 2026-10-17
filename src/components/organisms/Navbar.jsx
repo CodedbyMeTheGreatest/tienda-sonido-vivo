@@ -9,7 +9,8 @@ import { useSesion } from "../../context/SesionContext";
 const ENLACES = [
   { texto: "Página Principal", to: "/" },
   { texto: "Catálogo", to: "/catalogo" },
-  { texto: "Blogs", to: "/blog" }
+  { texto: "Blogs", to: "/blog" },
+  {texto: "Mis pedidos", to: "/mis-pedidos"}
 ];
 
 const ENLACES_INVITADO = [

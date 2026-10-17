@@ -813,3 +813,83 @@ textarea.campo {
     line-height: 1.7;
     margin-bottom: 12px;
 }
+
+/*Checkout y Pedidos*/
+.checkout-grilla {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+@media (min-width: 768px) {
+    .checkout-grilla {
+        grid-template-columns: 3fr 2fr;
+        align-items: start;
+    }
+}
+
+.resumen-compra {
+    padding: 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.resumen-compra h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.resumen-compra-lista {
+    list-style: none;
+    margin-bottom: 15px;
+}
+
+.resumen-compra-linea {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.resultado-compra {
+    text-align: center;
+}
+
+.resultado-compra-acciones {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.pedido-detalle {
+    font-size: 13px;
+    color: #555;
+    margin: 4px 0 0;
+}
+
+.estado-pedido {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.estado-paso {
+    padding: 4px 10px;
+    border-radius: 20px;
+    background-color: #e0e0e0;
+    color: #555;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.estado-paso-activo {
+    background-color: #d32f2f;
+    color: white;
+}

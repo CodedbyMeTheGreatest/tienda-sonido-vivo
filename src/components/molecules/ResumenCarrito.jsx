@@ -13,6 +13,11 @@ function ResumenCarrito(props) {
                 <span>Total:</span>
                 <Precio precio={props.total} />
             </div>
+            <Boton
+                className="boton-carrito boton-carrito-primario"
+                texto="Finalizar compra"
+                alHacerClick={props.onCheckout}
+            />
         </div>
     );
 }
