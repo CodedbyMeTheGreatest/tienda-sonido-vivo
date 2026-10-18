@@ -9,6 +9,7 @@ import { usePedidos } from "../context/PedidoContext";
 import { useProductos } from "../context/ProductContext";
 import { useTituloPagina } from "../hooks/useTituloPagina";
 import { ENTREGA_DESPACHO, aLineasPedido } from "../utils/pedidos";
+import AvisoInicioSesion from "../components/molecules/AvisoInicioSesion";
 
 export default function Checkout() {
     const navigate = useNavigate();
@@ -40,7 +41,15 @@ export default function Checkout() {
         navigate(`/compra-exitosa/${pedido.id}`);
     }
 
-    const { valores, errores, alCambiar, alEnviar } = useCheckout(usuario.direccion ?? "", confirmar);
+    const { valores, errores, alCambiar, alEnviar } = useCheckout(usuario?.direccion ?? "", confirmar);
+
+    if (!usuario) {
+    return (
+        <PlantillaPublica>
+            <AvisoInicioSesion titulo="Confirmar pedido" mensaje="Inicia sesión para confirmar tu pedido." />
+        </PlantillaPublica>
+    );
+}
 
     if (items.length === 0) {
         return (

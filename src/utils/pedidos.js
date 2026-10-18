@@ -2,8 +2,12 @@ export const ESTADOS_PEDIDO = ['En preparación', 'Despachado', 'Entregado']
 export const ENTREGAS = ['Despacho a domicilio', 'Retiro en tienda']
 export const ENTREGA_DESPACHO = ENTREGAS[0]
 
+export function limitarCantidad(cantidad, stock) {
+  return Math.max(0, Math.min(cantidad, stock))
+}
+
 export function puedeAgregar(cantidadActual, stock) {
-  return stock > 0 && cantidadActual < stock
+  return limitarCantidad(cantidadActual + 1, stock) > cantidadActual
 }
 
 export function aLineasPedido(items) {

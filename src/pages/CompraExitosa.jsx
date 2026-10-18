@@ -9,7 +9,7 @@ export default function CompraExitosa() {
     const { id } = useParams();
     const { pedidos } = usePedidos();
     const { usuario } = useSesion();
-    const pedido = pedidos.find((p) => p.id === id && p.clienteRun === usuario.run);
+    const pedido = pedidos.find((p) => p.id === id && p.clienteRun === usuario?.run);
 
     useTituloPagina("Compra exitosa");
 
