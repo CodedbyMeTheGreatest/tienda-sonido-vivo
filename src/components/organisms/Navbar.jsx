@@ -10,7 +10,7 @@ const ENLACES = [
   { texto: "Página Principal", to: "/" },
   { texto: "Catálogo", to: "/catalogo" },
   { texto: "Blogs", to: "/blog" },
-  {texto: "Mis pedidos", to: "/mis-pedidos"}
+  { texto: "Mis pedidos", to: "/mis-pedidos" }
 ];
 
 const ENLACES_INVITADO = [
@@ -22,7 +22,7 @@ function Navbar() {
   const [menuAbierto, setMenuAbierto] = useState(false);
   const { totalItems } = useCart();
   const { usuario, cerrarSesion } = useSesion();
-const enlacesIniciado = usuario ? ENLACES : [...ENLACES, ...ENLACES_INVITADO]
+  const enlacesIniciado = usuario ? ENLACES : [...ENLACES, ...ENLACES_INVITADO]
 
   function alternarMenu() {
     setMenuAbierto(!menuAbierto);
@@ -34,6 +34,7 @@ const enlacesIniciado = usuario ? ENLACES : [...ENLACES, ...ENLACES_INVITADO]
 
   const claseNav = menuAbierto ? "nav-principal activo" : "nav-principal";
 
+  const esAdmin = Boolean(usuario && usuario.rol && usuario.rol.toLowerCase().includes("admin"))
   return (
     <header className="header">
       <LogoMarca
@@ -53,12 +54,19 @@ const enlacesIniciado = usuario ? ENLACES : [...ENLACES, ...ENLACES_INVITADO]
         ))}
 
         {usuario && (
-        <>
-          <span className="saludo-usuario">Hola, {usuario.nombres}</span>
-          <EnlaceNav
-            to="/"
-            texto="Cerrar sesión"
-            alHacerClick={() => {
+          <>
+            {esAdmin && (
+              <EnlaceNav
+                to="/admin/productos"
+                texto="Administración"
+                alHacerClick={cerrarMenu}
+              />
+            )}
+            <span className="saludo-usuario">Hola, {usuario.nombres}</span>
+            <EnlaceNav
+              to="/"
+              texto="Cerrar sesión"
+              alHacerClick={() => {
                 cerrarSesion();
                 cerrarMenu();
               }}

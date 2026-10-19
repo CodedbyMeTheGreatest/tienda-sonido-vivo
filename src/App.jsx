@@ -16,6 +16,7 @@ import CompraExitosa from "./pages/CompraExitosa";
 import CompraFallida from "./pages/CompraFallida";
 import MisPedidos from "./pages/MisPedidos";
 import { PedidosProvider } from "./context/PedidoContext";
+import AdminProductos from "./pages/AdminProductos"
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
                   <Route path="/compra-exitosa/:id" element={<CompraExitosa />} />
                   <Route path="/compra-fallida" element={<CompraFallida />} />
                   <Route path="/mis-pedidos" element={<MisPedidos />} />
+                  <Route path="/admin/productos" element={<AdminProductos/>} />
                 </Routes>
               </BrowserRouter>
             </CarritoProvider>
