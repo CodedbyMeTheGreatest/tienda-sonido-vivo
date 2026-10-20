@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Modal, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import PlantillaAdmin from "../components/templates/PlantillaAdmin";
 import TablaProductos from "../components/organisms/TablaProductos";
-import FormularioProducto from "../components/organisms/FormularioProducto";
 import Boton from "../components/atoms/Boton";
 import { useProductos } from "../context/ProductContext";
 import { useSesion } from "../context/SesionContext";
 import { useTituloPagina } from "../hooks/useTituloPagina";
+import ModalConfirmacion from "../components/organisms/ModalConfirmacion";
+import ModalFormularioProducto from "../components/organisms/ModalFormularioProducto";
 
 function AdminProductos() {
   useTituloPagina("Administración de Productos");
@@ -16,23 +16,21 @@ function AdminProductos() {
   const navigate = useNavigate();
   const { productos, crear, actualizar, eliminar } = useProductos();
 
-  const [mostrarModal, setMostrarModal] = useState(false);
-  const [productoAEditar, setProductoAEditar] = useState(null);
+  const [mostrarModalForm, setMostrarModalForm] = useState(false); const [productoAEditar, setProductoAEditar] = useState(null);
+  const [productoAEliminar, setProductoAEliminar] = useState(null)
   const [errorGlobal, setErrorGlobal] = useState("");
 
   if (!usuario) {
     return (
       <PlantillaAdmin>
-        <div className="">
-          <Alert variant="danger" className="">
-            <h4>Acceso Restringido</h4>
-            <p>Debe iniciar sesión como administrador para acceder a esta pantalla.</p>
-            <Boton
-              className="btn btn-primary"
-              alHacerClick={() => navigate("/login")}
-              texto="Ir al Login"
-            />
-          </Alert>
+        <div className="contenedor-restringido">
+          <h4>Acceso Restringido</h4>
+          <p>Debe iniciar sesión como administrador para acceder a esta pantalla.</p>
+          <Boton
+            className="btn-login"
+            alHacerClick={() => navigate("/login")}
+            texto="Ir al Login"
+          />
         </div>
       </PlantillaAdmin>
     );
@@ -41,17 +39,17 @@ function AdminProductos() {
   const handleAbrirCrear = () => {
     setProductoAEditar(null);
     setErrorGlobal("");
-    setMostrarModal(true);
+    setMostrarModalForm(true);
   };
 
   const handleAbrirEditar = (producto) => {
     setProductoAEditar(producto);
     setErrorGlobal("");
-    setMostrarModal(true);
+    setMostrarModalForm(true);
   };
 
   const handleCerrarModal = () => {
-    setMostrarModal(false);
+    setMostrarModalForm(false);
     setProductoAEditar(null);
     setErrorGlobal("");
   };
@@ -64,53 +62,49 @@ function AdminProductos() {
         crear(datosProducto);
       }
       handleCerrarModal();
-    } catch (err) {
-      setErrorGlobal(err.message || "Error al procesar la solicitud.");
+    } catch (e) {
+      setErrorGlobal(e.message || "Error al procesar la solicitud.");
     }
   };
 
-  const handleEliminar = (codigo) => {
-    if (window.confirm(`¿Confirma eliminar el producto con código ${codigo}?`)) {
-      eliminar(codigo);
+  const handleConfirmarEliminar = () => {
+    if (productoAEliminar) {
+      eliminar(productoAEliminar);
+      setProductoAEliminar(null)
     }
   };
 
   return (
     <PlantillaAdmin>
-      <div className="">
+      <section className="encabezado-pagina">
         <h2>Gestión de Productos</h2>
         <Boton
-          className="btn btn-success"
+          className="btn-crear-producto"
           alHacerClick={handleAbrirCrear}
           texto="+ Agregar Producto"
         />
-      </div>
-
+      </section>
+      
       <TablaProductos
         productos={productos}
         onEditar={handleAbrirEditar}
-        onEliminar={handleEliminar}
+        onEliminar={(codigo) => setProductoAEliminar(codigo)}
       />
 
-      <Modal show={mostrarModal} onHide={handleCerrarModal} size="lg" centered>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            {productoAEditar ? "Editar Producto" : "Nuevo Producto"}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="">
-          {errorGlobal && (
-            <Alert variant="danger" className="">
-              {errorGlobal}
-            </Alert>
-          )}
-          <FormularioProducto
-            productoAEditar={productoAEditar}
-            onSubmit={handleGuardar}
-            onCancelar={handleCerrarModal}
-          />
-        </Modal.Body>
-      </Modal>
+      <ModalFormularioProducto
+        show={mostrarModalForm}
+        onHide={handleCerrarModal}
+        productoAEditar={productoAEditar}
+        onSubmit={handleGuardar}
+        errorGlobal={errorGlobal}
+      />
+
+      <ModalConfirmacion
+        show={Boolean(productoAEliminar)}
+        onHide={() => setProductoAEliminar(null)}
+        onConfirmar={handleConfirmarEliminar}
+        codigoProducto={productoAEliminar}
+      />
     </PlantillaAdmin>
   );
 }

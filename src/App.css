@@ -350,6 +350,7 @@ main section h2 {
     max-width: 160px;
     overflow: hidden;
     text-overflow: ellipsis;
+    align-items: center;
     white-space: nowrap;
 }
 
@@ -400,7 +401,9 @@ main section h2 {
 /*Layout general*/
 html,
 body {
+    max-width: 100vw;
     height: 100%;
+    overflow-x: hidden;
 }
 
 .pagina {
@@ -414,7 +417,7 @@ body {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     header {
         position: relative;
          z-index: 1000;
@@ -447,6 +450,18 @@ body {
         padding: 14px 5%;
         border-radius: 0;
         border-bottom: 1px solid #333;
+    }
+
+    .enlace-carrito {
+        align-self: flex-start;
+        margin: 14px 5%;
+        width: fit-content; 
+        display: inline-flex;
+    }
+
+    .contador-carrito {
+        top: -6px;
+        right: -10px; 
     }
 }
 
@@ -892,4 +907,154 @@ textarea.campo {
 .estado-paso-activo {
     background-color: #d32f2f;
     color: white;
+}
+
+
+/*Admin Productos*/
+
+.encabezado-pagina {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.encabezado-pagina h2 {
+  font-size: 22px;
+  color: #1a1a1a;
+  border-bottom: 3px solid #d32f2f;
+  display: inline-block;
+  padding-bottom: 5px;
+  margin: 0;
+}
+
+.texto-centro {
+  text-align: center;
+}
+
+.acciones-tabla {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-editar,
+.btn-eliminar {
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: transparent;
+  line-height: 1.2;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-editar {
+  color: #0d6efd;
+  border: 1px solid #0d6efd;
+}
+
+.btn-editar:hover {
+  background-color: #0d6efd;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(13, 110, 253, 0.2);
+}
+
+.btn-eliminar {
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.btn-eliminar:hover {
+  background-color: #dc3545;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2);
+}
+
+.btn-crear-producto {
+  background-color: #00964b;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-crear-producto:hover {
+  background-color: #016d3b;
+}
+
+.paginacion-contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.paginacion-numeros {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-paginacion {
+  padding: 6px 14px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-paginacion:hover:not(:disabled) {
+  background-color: #f0f0f0;
+  border-color: #aaa;
+}
+
+.btn-paginacion:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-pagina {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: 1px solid #dcdcdc;
+  background-color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-pagina:hover {
+  background-color: #f5f5f5;
+}
+
+.btn-pagina.activa {
+  background-color: #d32f2f;
+  color: #ffffff;
+  border-color: #d32f2f;
+  font-weight: bold;
+}
+
+.contenedor-tabla-paginada,
+.tabla-contenedor {
+    width: 100%;
+    overflow-x: auto; /* Genera el scroll local en la tabla */
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+}
+
+.tabla-productos {
+    width: 100%;
+    min-width: 650px; /* Al achicar la pantalla, activa el scroll dentro del contenedor */
+    margin-bottom: 0 !important;
 }

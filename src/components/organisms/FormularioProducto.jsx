@@ -10,7 +10,6 @@ function FormularioProducto(props) {
     const productoAEditar = props.productoAEditar;
     const esModoEdicion = Boolean(productoAEditar)
     const { productos } = useProductos();
-
     const listaCategorias = categoriasDe(productos)
 
     const [formData, setFormData] = useState({
@@ -67,8 +66,12 @@ function FormularioProducto(props) {
             nuevosErrores.codigo = "El código es obligatorio.";
         }
 
-        if (!esTextoValido(formData.nombre, 2, 80)) {
-            nuevosErrores.nombre = "El nombre debe tener entre 2 y 80 caracteres.";
+        if (!esTextoValido(formData.nombre, 1, 100)) {
+            nuevosErrores.nombre = "El nombre debe tener entre 1 y 100 caracteres.";
+        }
+
+        if(!esTextoValido(formData.descripcion, 1, 500)) {
+            nuevosErrores.descripcion = "La descripción debe tener entre 1 y 500 caracteres"
         }
 
         if (esCampoVacio(formData.categoria)) {
@@ -80,7 +83,7 @@ function FormularioProducto(props) {
         }
 
         if (!esNumeroValido(formData.stock, 0)) {
-            nuevosErrores.stock = "El stock debe ser 0 o mayor.";
+            nuevosErrores.stock = "El stock debe igual o mayor a 0.";
         }
 
         setErrores(nuevosErrores);
@@ -100,8 +103,8 @@ function FormularioProducto(props) {
     };
 
     return (
-        <Form onSubmit={handleSubmit} className="">
-            <h3 className="">{esModoEdicion ? "Editar Producto" : "Agregar Producto Nuevo"}</h3>
+        <Form onSubmit={handleSubmit} className="formulario-producto-admin">
+            <h3>{esModoEdicion ? "Editar Producto" : "Agregar Producto Nuevo"}</h3>
             <Row>
                 <Col xs={12} md={6}>
                     <CampoFormulario
@@ -199,17 +202,17 @@ function FormularioProducto(props) {
                     />
                 </Col>
             </Row>
-            <div className="">
+            <div className="formulario-acciones">
                 {props.onCancelar && (
                     <Boton
-                        className="btn btn-secondary"
+                        className="btn-cancelar"
                         alHacerClick={props.onCancelar}
                         texto="Cancelar"
                     />
                 )}
                 <Boton
                     tipo="submit"
-                    className="btn btn-danger"
+                    className="btn-guardar"
                     texto={esModoEdicion ? "Actualizar Producto" : "Guardar Producto"}
                 />
             </div>
