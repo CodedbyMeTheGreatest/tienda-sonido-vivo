@@ -354,14 +354,36 @@ main section h2 {
     white-space: nowrap;
 }
 
+.icono-carrito {
+    position: relative;
+    display: flex;
+}
+
+.texto-carrito {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .saludo-usuario {
-        padding: 14px 5%;
-        border: none;
-        border-bottom: 1px solid #333;
-        border-radius: 0;
-        max-width: none;
+        display: none;
     }
+    .enlace-carrito {
+        width: fit-content;
+        margin: 0 auto;
+        gap: 12px;
+        padding: 14px 5%;
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .texto-carrito {
+        display: inline;
+        margin-right: 14px;
+    }
+    .imagen-carrito {
+        height: 22px;
+    }   
 }
 
 /*Footer*/
@@ -450,13 +472,6 @@ body {
         padding: 14px 5%;
         border-radius: 0;
         border-bottom: 1px solid #333;
-    }
-
-    .enlace-carrito {
-        align-self: flex-start;
-        margin: 14px 5%;
-        width: fit-content; 
-        display: inline-flex;
     }
 
     .contador-carrito {

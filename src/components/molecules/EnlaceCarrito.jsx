@@ -7,10 +7,13 @@ function EnlaceCarrito(props) {
 
   return (
     <Link to={props.to} className="enlace-carrito" aria-label="carrito">
+      <span className="icono-carrito">
+      <span className="texto-carrito">Carrito</span>
       <img src={iconoCarrito} alt="carrito" className="imagen-carrito" />
       {mostrarContador && (
         <span className="contador-carrito">{cantidad}</span>
       )}
+      </span>
     </Link>
   );
 }
