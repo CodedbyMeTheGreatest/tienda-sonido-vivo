@@ -3,9 +3,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'
 import Login from './pages/Login'
 import Catalogo from "./pages/Catalogo";
+import Blog from "./pages/Blog";
 import Inicio from "./pages/Inicio";
 import { CarritoProvider } from "./context/CarritoContext";
 import { ProductosProvider } from "./context/ProductContext";
+import DetalleBlog from "./pages/DetalleBlog";
 import Carrito from "./pages/Carrito";
 import Producto from "./pages/Producto";
 import Registro from "./pages/Registro";
@@ -30,6 +32,8 @@ function App() {
                   <Route path="/" element={<Inicio />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/catalogo" element={<Catalogo />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/blog/:id" element={<DetalleBlog />} />
                   <Route path="/carrito" element={<Carrito />} />
                   <Route path="/producto/:codigo" element={<Producto />}></Route>
                   <Route path="/registro" element={<Registro />} />
