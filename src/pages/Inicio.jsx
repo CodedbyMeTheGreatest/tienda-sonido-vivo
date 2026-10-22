@@ -5,6 +5,7 @@ import { useCart } from "../context/CarritoContext";
 import TarjetaProducto from "../components/molecules/TarjetaProducto";
 import FormularioContacto from "../components/organisms/FormularioContacto";
 import imagen from "../assets/placeholder.png"
+import { useTituloPagina } from "../hooks/useTituloPagina"
 
 
 function Inicio() {
@@ -14,6 +15,8 @@ function Inicio() {
     const maxIndex = Math.max(0, productos.length - 3);
     const randomIndex = Math.floor(Math.random() * (maxIndex + 1));
     const destacados = productos.slice(randomIndex, randomIndex + 3);
+
+    useTituloPagina('Inicio')
 
 
     return (

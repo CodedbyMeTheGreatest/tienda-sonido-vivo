@@ -11,7 +11,7 @@ function CatalogoProducto(props) {
                     <TarjetaProducto
                         key={p.codigo}
                         producto={p}
-                        href={`${import.meta.env.BASE_URL}producto/${p.codigo}`}
+                        to={`/producto/${p.codigo}`}
                         productoImagenRuta={imagen}
                         productoTextAlt={`Imagen de ${p.nombre} ${p.marca} ${p.modelo}`}
                         productoNombreCompleto={`${p.nombre} ${p.marca} ${p.modelo}`}

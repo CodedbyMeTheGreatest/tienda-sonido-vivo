@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import Boton from "../components/atoms/Boton";
 import PlantillaAdmin from "../components/templates/PlantillaAdmin";
+import { useTituloPagina } from "../hooks/useTituloPagina";
 
 function InicioAdmin() {
     const navigate = useNavigate();
+
+    useTituloPagina('Panel de Administración')
 
     return (
         <PlantillaAdmin>
@@ -17,7 +20,7 @@ function InicioAdmin() {
                         <div className="admin-section">
                             <h2>Gestión de Usuarios</h2>
                             <div className="admin-actions">
-                                <Boton className="btn-enlace" texto="Gestionar usuarios" alHacerClick={() => navigate("/admin/usuarios")} />
+                                <Boton className="btn-enlace" texto="Ir a Gestionar Usuarios" alHacerClick={() => navigate("/admin/usuarios")} />
                             </div>
                         </div>
                     </div>
@@ -26,7 +29,7 @@ function InicioAdmin() {
                         <div className="admin-section">
                             <h2>Gestión de Productos</h2>
                             <div className="admin-actions">
-                                <Boton className="btn-enlace" texto="Gestionar productos" alHacerClick={() => navigate("/admin/productos")} />
+                                <Boton className="btn-enlace" texto="Ir a Gestionar Productos" alHacerClick={() => navigate("/admin/productos")} />
                             </div>
                         </div>
                     </div>
