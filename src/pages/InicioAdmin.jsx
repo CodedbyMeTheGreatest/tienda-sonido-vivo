@@ -20,10 +20,7 @@ function InicioAdmin() {
                         <div className="admin-section">
                             <h2>Gestión de Usuarios</h2>
                             <div className="admin-actions">
-                                <Boton className="btn-enlace" texto="Listado de Usuarios" alHacerClick={() => navigate("/admin/usuarios")} />
-                                <Boton className="btn-enlace" texto="Agregar Usuario" alHacerClick={() => navigate("/admin/usuarios/nuevo")} />
-                                <Boton className="btn-enlace" texto="Editar Usuario" alHacerClick={() => navigate("/admin/usuarios/editar")} />
-                                <Boton className="btn-enlace" texto="Eliminar Usuario" alHacerClick={() => navigate("/admin/usuarios/eliminar")} />
+                                <Boton className="btn-enlace" texto="Gestionar usuarios" alHacerClick={() => navigate("/admin/usuarios")} />
                             </div>
                         </div>
                     </div>
