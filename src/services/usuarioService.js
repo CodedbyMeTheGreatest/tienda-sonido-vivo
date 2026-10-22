@@ -64,3 +64,9 @@ export function autenticarUsuario(correo, contraseña) {
   const { contraseña: omitida, ...sinContraseña } = usuario
   return sinContraseña
 }
+export function autenticarUsuario(correo, contrasena) {
+    const usuario = leer().find((u) => u.correo === correo && u.contrasena === contrasena);
+    if (!usuario) return null;
+    const { contrasena: _omitida, ...sinContrasena } = usuario;
+    return sinContrasena;
+}

@@ -20,6 +20,7 @@ import MisPedidos from "./pages/MisPedidos";
 import { PedidosProvider } from "./context/PedidoContext";
 import InicioAdmin from "./pages/InicioAdmin"
 import AdminProductos from "./pages/AdminProductos"
+import AdminUsuarios from "./pages/AdminUsuarios"
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
                   <Route path="/mis-pedidos" element={<MisPedidos />} />
                   <Route path="/admin/" element={<InicioAdmin/>} />
                   <Route path="/admin/productos" element={<AdminProductos/>}></Route>
+                  <Route path="/admin/usuarios" element={<AdminUsuarios/>}></Route>
                 </Routes>
               </BrowserRouter>
             </CarritoProvider>

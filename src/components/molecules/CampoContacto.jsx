@@ -14,7 +14,7 @@ function CampoContacto(props) {
                 esInvalido={props.esInvalido}
                 opciones={props.opciones}
             />
-            {props.esInvalido && <span className="error">{props.mensajeError}</span>}
+            {props.esInvalido && <span className="texto-error">{props.mensajeError}</span>}
         </div>
     );
 }

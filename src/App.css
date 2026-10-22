@@ -1177,3 +1177,170 @@ select.campo {
   color: #ffffff;
   border-color: #dc3545;
 }
+/*Admin: Inicio*/
+.admin-container {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.admin-main {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* Se anula el estilo global de "header" (fondo negro y borde rojo del navbar) */
+.admin-header {
+    display: block;
+    background-color: transparent;
+    color: #1a1a1a;
+    padding: 0;
+    border-bottom: none;
+    text-align: center;
+}
+
+.admin-header h1,
+.admin-header h2 {
+    display: inline-block;
+    font-size: 28px;
+    color: #1a1a1a;
+    border-bottom: 3px solid #d32f2f;
+    padding-bottom: 8px;
+}
+
+.admin-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+/* "main section" ya da padding y fondo; esto lo ajusta para las tarjetas */
+.admin-section {
+    padding: 30px;
+    margin-bottom: 0;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.admin-section:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+}
+
+.admin-section h2,
+.admin-section h3 {
+    font-size: 22px;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+}
+
+.admin-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-enlace {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #d32f2f;
+    color: #ffffff;
+    border: 2px solid #d32f2f;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-enlace:hover {
+    background-color: #b71c1c;
+    border-color: #b71c1c;
+}
+
+.admin-footer {
+    text-align: center;
+    color: #555555;
+    font-size: 14px;
+    padding-top: 10px;
+    border-top: 1px solid #e0e0e0;
+}
+
+@media (max-width: 768px) {
+    .admin-content {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-section {
+        padding: 20px;
+    }
+}
+/*Admin Usuarios*/
+.tabla-usuarios {
+    width: 100%;
+    min-width: 750px;
+    margin-bottom: 0;
+}
+
+.formulario-usuario {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.formulario-usuario .campo-contenedor {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.campo-solo-lectura {
+    margin: 0;
+    background-color: #f1f1f1;
+    color: #555555;
+}
+
+.detalle-subtexto {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.mensaje-vacio {
+    text-align: center;
+    padding: 30px 0;
+    color: #555555;
+}
+
+.contenedor-restringido {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.btn-login {
+    margin-top: 15px;
+    padding: 10px 18px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-login:hover {
+    background-color: #b71c1c;
+}
+
+.mensaje-error-global {
+    margin-bottom: 15px;
+    padding: 10px 12px;
+    background-color: #ffebee;
+    color: #b71c1c;
+    border-radius: 4px;
+    font-weight: bold;
+}
