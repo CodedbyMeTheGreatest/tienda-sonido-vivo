@@ -84,7 +84,6 @@ function AdminProductos() {
           texto="+ Agregar Producto"
         />
       </section>
-      
       <TablaProductos
         productos={productos}
         onEditar={handleAbrirEditar}

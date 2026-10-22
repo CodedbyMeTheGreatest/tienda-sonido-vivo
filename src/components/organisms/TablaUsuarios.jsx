@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
+import Table from "react-bootstrap/Table";
 import Boton from "../atoms/Boton";
 
 function TablaUsuarios(props) {
     const navigate = useNavigate();
 
     return (
-        <div className="contenedor-tabla-admin">
-            <table className="tabla-admin">
+        <section className="contenedor-tabla-admin">
+            <Table className="tabla-admin">
                 <thead>
                     <tr>
                         <th>RUN</th>
@@ -32,22 +33,25 @@ function TablaUsuarios(props) {
                             <td>{u.rol}</td>
                             <td>{u.direccion}</td>
                             <td>
-                                <Boton
-                                    className="btn-enlace"
-                                    texto="Editar"
-                                    alHacerClick={() => navigate(`/admin/usuarios/editar/${u.run}`)}
-                                />
-                                <Boton
-                                    className="btn-enlace"
-                                    texto="Eliminar"
-                                    alHacerClick={() => navigate(`/admin/usuarios/eliminar/${u.run}`)}
-                                />
+                                <div className="acciones-tabla">
+
+                                    <Boton
+                                        className="btn-editar"
+                                        texto="Editar"
+                                        alHacerClick={() => navigate(`/admin/usuarios/editar/${u.run}`)}
+                                    />
+                                    <Boton
+                                        className="btn-eliminar"
+                                        texto="Eliminar"
+                                        alHacerClick={() => navigate(`/admin/usuarios/eliminar/${u.run}`)}
+                                    />
+                                </div>
                             </td>
                         </tr>
                     ))}
                 </tbody>
-            </table>
-        </div>
+            </Table>
+        </section>
     );
 }
 
