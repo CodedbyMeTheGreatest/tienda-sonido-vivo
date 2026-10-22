@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import Boton from "../atoms/Boton"
 import Precio from "../atoms/Precio"
@@ -10,15 +11,14 @@ function TarjetaProducto(props) {
 
     return (
         <Card as="article" className="producto">
-            <a href={props.href}>
-                {
-                    props.productoImagenRuta && (
-                        <Imagen
-                            src={props.productoImagenRuta}
-                            alt={props.productoTextAlt || producto.nombre}
-                            className="imagen-tarjeta-producto"
-                        />
-                    )}
+            <Link to={props.to}>
+            {props.productoImagenRuta && (
+                    <Imagen
+                        src={props.productoImagenRuta}
+                        alt={props.productoTextAlt || producto.nombre}
+                        className="imagen-tarjeta-producto"
+                    />
+                )}
                 <Card.Body>
                     <Insignia tone="marca">{producto.categoria}</Insignia>
                     <Card.Title as="h3">{props.productoNombreCompleto}</Card.Title>
@@ -31,7 +31,7 @@ function TarjetaProducto(props) {
                         )}
                     </p>
                 </Card.Body>
-            </a>
+            </Link>
             <Boton className="boton-catalogo-añadir-producto" tipo="button" texto="Añadir al Carrito" alHacerClick={() => props.onAdd(producto)} deshabilitado={sinStock}></Boton>
         </Card >
     );

@@ -14,8 +14,6 @@ function Catalogo() {
 
     const carrito = useCart()
 
-
-
     let titulo = 'Catálogo'
     if (nombre) titulo = nombre
     if (texto) titulo = `Resultados para "${texto}"`

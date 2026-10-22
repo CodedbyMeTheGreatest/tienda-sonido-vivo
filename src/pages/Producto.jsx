@@ -3,15 +3,15 @@ import { useParams, Link } from "react-router-dom";
 import PlantillaPublica from "../components/templates/PlantillaPublica";
 import DetalleProducto from "../components/organisms/DetalleProducto";
 import { useCart } from "../context/CarritoContext";
-import { obtenerProducto } from "../services/productoService";
+import { useProductos } from "../context/ProductContext";
 import { useTituloPagina } from "../hooks/useTituloPagina";
 import imagen from "../assets/placeholder.png"
 
 
 function Producto() {
-    const params = useParams();
-    const codigo = params.codigo;
-    const producto = obtenerProducto(codigo);
+    const { codigo } = useParams();
+    const { productos } = useProductos();
+    const producto = productos.find((p) => p.codigo === codigo);
     const nombreCompleto = producto
         ? `${producto.nombre} ${producto.marca || ""} ${producto.modelo || ""}`.trim()
         : "Producto no encontrado";
