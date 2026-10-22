@@ -3,15 +3,16 @@ import PlantillaPublica from "../components/templates/PlantillaPublica";
 import ArticuloBlog from "../components/organisms/ArticuloBlog";
 import Boton from "../components/atoms/Boton";
 import entradas from "../data/Blogs.json";
+import { useTituloPagina } from "../hooks/useTituloPagina";
 
 function DetalleBlog() {
     const { id } = useParams(); 
     const navigate = useNavigate();
 
-
     const articulo = entradas.find((e) => String(e.id) === id);
-
+    
     if (!articulo) {
+        useTituloPagina('Artículo no encontrado')
         return (
             <PlantillaPublica>
                 <div className="articulo-completo">
@@ -22,6 +23,8 @@ function DetalleBlog() {
             </PlantillaPublica>
         );
     }
+
+    useTituloPagina(articulo.titulo)
 
     return (
         <PlantillaPublica>

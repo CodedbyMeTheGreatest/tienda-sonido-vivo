@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import Boton from "../components/atoms/Boton";
 import PlantillaAdmin from "../components/templates/PlantillaAdmin";
+import { useTituloPagina } from "../hooks/useTituloPagina";
 
 function InicioAdmin() {
     const navigate = useNavigate();
+
+    useTituloPagina('Panel de Administración')
 
     return (
         <PlantillaAdmin>
