@@ -24,8 +24,9 @@ function InicioAdmin() {
 
                     <div className="admin-mitad-inferior">
                         <div className="admin-section">
+                            <h2>Gestión de Productos</h2>
                             <div className="admin-actions">
-                             <Boton className="btn-enlace" texto="Gestión de Productos" alHacerClick={() => navigate("/admin/productos")} />
+                                <Boton className="btn-enlace" texto="Gestionar productos" alHacerClick={() => navigate("/admin/productos")} />
                             </div>
                         </div>
                     </div>

@@ -1213,6 +1213,15 @@ select.campo {
     grid-template-columns: 1fr 1fr;
     gap: 25px;
 }
+.admin-mitad-superior,
+.admin-mitad-inferior {
+    display: flex;
+}
+
+.admin-mitad-superior .admin-section,
+.admin-mitad-inferior .admin-section {
+    flex: 1;
+}
 
 /* "main section" ya da padding y fondo; esto lo ajusta para las tarjetas */
 .admin-section {
