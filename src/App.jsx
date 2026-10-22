@@ -33,19 +33,21 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Inicio />} />
                   <Route path="/login" element={<Login />} />
-                  <Route path="/catalogo" element={<Catalogo />} />
-                  <Route path="/blog" element={<Blog />} />
-                  <Route path="/blog/:id" element={<DetalleBlog />} />
-                  <Route path="/carrito" element={<Carrito />} />
-                  <Route path="/producto/:codigo" element={<Producto />}></Route>
                   <Route path="/registro" element={<Registro />} />
                   <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/blog/:id" element={<DetalleBlog />} />
+                  <Route path="/catalogo" element={<Catalogo />} />
+                  <Route path="/categoria/:nombre" element={<Catalogo />} />
+                  <Route path="/buscar/:texto" element={<Catalogo />} />
+                  <Route path="/producto/:codigo" element={<Producto />}></Route>
+                  <Route path="/carrito" element={<Carrito />} />
                   <Route path="/compra-exitosa/:id" element={<CompraExitosa />} />
                   <Route path="/compra-fallida" element={<CompraFallida />} />
                   <Route path="/mis-pedidos" element={<MisPedidos />} />
-                  <Route path="/admin/" element={<InicioAdmin/>} />
-                  <Route path="/admin/productos" element={<AdminProductos/>}></Route>
-                  <Route path="/admin/usuarios" element={<AdminUsuarios/>}></Route>
+                  <Route path="/admin/" element={<InicioAdmin />} />
+                  <Route path="/admin/productos" element={<AdminProductos />}></Route>
+                  <Route path="/admin/usuarios" element={<AdminUsuarios />}></Route>
                 </Routes>
               </BrowserRouter>
             </CarritoProvider>
