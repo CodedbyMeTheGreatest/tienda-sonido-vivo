@@ -4,6 +4,7 @@ import ResumenCompra from "../components/organisms/ResumenCompra";
 import { usePedidos } from "../context/PedidoContext";
 import { useSesion } from "../context/SesionContext";
 import { useTituloPagina } from "../hooks/useTituloPagina";
+import AnimacionExito from "../components/molecules/AnimacionExito";
 
 export default function CompraExitosa() {
     const { id } = useParams();
@@ -18,6 +19,7 @@ export default function CompraExitosa() {
     return (
         <PlantillaPublica>
             <section className="resultado-compra">
+                <AnimacionExito />
                 <h2>¡Compra exitosa!</h2>
                 <p>Tu pedido <strong>{pedido.id}</strong> está {pedido.estado.toLowerCase()}.</p>
                 <p>

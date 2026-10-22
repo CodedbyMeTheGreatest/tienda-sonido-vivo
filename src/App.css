@@ -1354,6 +1354,124 @@ select.campo {
     font-weight: bold;
 }
 
+/*Animación de compra exitosa*/
+.resultado-compra {
+    --llegada: 1.4s;
+}
+
+.exito-escenario {
+    position: relative;
+    width: 150px;
+    margin: 0 auto 28px;
+}
+
+.exito-carrito {
+    display: block;
+    width: 150px;
+    height: auto;
+    animation: exito-llegar var(--llegada) cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+
+.exito-rueda {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: exito-rodar var(--llegada) cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+
+.exito-icono {
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    width: 64px;
+    height: 64px;
+    animation: exito-pop 0.5s var(--llegada) ease-out both;
+}
+
+.exito-circulo {
+    fill: #fff;
+    stroke: #d32f2f;
+    stroke-width: 3;
+    stroke-dasharray: 151;
+    stroke-dashoffset: 151;
+    animation: exito-dibujar 0.5s var(--llegada) ease-out forwards;
+}
+
+.exito-check {
+    stroke: #d32f2f;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 36;
+    stroke-dashoffset: 36;
+    animation: exito-dibujar 0.3s calc(var(--llegada) + 0.4s) ease-out forwards;
+}
+
+.exito-contenido {
+    animation: exito-subir 0.7s calc(var(--llegada) + 1s) ease-out both;
+}
+
+.confeti {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.confeti-pieza {
+    position: absolute;
+    top: -20px;
+    opacity: 0;
+    animation-name: exito-caer;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes exito-llegar {
+    0% { transform: translateX(-80vw); }
+    75% { transform: translateX(14px); }
+    90% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes exito-rodar {
+    to { transform: rotate(2160deg); }
+}
+
+@keyframes exito-dibujar {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes exito-pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes exito-subir {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes exito-caer {
+    0% { transform: translate(0, 0) rotate(0); opacity: 1; }
+    100% { transform: translate(var(--deriva), 105vh) rotate(var(--giro)); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .confeti { display: none; }
+
+    .exito-carrito,
+    .exito-rueda,
+    .exito-icono,
+    .exito-circulo,
+    .exito-check,
+    .exito-contenido {
+        animation: none;
+        stroke-dashoffset: 0;
+    }
+}
+
 
 /* Barra de Filtros del Catálogo */
 
