@@ -27,12 +27,8 @@ function InicioAdmin() {
 
                     <div className="admin-mitad-inferior">
                         <div className="admin-section">
-                            <h2>Gestión de Productos</h2>
                             <div className="admin-actions">
-                                <Boton className="btn-enlace" texto="Listado de Productos" alHacerClick={() => navigate("/admin/productos")} />
-                                <Boton className="btn-enlace" texto="Agregar Producto" alHacerClick={() => navigate("/admin/productos/nuevo")} />
-                                <Boton className="btn-enlace" texto="Editar Producto" alHacerClick={() => navigate("/admin/productos/editar")} />
-                                <Boton className="btn-enlace" texto="Eliminar Producto" alHacerClick={() => navigate("/admin/productos/eliminar")} />
+                             <Boton className="btn-enlace" texto="Gestión de Productos" alHacerClick={() => navigate("/admin/productos")} />
                             </div>
                         </div>
                     </div>
