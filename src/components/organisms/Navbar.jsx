@@ -57,7 +57,7 @@ function Navbar() {
           <>
             {esAdmin && (
               <EnlaceNav
-                to="/admin/productos"
+                to="/admin/"
                 texto="Administración"
                 alHacerClick={cerrarMenu}
               />

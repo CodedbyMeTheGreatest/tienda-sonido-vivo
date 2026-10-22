@@ -104,7 +104,6 @@ function FormularioProducto(props) {
 
     return (
         <Form onSubmit={handleSubmit} className="formulario-producto-admin">
-            <h3>{esModoEdicion ? "Editar Producto" : "Agregar Producto Nuevo"}</h3>
             <Row>
                 <Col xs={12} md={6}>
                     <CampoFormulario
