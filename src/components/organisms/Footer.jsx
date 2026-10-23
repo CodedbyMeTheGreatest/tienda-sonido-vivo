@@ -1,8 +1,8 @@
 import EnlaceNav from "../atoms/EnlaceNav";
 
 const enlacesFooter = [
-    { texto: "Nosotros", to: "/nosotros" },
-    { texto: "Contacto", to: "/contacto" },
+    { texto: "Nosotros", to: "/#nosotros" },
+    { texto: "Contacto", to: "/#contactanos" },
 ];
 
 

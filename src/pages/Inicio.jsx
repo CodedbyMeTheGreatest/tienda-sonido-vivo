@@ -6,17 +6,22 @@ import TarjetaProducto from "../components/molecules/TarjetaProducto";
 import FormularioContacto from "../components/organisms/FormularioContacto";
 import imagen from "../assets/placeholder.png"
 import { useTituloPagina } from "../hooks/useTituloPagina"
+import { useState } from "react";
+import { useScroll } from "../hooks/useScroll";
 
 
 function Inicio() {
     const { productos } = useProductos();
     const { añadir } = useCart();
 
+    const [semilla] = useState(() => Math.random());
+
     const maxIndex = Math.max(0, productos.length - 3);
-    const randomIndex = Math.floor(Math.random() * (maxIndex + 1));
+    const randomIndex = Math.floor(semilla * (maxIndex + 1));
     const destacados = productos.slice(randomIndex, randomIndex + 3);
 
     useTituloPagina('Inicio')
+    useScroll()
 
 
     return (
