@@ -509,7 +509,10 @@ textarea.campo {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    width: 100%;
     max-width: 500px;
+    margin: 0 auto;
+    text-align: left;
 }
 
 .formulario-contacto .boton-primario {
@@ -522,10 +525,14 @@ textarea.campo {
     cursor: pointer;
     margin-top: 10px;
 }
-
 .formulario-contacto .boton-primario:hover {
     background-color: #b71c1c;
 }
+
+#contactanos {
+    text-align: center;
+}
+
 
 /*Carrito*/
 .carrito-lista {
