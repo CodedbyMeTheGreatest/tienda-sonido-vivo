@@ -17,9 +17,9 @@ describe('esTextoValido', () => {
         expect(esTextoValido('Jane', 8)).toBe(false)
     })
 
-    it('retorna false si el valor tiene mas caracteres que el maximo entregado'), () => {
-        expect (esTextoValido('Jane Doe', 4)).toBe(false)
-    }
+    it('retorna false si el valor tiene mas caracteres que el maximo entregado', () => {
+        expect (esTextoValido('Jane Doe', 1, 4)).toBe(false)
+    })
 
     it('retorna true si el valor es de tipo String', () => {
         expect(esTextoValido('Jane Doe', 4, 15)).toBe(true)

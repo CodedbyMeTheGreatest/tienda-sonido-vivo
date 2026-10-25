@@ -61,6 +61,6 @@ export function autenticarUsuario(correo, contraseña) {
   )
   if (!usuario) return null
 
-  const { contraseña: omitida, ...sinContraseña } = usuario
+  const { contrasena: omitida, ...sinContraseña } = usuario
   return sinContraseña
 }

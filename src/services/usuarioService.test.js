@@ -6,7 +6,7 @@ import {
   actualizarUsuario,
   eliminarUsuario,
   autenticarUsuario,
-} from './usuariosService.js'
+} from './usuarioService.js'
 
 
 vi.mock('../data/Usuarios.json', () => ({
@@ -26,7 +26,7 @@ vi.mock('../data/Usuarios.json', () => ({
   ],
 }))
 
-describe('usuariosService', () => {
+describe('usuarioService', () => {
   beforeEach(() => {
     localStorage.clear()
   })
@@ -124,7 +124,7 @@ describe('usuariosService', () => {
   describe('autenticarUsuario', () => {
     it('retorna el usuario sin la contraseña si las credenciales son correctas', () => {
       const usuario = autenticarUsuario('juan@sonidovivo.cl', 'pass123')
-      expect(usuario).toBeDefined()
+      expect(usuario).not.toBeNull()
       expect(usuario?.run).toBe('11111111-1')
       expect(usuario).not.toHaveProperty('contrasena')
     })
