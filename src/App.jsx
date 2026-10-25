@@ -21,6 +21,7 @@ import { PedidosProvider } from "./context/PedidoContext";
 import InicioAdmin from "./pages/InicioAdmin"
 import AdminProductos from "./pages/AdminProductos"
 import AdminUsuarios from "./pages/AdminUsuarios"
+import NoEncontrado from "./pages/NoEncontrado"
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
                   <Route path="/admin/" element={<InicioAdmin />} />
                   <Route path="/admin/productos" element={<AdminProductos />}></Route>
                   <Route path="/admin/usuarios" element={<AdminUsuarios />}></Route>
+                  <Route path="*" element={<NoEncontrado />} />
                 </Routes>
               </BrowserRouter>
             </CarritoProvider>

@@ -1499,3 +1499,72 @@ select.campo {
 .boton-buscar-catalogo:hover {
     background-color: #b71c1c;
 }
+
+/*Página de error 404*/
+.pagina-error {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 50px 30px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.pagina-error-codigo {
+    font-size: 96px;
+    font-weight: bold;
+    line-height: 1;
+    color: #d32f2f;
+    margin-bottom: 10px;
+}
+
+.pagina-error h2 {
+    font-size: 26px;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+}
+
+.pagina-error-texto {
+    color: #555555;
+    margin-bottom: 30px;
+}
+
+.pagina-error-acciones {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.boton-error-primario,
+.boton-error-secundario {
+    padding: 10px 22px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.boton-error-primario {
+    background-color: #d32f2f;
+    color: #ffffff;
+    border: 2px solid #d32f2f;
+}
+
+.boton-error-primario:hover {
+    background-color: #b71c1c;
+    border-color: #b71c1c;
+}
+
+.boton-error-secundario {
+    background-color: transparent;
+    color: #d32f2f;
+    border: 2px solid #d32f2f;
+}
+
+.boton-error-secundario:hover {
+    background-color: #d32f2f;
+    color: #ffffff;
+}
