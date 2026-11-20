@@ -13,8 +13,8 @@ function Login() {
     useTituloPagina("Iniciar Sesion");
 
 
-    function manejarInicioSesionExitoso(valores) {
-        const exito = iniciarSesion(valores.correo, valores.contrasenia)
+    async function manejarInicioSesionExitoso(valores) {
+        const exito = await iniciarSesion(valores.correo, valores.contrasenia)
         if (exito) navigate ("/")
         return exito
     }

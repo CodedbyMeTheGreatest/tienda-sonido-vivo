@@ -1,32 +1,26 @@
 import PlantillaPublica from "../components/templates/PlantillaPublica";
 import FormularioRegistro from "../components/organisms/FormularioRegistro";
 import useRegistro from "../hooks/useRegistro";
-import { useUsuarios } from "../context/UsuarioContext";
 import { useTituloPagina } from "../hooks/useTituloPagina";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { registrarUsuario, obtenerMensajeError } from "../services/authService";
+import { registroRequestDto } from "../dto/auth.dto";
 
 export default function Registro() {
     const navigate = useNavigate();
     const temporizador = useRef(null);
-    const { crear } = useUsuarios();
 
     useTituloPagina("Registro");
 
     useEffect(() => () => clearTimeout(temporizador.current), []);
 
-    function manejarRegistro(v) {
-        crear({
-            run: v.run.trim().toUpperCase(),
-            nombres: v.nombres.trim(),
-            apellidos: v.apellidos.trim(),
-            correo: v.correo.trim().toLowerCase(),
-            contrasena: v.contrasenia,
-            region: v.region,
-            comuna: v.comuna,
-            rol: "Cliente",
-            direccion: v.direccion.trim(),
-        });
+    async function manejarRegistro(v) {
+        try {
+            await registrarUsuario(registroRequestDto(v));
+        }catch(e){
+            throw new Error(obtenerMensajeError(e));
+        }
         temporizador.current = setTimeout(() => navigate("/login"), 2000);
     }
 

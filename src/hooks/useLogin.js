@@ -15,7 +15,7 @@ export default function useLogin(alIniciarSesion) {
     }
   };
 
-  const alEnviar = (e) => {
+  const alEnviar = async (e) => {
     e.preventDefault();
 
     const errorCorreo = !esCorreoValido(valores.correo)
@@ -27,19 +27,23 @@ export default function useLogin(alIniciarSesion) {
       : '';
 
     if (errorCorreo || errorContraseña) {
-      setErrores({ correo: errorCorreo, contraseña: errorContraseña });
+      setErrores({ correo: errorCorreo, contrasenia: errorContraseña });
       setMensajeConfirmacion({ texto: 'Por favor, revise los campos marcados.', esExito: false });
       return;
     }
 
-    setErrores({ correo: '', contraseña: '' });
+    setErrores({ correo: '', contrasenia: '' });
 
-    const exito = alIniciarSesion(valores);
-    setMensajeConfirmacion(
-      exito
-        ? { texto: 'Inicio de sesión exitoso.', esExito: true }
-        : { texto: 'Correo o contraseña incorrectos.', esExito: false }
-    );
+    try {
+      const exito = await alIniciarSesion(valores);
+      setMensajeConfirmacion(
+        exito
+          ? { texto: 'Inicio de sesión exitoso.', esExito: true }
+          : { texto: 'Correo o contraseña incorrectos.', esExito: false }
+      );
+    } catch (error) {
+      setMensajeConfirmacion({ texto: error.message, esExito: false });
+    }
   };
 
   return { valores, errores, mensajeConfirmacion, alCambiar, alEnviar };

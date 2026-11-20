@@ -1,5 +1,8 @@
 import { createContext, useContext, useState } from 'react'
 import { autenticarUsuario } from '../services/usuarioService'
+import { iniciarSesionApi, obtenerMensajeError } from '../services/authService'
+import { loginRequestDto, sesionDesdeRespuesta } from '../dto/auth.dto'
+import { TOKEN_KEY } from '../services/api'
 
 const SESION_KEY = 'sv_sesion'
 const SesionContext = createContext(null)
@@ -15,17 +18,25 @@ function leerSesion() {
 export function SesionProvider({ children }) {
   const [usuario, setUsuario] = useState(leerSesion)
 
-  function iniciarSesion(correo, contrasena) {
-    const encontrado = autenticarUsuario(correo, contrasena)
-    if (!encontrado) return false
+  async function iniciarSesion(correo, contrasena) {
+    try{
+      const respuesta = await iniciarSesionApi(loginRequestDto(correo, contrasena))
+      const sesion = sesionDesdeRespuesta(respuesta)
+      const usuarioSesion = {...sesion.usuario, correo:correo.trim().toLowerCase()}
 
-    localStorage.setItem(SESION_KEY, JSON.stringify(encontrado))
-    setUsuario(encontrado)
-    return true
+      localStorage.setItem(TOKEN_KEY, sesion.token)
+      localStorage.setItem(SESION_KEY, JSON.stringify(usuarioSesion))
+      setUsuario(usuarioSesion)
+      return true
+    }catch(e){
+      if(e.response && e.response.status === 401) return false
+      throw new Error(obtenerMensajeError(e))
+    }
   }
 
   function cerrarSesion() {
     localStorage.removeItem(SESION_KEY)
+    localStorage.removeItem(TOKEN_KEY)
     setUsuario(null)
   }
 

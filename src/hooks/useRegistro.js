@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import {  esCampoVacio, esTextoValido, esCorreoValido, esRunValido, coincidenContrasenias,} from '../utils/validaciones'
 
-const MIN_CONTRASEÑA = 6;
-const MAX_CONTRASEÑA = 20;
+const MIN_CONTRASEÑA = 4;
+const MAX_CONTRASEÑA = 60;
 
 const VALORES_INICIALES = {
   run: '', nombres: '', apellidos: '', correo: '',
@@ -38,7 +38,7 @@ export default function useRegistro(alExitoRegistro) {
     if (errores[id]) setErrores((prev) => ({ ...prev, [id]: '' }))
   }
 
-  const alEnviar = (e) => {
+  const alEnviar = async (e) => {
     e.preventDefault()
 
     const nuevosErrores = validar(valores)
@@ -49,7 +49,7 @@ export default function useRegistro(alExitoRegistro) {
     }
 
     try {
-      alExitoRegistro(valores)
+      await alExitoRegistro(valores)
       setErrores({})
       setValores(VALORES_INICIALES)
       setMensajeConfirmacion({ texto: 'Registro exitoso. Redirigiendo al inicio de sesión...', esExito: true })
