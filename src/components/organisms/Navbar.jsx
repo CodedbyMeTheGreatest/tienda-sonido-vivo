@@ -34,7 +34,7 @@ function Navbar() {
 
   const claseNav = menuAbierto ? "nav-principal activo" : "nav-principal";
 
-  const esAdmin = Boolean(usuario && usuario.rol && usuario.rol.toLowerCase().includes("admin"))
+  const esAdmin = Boolean(usuario && usuario.rol && usuario.rol.toLowerCase().includes("admin")|| usuario && usuario.rol && usuario.rol.toLowerCase().includes("vendedor"))
   return (
     <header className="header">
       <LogoMarca

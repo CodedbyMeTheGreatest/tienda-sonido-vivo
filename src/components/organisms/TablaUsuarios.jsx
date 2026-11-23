@@ -33,27 +33,25 @@ function TablaUsuarios(props) {
                         <th>RUN</th>
                         <th>Nombre</th>
                         <th>Correo</th>
-                        <th>Región</th>
                         <th>Rol</th>
+                        <th>Estado</th>
                         <th className="texto-centro">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {usuariosActuales.map((u) => (
-                        <tr key={u.run}>
-                            <td><code>{u.run}</code></td>
-                            <td>
-                                <strong>{u.nombres} {u.apellidos}</strong>
-                                <div className="detalle-subtexto">{u.direccion}</div>
-                            </td>
+                        <tr key={u.id}>
+                            <td><code>{u.id}</code></td>
+                            <td><strong>{u.nombres} {u.apellidos}</strong></td>
                             <td>{u.correo}</td>
-                            <td>
-                                {u.region}
-                                <div className="detalle-subtexto">{u.comuna}</div>
-                            </td>
                             <td>
                                 <Insignia tone={u.rol === "Administrador" ? "success" : "neutral"}>
                                     {u.rol}
+                                </Insignia>
+                            </td>
+                            <td>
+                                <Insignia tone={u.activo ? "success" : "neutral"}>
+                                    {u.activo ? "Activo" : "Inactivo"}
                                 </Insignia>
                             </td>
                             <td>

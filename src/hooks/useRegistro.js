@@ -2,7 +2,7 @@ import { useState } from 'react'
 import {  esCampoVacio, esTextoValido, esCorreoValido, esRunValido, coincidenContrasenias,} from '../utils/validaciones'
 
 const MIN_CONTRASEÑA = 4;
-const MAX_CONTRASEÑA = 60;
+const MAX_CONTRASEÑA = 64;
 
 const VALORES_INICIALES = {
   run: '', nombres: '', apellidos: '', correo: '',

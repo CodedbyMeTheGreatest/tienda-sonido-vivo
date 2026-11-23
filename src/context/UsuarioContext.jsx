@@ -1,33 +1,51 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useCallback } from 'react'
+import { obtenerMensajeError } from '../services/authService'
+import { listarUsuariosApi, crearUsuarioApi, actualizarUsuarioApi, desactivarUsuarioApi } from '../services/usuarioApiService'
 import * as usuarioService from '../services/usuarioService'
 
 const UsuariosContext = createContext(null)
 
 export function UsuariosProvider({ children }) {
 
-  const [usuarios, setUsuarios] = useState(() => usuarioService.listarUsuarios())
+  const [usuarios, setUsuarios] = useState([])
+  const [cargando, setCargando] = useState(true)
+  const [error, setError] = useState('')
 
-  function crear(datos) {
-    usuarioService.crearUsuario(datos)
-    setUsuarios(usuarioService.listarUsuarios())
+  const recargar = useCallback(async () => {
+    setCargando(true)
+    setError('')
+    try {
+      setUsuarios(await listarUsuariosApi())
+    } catch (e) {
+      setError(obtenerMensajeError(e))
+    } finally {
+      setCargando(false)
+    }
+  }, [])
+
+  async function crear(datos) {
+    try { await crearUsuarioApi(datos) }
+    catch (e) { throw new Error(obtenerMensajeError(e)) }
+    await recargar()
   }
 
-  function actualizar(run, cambios) {
-    usuarioService.actualizarUsuario(run, cambios)
-    setUsuarios(usuarioService.listarUsuarios())
+
+  async function actualizar(id, cambios) {
+    try {
+      await actualizarUsuarioApi(id, cambios)
+    }catch(e) {throw new Error(obtenerMensajeError(e))}
+    await recargar()
   }
 
-  function eliminar(run) {
-    usuarioService.eliminarUsuario(run)
-    setUsuarios(usuarioService.listarUsuarios())
+  async function desactivar(id) {
+    try{
+      await desactivarUsuarioApi(id)
+    }catch(e) {throw new Error(obtenerMensajeError(e))}
+    await recargar()
   }
-
-  function recargar() {
-    setUsuarios(usuarioService.listarUsuarios())
-  }
-
+  
   return (
-    <UsuariosContext.Provider value={{ usuarios, crear, actualizar, eliminar, recargar }}>
+    <UsuariosContext.Provider value={{ usuarios, cargando, error, recargar, actualizar, desactivar, crear }}>
       {children}
     </UsuariosContext.Provider>
   )

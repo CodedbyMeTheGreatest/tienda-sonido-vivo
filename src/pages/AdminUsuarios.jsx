@@ -1,38 +1,26 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import PlantillaAdmin from "../components/templates/PlantillaAdmin";
 import TablaUsuarios from "../components/organisms/TablaUsuarios";
 import ModalFormularioUsuario from "../components/organisms/ModalFormularioUsuario";
 import ModalConfirmacionUsuario from "../components/organisms/ModalConfirmacionUsuario";
 import Boton from "../components/atoms/Boton";
 import { useUsuarios } from "../context/UsuarioContext";
-import { useSesion } from "../context/SesionContext";
 import { useTituloPagina } from "../hooks/useTituloPagina";
+import { useEffect } from "react";
+import { Alert } from "react-bootstrap";
 
 function AdminUsuarios() {
     useTituloPagina("Administración de Usuarios");
 
-    const { usuario } = useSesion();
-    const navigate = useNavigate();
-    const { usuarios, crear, actualizar, eliminar } = useUsuarios();
+    const { usuarios, cargando, error, recargar, actualizar, desactivar, crear } = useUsuarios()
+    useEffect(() => {recargar()}, [recargar]);
 
     const [mostrarModalForm, setMostrarModalForm] = useState(false);
     const [usuarioAEditar, setUsuarioAEditar] = useState(null);
     const [usuarioAEliminar, setUsuarioAEliminar] = useState(null);
     const [errorGlobal, setErrorGlobal] = useState("");
+    const [errorAccion, setErrorAccion] = useState("");
 
-  
-    if (!usuario || usuario.rol !== "Administrador") {
-        return (
-            <PlantillaAdmin>
-                <div className="contenedor-restringido">
-                    <h4>Acceso Restringido</h4>
-                    <p>Debe iniciar sesión como administrador para acceder a esta pantalla.</p>
-                    <Boton className="btn-login" alHacerClick={() => navigate("/login")} texto="Ir al Login" />
-                </div>
-            </PlantillaAdmin>
-        );
-    }
 
     const handleAbrirCrear = () => {
         setUsuarioAEditar(null);
@@ -52,24 +40,25 @@ function AdminUsuarios() {
         setErrorGlobal("");
     };
 
-    const handleGuardar = (datosUsuario) => {
+    const handleGuardar = async (datosUsuario) => {
         try {
-            if (usuarioAEditar) {
-                actualizar(usuarioAEditar.run, datosUsuario);
-            } else {
-                crear(datosUsuario); 
-            }
+            if(usuarioAEditar) await actualizar(usuarioAEditar.id, datosUsuario)
+            else await crear(datosUsuario)
             handleCerrarModal();
-        } catch (e) {
-            setErrorGlobal(e.message || "Error al procesar la solicitud.");
+        }catch(e){
+            setErrorGlobal(e.message);
         }
-    };
+    }
 
-    const handleConfirmarEliminar = () => {
-        if (usuarioAEliminar) {
-            eliminar(usuarioAEliminar.run);
-            setUsuarioAEliminar(null);
+    const handleConfirmarEliminar = async () => {
+        if (!usuarioAEliminar) return
+        try{
+            await desactivar(usuarioAEliminar.id)
+            setErrorAccion("");
+        }catch(e){
+            setErrorAccion(e.message);
         }
+        setUsuarioAEliminar(null);
     };
 
     return (
@@ -79,11 +68,17 @@ function AdminUsuarios() {
                 <Boton className="btn-crear-producto" alHacerClick={handleAbrirCrear} texto="+ Agregar Usuario" />
             </section>
 
-            <TablaUsuarios
-                usuarios={usuarios}
-                onEditar={handleAbrirEditar}
-                onEliminar={(u) => setUsuarioAEliminar(u)}
-            />
+            {error && <Alert variant="danger">{error}</Alert>}
+            {errorAccion && (
+                <Alert variant="danger" dismissible onClose={() => setErrorAccion("")}>{errorAccion}</Alert>
+            )}
+
+            {cargando && usuarios.length === 0
+                ? <p>Cargando usuarios...</p>
+                : <TablaUsuarios 
+                usuarios={usuarios} 
+                onEditar={handleAbrirEditar} 
+                onEliminar={(u) => setUsuarioAEliminar(u)} />}
 
             <ModalFormularioUsuario
                 show={mostrarModalForm}

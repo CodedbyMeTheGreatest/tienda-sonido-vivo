@@ -22,6 +22,7 @@ import InicioAdmin from "./pages/InicioAdmin"
 import AdminProductos from "./pages/AdminProductos"
 import AdminUsuarios from "./pages/AdminUsuarios"
 import NoEncontrado from "./pages/NoEncontrado"
+import RutaProtegida from "./routes/RutasProtegidas";
 
 function App() {
   return (
@@ -35,7 +36,6 @@ function App() {
                   <Route path="/" element={<Inicio />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/registro" element={<Registro />} />
-                  <Route path="/checkout" element={<Checkout />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/blog/:id" element={<DetalleBlog />} />
                   <Route path="/catalogo" element={<Catalogo />} />
@@ -43,12 +43,19 @@ function App() {
                   <Route path="/buscar/:texto" element={<Catalogo />} />
                   <Route path="/producto/:codigo" element={<Producto />}></Route>
                   <Route path="/carrito" element={<Carrito />} />
-                  <Route path="/compra-exitosa/:id" element={<CompraExitosa />} />
-                  <Route path="/compra-fallida" element={<CompraFallida />} />
-                  <Route path="/mis-pedidos" element={<MisPedidos />} />
-                  <Route path="/admin/" element={<InicioAdmin />} />
-                  <Route path="/admin/productos" element={<AdminProductos />}></Route>
-                  <Route path="/admin/usuarios" element={<AdminUsuarios />}></Route>
+                  <Route element={<RutaProtegida />}>
+                    <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/compra-exitosa/:id" element={<CompraExitosa />} />
+                    <Route path="/compra-fallida" element={<CompraFallida />} />
+                    <Route path="/mis-pedidos" element={<MisPedidos />} />
+                  </Route>
+                  <Route element={<RutaProtegida roles={['Administrador','Vendedor']} />}>
+                    <Route  path="/admin/" element={<InicioAdmin />} />
+                    <Route path="/admin/productos" element={<AdminProductos />}></Route>
+                  </Route>
+                  <Route element={<RutaProtegida roles={['Administrador']} />}>
+                    <Route path="/admin/usuarios" element={<AdminUsuarios />}></Route>
+                  </Route>
                   <Route path="*" element={<NoEncontrado />} />
                 </Routes>
               </BrowserRouter>
