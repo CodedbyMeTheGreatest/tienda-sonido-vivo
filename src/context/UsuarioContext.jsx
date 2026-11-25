@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useCallback } from 'react'
 import { obtenerMensajeError } from '../services/authService'
 import { listarUsuariosApi, crearUsuarioApi, actualizarUsuarioApi, desactivarUsuarioApi } from '../services/usuarioApiService'
-import * as usuarioService from '../services/usuarioService'
 
 const UsuariosContext = createContext(null)
 

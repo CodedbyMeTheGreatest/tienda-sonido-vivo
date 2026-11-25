@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from 'react'
-import { autenticarUsuario } from '../services/usuarioService'
 import { iniciarSesionApi, obtenerMensajeError } from '../services/authService'
 import { loginRequestDto, sesionDesdeRespuesta } from '../dto/auth.dto'
 import { TOKEN_KEY } from '../services/api'

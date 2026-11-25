@@ -1,11 +1,27 @@
 import CampoFormulario from "../molecules/CampoFormulario";
 import Boton from "../atoms/Boton";
-import Regiones  from "../../data/Regiones.json";
+import { listarRegionesApi, listarComunasApi } from '../../services/ubicacionApiService'
 
 function FormularioRegistro(props) {
     const { valores, errores, mensajeConfirmacion } = props;
 
-    const comunas = Regiones.find((r) => r.nombre === valores.region)?.comunas ?? [];
+    const [regiones, setRegiones] = useState([])
+    const [todasLasComunas, setTodasLasComunas] = useState([])
+
+    useEffect(() => {
+        Promise.all([listarRegionesApi(), listarComunasApi()])
+            .then(([regs, coms]) => {
+                setRegiones(regs)
+                setTodasLasComunas(coms)
+            })
+            .catch((err) => console.error('Error al cargar ubicaciones:', err))
+    }, [])
+
+    const regionSeleccionada = regiones.find((r) => r.nombre === valores.region)
+
+    const comunas = regionSeleccionada
+        ? todasLasComunas.filter((c) => c.region_id === regionSeleccionada.id)
+        : []
 
     const campo = (id) => ({
         id,
