@@ -19,3 +19,6 @@ export async function actualizarUsuarioApi(id, valores) {
 export async function desactivarUsuarioApi(id) {
   await api.delete(`/usuarios/${id}`)
 }
+export async function activarUsuarioApi(id) {
+  await api.patch(`/usuarios/${id}/activar`)
+}

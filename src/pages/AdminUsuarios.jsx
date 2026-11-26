@@ -12,7 +12,7 @@ import { Alert } from "react-bootstrap";
 function AdminUsuarios() {
     useTituloPagina("Administración de Usuarios");
 
-    const { usuarios, cargando, error, recargar, actualizar, desactivar, crear } = useUsuarios()
+    const { usuarios, cargando, error, recargar, actualizar, desactivar, crear, activar } = useUsuarios()
     useEffect(() => {recargar()}, [recargar]);
 
     const [mostrarModalForm, setMostrarModalForm] = useState(false);
@@ -60,6 +60,14 @@ function AdminUsuarios() {
         }
         setUsuarioAEliminar(null);
     };
+    const handleActivar = async (u) => {
+    try {
+        await activar(u.id)
+        setErrorAccion("");
+    } catch (e) {
+        setErrorAccion(e.message);
+    }
+};
 
     return (
         <PlantillaAdmin>

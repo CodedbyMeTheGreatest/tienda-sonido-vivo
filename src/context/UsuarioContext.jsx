@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useCallback } from 'react'
 import { obtenerMensajeError } from '../services/authService'
-import { listarUsuariosApi, crearUsuarioApi, actualizarUsuarioApi, desactivarUsuarioApi } from '../services/usuarioApiService'
+import { listarUsuariosApi, crearUsuarioApi, actualizarUsuarioApi, desactivarUsuarioApi, activarUsuarioApi } from '../services/usuarioApiService'
 
 const UsuariosContext = createContext(null)
 
@@ -42,9 +42,16 @@ export function UsuariosProvider({ children }) {
     }catch(e) {throw new Error(obtenerMensajeError(e))}
     await recargar()
   }
+
+  async function activar(id) {
+    try{
+      await activarUsuarioApi(id)
+    }catch(e) {throw new Error(obtenerMensajeError(e))}
+    await recargar()
+  }
   
   return (
-    <UsuariosContext.Provider value={{ usuarios, cargando, error, recargar, actualizar, desactivar, crear }}>
+    <UsuariosContext.Provider value={{ usuarios, cargando, error, recargar, actualizar, desactivar, activar, crear }}>
       {children}
     </UsuariosContext.Provider>
   )

@@ -57,7 +57,9 @@ function TablaUsuarios(props) {
                             <td>
                                 <div className="acciones-tabla">
                                     <Boton className="btn-editar" alHacerClick={() => props.onEditar(u)} texto="Editar" />
-                                    <Boton className="btn-eliminar" alHacerClick={() => props.onEliminar(u)} texto="Eliminar" />
+                                    {u.activo
+                                        ? <Boton className="btn-eliminar" alHacerClick={() => props.onEliminar(u)} texto="Desactivar" />
+                                        : <Boton className="btn-editar" alHacerClick={() => props.onActivar(u)} texto="Activar" />}
                                 </div>
                             </td>
                         </tr>
