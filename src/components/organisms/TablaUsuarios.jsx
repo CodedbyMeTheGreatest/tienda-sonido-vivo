@@ -41,7 +41,7 @@ function TablaUsuarios(props) {
                 <tbody>
                     {usuariosActuales.map((u) => (
                         <tr key={u.id}>
-                            <td><code>{u.id}</code></td>
+                            <td><code>{u.run}</code></td>
                             <td><strong>{u.nombres} {u.apellidos}</strong></td>
                             <td>{u.correo}</td>
                             <td>
