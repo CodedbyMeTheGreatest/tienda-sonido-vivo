@@ -10,7 +10,7 @@ function TarjetaPedido(props) {
         <li className="carrito-item">
             <div className="carrito-item-info">
                 <h3 className="carrito-item-nombre">{pedido.id} · {fecha}</h3>
-                <p className="carrito-item-precio-unitario">{pedido.entrega.tipo}</p>
+                <p className="carrito-item-precio-unitario">{pedido.tipoEntrega}</p>
                 <p className="pedido-detalle">{detalle}</p>
             </div>
             <div className="carrito-item-controles">

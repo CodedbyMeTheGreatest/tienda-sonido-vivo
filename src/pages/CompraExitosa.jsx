@@ -8,11 +8,23 @@ import AnimacionExito from "../components/molecules/AnimacionExito";
 
 export default function CompraExitosa() {
     const { id } = useParams();
-    const { pedidos } = usePedidos();
+    const { pedidos, cargando } = usePedidos();
     const { usuario } = useSesion();
-    const pedido = pedidos.find((p) => p.id === id && p.clienteRun === usuario?.run);
+    const pedido = pedidos.find(
+        (p) => String(p.id) === String(id) && Number(p.usuarioId) === Number(usuario?.id)
+    );
 
     useTituloPagina("Compra exitosa");
+
+    if (cargando) {
+        return (
+            <PlantillaPublica>
+                <section className="resultado-compra">
+                    <p>Cargando pedido...</p>
+                </section>
+            </PlantillaPublica>
+        );
+    }
 
     if (!pedido) return <Navigate to="/mis-pedidos" replace />;
 
@@ -21,10 +33,10 @@ export default function CompraExitosa() {
             <section className="resultado-compra">
                 <AnimacionExito />
                 <h2>¡Compra exitosa!</h2>
-                <p>Tu pedido <strong>{pedido.id}</strong> está {pedido.estado.toLowerCase()}.</p>
+                <p>Tu pedido <strong>#{pedido.id}</strong> está {pedido.estado.toLowerCase()}.</p>
                 <p>
-                    Entrega: {pedido.entrega.tipo}
-                    {pedido.entrega.direccion && ` — ${pedido.entrega.direccion}`}
+                    Entrega: {pedido.tipoEntrega}
+                    {pedido.direccion && ` — ${pedido.direccion}`}
                 </p>
                 <ResumenCompra lineas={pedido.items} total={pedido.total} />
                 <div className="resultado-compra-acciones">

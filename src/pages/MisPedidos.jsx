@@ -11,16 +11,16 @@ export default function MisPedidos() {
 
     useTituloPagina("Mis pedidos");
 
-    if(!usuario) {
+    if (!usuario) {
         return (
-        <PlantillaPublica>
-            <AvisoInicioSesion titulo="Mis pedidos" mensaje="Inicia sesión para ver tus pedidos." />
-        </PlantillaPublica>
+            <PlantillaPublica>
+                <AvisoInicioSesion titulo="Mis pedidos" mensaje="Inicia sesión para ver tus pedidos." />
+            </PlantillaPublica>
         );
     }
 
-    const propios = pedidos.filter((p) => p.clienteRun === usuario.run).reverse();
-
+    const propios = pedidos.filter((p) => Number(p.usuarioId) === Number(usuario.id));
+    
     return (
         <PlantillaPublica>
             <section className="mis-pedidos">
