@@ -1,131 +1,103 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { api } from './api'
 import {
   listarPedidos,
   obtenerPedido,
   crearPedido,
   actualizarEstadoPedido,
-} from './pedidoService.js' 
+} from './pedidoService.js'
 
-import { listarProductos, actualizarProducto } from './productoService'
-import { aLineasPedido, calcularTotal, validarStock } from '../utils/pedidos'
-
-vi.mock('./productoService', () => ({
-  listarProductos: vi.fn(),
-  actualizarProducto: vi.fn(),
-}))
-
-vi.mock('../utils/pedidos', () => ({
-  ESTADOS_PEDIDO: ['En preparación', 'Despachado', 'Entregado'],
-  aLineasPedido: vi.fn(),
-  calcularTotal: vi.fn(),
-  validarStock: vi.fn(),
+vi.mock('./api', () => ({
+  api: {
+    get: vi.fn(),
+    post: vi.fn(),
+    patch: vi.fn(),
+  },
 }))
 
 describe('pedidoService', () => {
   beforeEach(() => {
-    localStorage.clear()
-    vi.clearAllMocks() 
+    vi.clearAllMocks()
   })
 
-  describe('listarPedidos y leer', () => {
-    it('retorna un arreglo vacío si no hay pedidos guardados', () => {
-      expect(listarPedidos()).toEqual([])
-    })
+  describe('listarPedidos', () => {
+    it('retorna la lista de pedidos desde el backend', async () => {
+      const pedidosMock = [{ id: 1, total: 5000, estado: 'En preparación' }]
+      api.get.mockResolvedValueOnce({ data: pedidosMock })
 
-    it('retorna los pedidos guardados correctamente', () => {
-      const pedidosGuardados = [{ id: 'PED-0001', total: 5000 }]
-      localStorage.setItem('pedidos', JSON.stringify(pedidosGuardados))
-      
-      expect(listarPedidos()).toEqual(pedidosGuardados)
-    })
+      const resultado = await listarPedidos()
 
-    it('retorna un arreglo vacío si el JSON en localStorage está corrupto', () => {
-      localStorage.setItem('pedidos', '{ json_invalido ]')
-      expect(listarPedidos()).toEqual([])
+      expect(api.get).toHaveBeenCalledWith('/pedidos')
+      expect(resultado).toEqual(pedidosMock)
     })
   })
 
   describe('obtenerPedido', () => {
-    it('retorna el pedido correspondiente al ID', () => {
-      localStorage.setItem('pedidos', JSON.stringify([{ id: 'PED-0002', estado: 'Despachado' }]))
-      const pedido = obtenerPedido('PED-0002')
-      
-      expect(pedido).toBeDefined()
-      expect(pedido?.estado).toBe('Despachado')
+    it('retorna el pedido correspondiente al ID', async () => {
+      const pedidoMock = { id: 2, estado: 'Despachado' }
+      api.get.mockResolvedValueOnce({ data: pedidoMock })
+
+      const resultado = await obtenerPedido(2)
+
+      expect(api.get).toHaveBeenCalledWith('/pedidos/2')
+      expect(resultado).toEqual(pedidoMock)
     })
 
-    it('retorna null si el ID no existe', () => {
-      expect(obtenerPedido('PED-9999')).toBeNull()
+    it('propaga el error si el backend responde con error', async () => {
+      api.get.mockRejectedValueOnce(new Error('404'))
+
+      await expect(obtenerPedido(9999)).rejects.toThrow('404')
     })
   })
 
   describe('crearPedido', () => {
-    const clienteMock = { run: '11111111-1', nombre: 'Juan' }
-    const itemsMock = [{ producto: { codigo: 'GA001', precio: 1000 }, cantidad: 2 }]
-    const entregaMock = 'Despacho a domicilio'
+    it('envía el payload en el formato esperado por el backend y retorna el pedido creado', async () => {
+      const pedidoCreado = {
+        id: 10,
+        usuarioId: 3,
+        tipoEntrega: 'Despacho a domicilio',
+        direccion: 'Av. Principal 123',
+        estado: 'En preparación',
+        total: 2000,
+      }
+      api.post.mockResolvedValueOnce({ data: pedidoCreado })
 
-    it('lanza un error si el carrito está vacío', () => {
-      expect(() => 
-        crearPedido({ cliente: clienteMock, items: [], entrega: entregaMock })
-      ).toThrow('El carrito está vacío.')
-    })
-
-    it('lanza un error con detalle si no hay stock suficiente', () => {
-      validarStock.mockReturnValue([{ nombre: 'Guitarra Acústica', disponible: 1 }])
-      listarProductos.mockReturnValue([{ codigo: 'GA001', stock: 1 }])
-
-      expect(() => 
-        crearPedido({ cliente: clienteMock, items: itemsMock, entrega: entregaMock })
-      ).toThrow('Stock insuficiente: Guitarra Acústica (disponibles: 1).')
-    })
-
-    it('crea el pedido, descuenta el stock y lo guarda correctamente si todo es válido', () => {
-  
-      validarStock.mockReturnValue([])
-      listarProductos.mockReturnValue([{ codigo: 'GA001', stock: 5 }])
-      aLineasPedido.mockReturnValue([{ codigo: 'GA001', precio: 1000, cantidad: 2 }])
-      calcularTotal.mockReturnValue(2000)
-
-      const pedido = crearPedido({ 
-        cliente: clienteMock, 
-        items: itemsMock, 
-        entrega: entregaMock 
+      const resultado = await crearPedido({
+        tipoEntrega: 'Despacho a domicilio',
+        direccion: 'Av. Principal 123',
+        items: [{ producto: { codigo: 'GA001', precio: 1000 }, cantidad: 2 }],
       })
 
-   
-      expect(pedido.id).toBe('PED-0001')
-      expect(pedido.clienteRun).toBe('11111111-1')
-      expect(pedido.total).toBe(2000)
-      expect(pedido.estado).toBe('En preparación')
-      expect(pedido.fecha).toBeDefined() 
+      expect(api.post).toHaveBeenCalledWith('/pedidos', {
+        tipoEntrega: 'Despacho a domicilio',
+        direccion: 'Av. Principal 123',
+        items: [{ codigo: 'GA001', cantidad: 2 }],
+      })
+      expect(resultado).toEqual(pedidoCreado)
+    })
 
-  
-      expect(actualizarProducto).toHaveBeenCalledWith('GA001', { stock: 3 })
-      expect(actualizarProducto).toHaveBeenCalledTimes(1)
+    it('propaga el error si el backend rechaza el pedido (por ejemplo sin stock)', async () => {
+      api.post.mockRejectedValueOnce(new Error('Stock insuficiente'))
 
-   
-      const guardados = JSON.parse(localStorage.getItem('pedidos'))
-      expect(guardados).toHaveLength(1)
-      expect(guardados[0].id).toBe('PED-0001')
+      await expect(
+        crearPedido({
+          tipoEntrega: 'Retiro en tienda',
+          direccion: null,
+          items: [{ producto: { codigo: 'GA001' }, cantidad: 99 }],
+        })
+      ).rejects.toThrow('Stock insuficiente')
     })
   })
 
   describe('actualizarEstadoPedido', () => {
-    it('actualiza el estado de un pedido existente', () => {
-      const pedidoInicial = { id: 'PED-0001', estado: 'En preparación' }
-      localStorage.setItem('pedidos', JSON.stringify([pedidoInicial]))
+    it('envía el PATCH con el nuevo estado y retorna el pedido actualizado', async () => {
+      const actualizado = { id: 1, estado: 'Entregado' }
+      api.patch.mockResolvedValueOnce({ data: actualizado })
 
-      const actualizado = actualizarEstadoPedido('PED-0001', 'Entregado')
-      
-      expect(actualizado?.estado).toBe('Entregado')
-      
-      const guardados = JSON.parse(localStorage.getItem('pedidos'))
-      expect(guardados[0].estado).toBe('Entregado')
-    })
+      const resultado = await actualizarEstadoPedido(1, 'Entregado')
 
-    it('retorna null si el pedido a actualizar no existe', () => {
-      const resultado = actualizarEstadoPedido('PED-9999', 'Entregado')
-      expect(resultado).toBeNull()
+      expect(api.patch).toHaveBeenCalledWith('/pedidos/1/estado', { estado: 'Entregado' })
+      expect(resultado).toEqual(actualizado)
     })
   })
 })
