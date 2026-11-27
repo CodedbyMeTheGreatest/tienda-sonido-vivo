@@ -20,23 +20,23 @@ export default function Checkout() {
 
     useTituloPagina("Confirmar pedido");
 
-    function confirmar(valores) {
+    async function confirmar(valores) {
         let pedido;
         try {
-            pedido = crear({
-                cliente: usuario,
+            pedido = await crear({
+                tipoEntrega: valores.tipoEntrega,
+                direccion: valores.tipoEntrega === ENTREGA_DESPACHO ? valores.direccion.trim() : null,
                 items,
-                entrega: {
-                    tipo: valores.tipoEntrega,
-                    direccion: valores.tipoEntrega === ENTREGA_DESPACHO ? valores.direccion.trim() : "",
-                },
             });
         } catch (error) {
-            navigate("/pago-fallido", { state: { motivo: error.message } });
+            if (error.response?.status === 401) return;
+
+            const motivo = error.response?.data?.error || error.message || "No se pudo procesar el pedido";
+            navigate("/pago-fallido", { state: { motivo } });
             return;
         }
 
-        recargar();
+        await recargar();
         vaciar();
         navigate(`/compra-exitosa/${pedido.id}`);
     }
@@ -44,12 +44,12 @@ export default function Checkout() {
     const { valores, errores, alCambiar, alEnviar } = useCheckout(usuario?.direccion ?? "", confirmar);
 
     if (!usuario) {
-    return (
-        <PlantillaPublica>
-            <AvisoInicioSesion titulo="Confirmar pedido" mensaje="Inicia sesión para confirmar tu pedido." />
-        </PlantillaPublica>
-    );
-}
+        return (
+            <PlantillaPublica>
+                <AvisoInicioSesion titulo="Confirmar pedido" mensaje="Inicia sesión para confirmar tu pedido." />
+            </PlantillaPublica>
+        );
+    }
 
     if (items.length === 0) {
         return (

@@ -26,8 +26,8 @@ import RutaProtegida from "./routes/RutasProtegidas";
 
 function App() {
   return (
-    <PedidosProvider>
-      <SesionProvider>
+    <SesionProvider>
+      <PedidosProvider>
         <UsuariosProvider>
           <ProductosProvider>
             <CarritoProvider>
@@ -49,8 +49,8 @@ function App() {
                     <Route path="/compra-fallida" element={<CompraFallida />} />
                     <Route path="/mis-pedidos" element={<MisPedidos />} />
                   </Route>
-                  <Route element={<RutaProtegida roles={['Administrador','Vendedor']} />}>
-                    <Route  path="/admin/" element={<InicioAdmin />} />
+                  <Route element={<RutaProtegida roles={['Administrador', 'Vendedor']} />}>
+                    <Route path="/admin/" element={<InicioAdmin />} />
                     <Route path="/admin/productos" element={<AdminProductos />}></Route>
                   </Route>
                   <Route element={<RutaProtegida roles={['Administrador']} />}>
@@ -62,8 +62,8 @@ function App() {
             </CarritoProvider>
           </ProductosProvider>
         </UsuariosProvider>
-      </SesionProvider>
-    </PedidosProvider>
+      </PedidosProvider >
+    </SesionProvider>
   );
 }
 

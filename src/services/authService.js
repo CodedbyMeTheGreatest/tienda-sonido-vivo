@@ -10,6 +10,10 @@ export async function iniciarSesionApi(dto) {
   return respuesta.data // { mensaje, token, usuario: { id, nombre, tipo } }
 }
 
+export async function cerrarSesionApi() {
+  await api.post('/auth/logout')
+}
+
 export function obtenerMensajeError(error) {
   if (error.response) {
     const datos = error.response.data
