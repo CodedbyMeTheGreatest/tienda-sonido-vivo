@@ -20,6 +20,7 @@ function ModalFormularioProducto(props) {
                     productoAEditar={productoAEditar}
                     onSubmit={onSubmit}
                     onCancelar={onHide}
+                    soloStock={props.soloStock}
                 />
             </Modal.Body>
         </Modal>

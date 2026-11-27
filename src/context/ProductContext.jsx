@@ -1,33 +1,47 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect } from 'react'
+import {
+  listarProductosApi, crearProductoApi, actualizarProductoApi,
+  actualizarStockApi, eliminarProductoApi
+} from '../services/productoApiService'
+import { obtenerMensajeError } from '../services/authService'
 import * as productoService from '../services/productoService'
 
 const ProductosContext = createContext(null)
 
 export function ProductosProvider({ children }) {
 
-  const [productos, setProductos] = useState(() => productoService.listarProductos())
+  const [productos, setProductos] = useState([])
+  const [cargando, setCargando] = useState(true)
+  const [error, setError] = useState('')
 
-  function crear(datos) {
-    productoService.crearProducto(datos)
-    setProductos(productoService.listarProductos())
+  const recargar = useCallback(async () => {
+    setError('')
+    try {
+      setProductos(await listarProductosApi())
+    } catch (e) {
+      console.error(e)
+      setError(obtenerMensajeError(e))
+    } finally {
+      setCargando(false)
+    }
+  }, [])
+
+  useEffect(() => { recargar() }, [recargar])
+
+  async function ejecutar(operacion) {
+    try { await operacion() }
+    catch (e) { throw new Error(obtenerMensajeError(e)) }
+    await recargar()
   }
 
-  function actualizar(codigo, cambios) {
-    productoService.actualizarProducto(codigo, cambios)
-    setProductos(productoService.listarProductos())
-  }
+  const crear = (datos) => ejecutar(() => crearProductoApi(datos))
+  const actualizar = (id, datos) => ejecutar(() => actualizarProductoApi(id, datos))
+  const actualizarStock = (id, stock) => ejecutar(() => actualizarStockApi(id, stock))
+  const eliminar = (id) => ejecutar(() => eliminarProductoApi(id))
 
-  function eliminar(codigo) {
-    productoService.eliminarProducto(codigo)
-    setProductos(productoService.listarProductos())
-  }
-
-  function recargar() {
-    setProductos(productoService.listarProductos())
-  }
 
   return (
-    <ProductosContext.Provider value={{ productos, crear, actualizar, eliminar, recargar }}>
+    <ProductosContext.Provider value={{ productos, cargando, error, crear, actualizar, eliminar, recargar, actualizarStock }}>
       {children}
     </ProductosContext.Provider>
   )

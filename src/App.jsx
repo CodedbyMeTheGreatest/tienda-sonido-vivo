@@ -50,7 +50,7 @@ function App() {
                     <Route path="/mis-pedidos" element={<MisPedidos />} />
                   </Route>
                   <Route element={<RutaProtegida roles={['Administrador','Vendedor']} />}>
-                    <Route  path="/admin/" element={<InicioAdmin />} />
+                    <Route path="/admin/" element={<InicioAdmin />} />
                     <Route path="/admin/productos" element={<AdminProductos />}></Route>
                   </Route>
                   <Route element={<RutaProtegida roles={['Administrador']} />}>

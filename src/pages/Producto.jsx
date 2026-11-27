@@ -6,11 +6,12 @@ import { useCart } from "../context/CarritoContext";
 import { useProductos } from "../context/ProductContext";
 import { useTituloPagina } from "../hooks/useTituloPagina";
 import imagen from "../assets/placeholder.png"
+import { Alert } from "react-bootstrap";
 
 
 function Producto() {
     const { codigo } = useParams();
-    const { productos } = useProductos();
+    const { productos, cargando, error } = useProductos();
     const producto = productos.find((p) => p.codigo === codigo);
     const nombreCompleto = producto
         ? `${producto.nombre} ${producto.marca || ""} ${producto.modelo || ""}`.trim()
@@ -21,16 +22,21 @@ function Producto() {
     const { añadir } = useCart();
     const [cantidad, setCantidad] = useState(1);
 
+    if (cargando) {
+    return (
+        <PlantillaPublica>
+            <p className="text-center my-5">Cargando producto...</p>
+        </PlantillaPublica>
+    );
+}
+
     if (!producto) {
         return (
             <PlantillaPublica>
-                <div className="text-center my-5 py-5">
-                    <h2>{nombreCompleto}</h2>
-                    <p>El código "{codigo}" no corresponde a ningún producto de nuestro catálogo.</p>
-                    <Link to="/catalogo" className="btn btn-primary mt-3">
-                        Volver al catálogo
-                    </Link>
-                </div>
+                {error && <Alert variant="danger">{error}</Alert>}
+                {cargando
+                    ? <p className="text-center my-5">Cargando catálogo...</p>
+                    : <CatalogoProducto titulo={titulo} productos={productosVisibles} onAdd={carrito.añadir} />}
             </PlantillaPublica>
         );
     }

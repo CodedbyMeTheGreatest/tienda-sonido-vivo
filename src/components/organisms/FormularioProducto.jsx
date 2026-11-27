@@ -5,6 +5,7 @@ import Boton from "../atoms/Boton";
 import { esCampoVacio, esTextoValido, esNumeroValido } from "../../utils/validaciones";
 import { categoriasDe } from "../../utils/categorias";
 import { useProductos } from "../../context/ProductContext";
+import { listarMarcasApi, listarModelosApi } from "../../services/productoApiService";
 
 function FormularioProducto(props) {
     const productoAEditar = props.productoAEditar;
@@ -24,6 +25,21 @@ function FormularioProducto(props) {
     });
 
     const [errores, setErrores] = useState({});
+
+    const [marcas, setMarcas] = useState([]);
+    const [modelos, setModelos] = useState([]);
+
+    useEffect(() => {
+        listarMarcasApi().then(setMarcas).catch(() => setMarcas([]));
+    }, []);
+
+    const marcaElegida = marcas.find((m) => m.nombre === formData.marca);
+    const marcaElegidaId = marcaElegida?.id;
+
+    useEffect(() => {
+        if (!marcaElegidaId) { setModelos([]); return; }
+        listarModelosApi(marcaElegidaId).then(setModelos).catch(() => setModelos([]));
+    }, [marcaElegidaId]);
 
     useEffect(() => {
         if (productoAEditar) {
@@ -53,10 +69,9 @@ function FormularioProducto(props) {
     }, [productoAEditar]);
 
     const handleChange = (campo, valor) => {
-        setFormData((prev) => ({ ...prev, [campo]: valor }));
-        if (errores[campo]) {
-            setErrores((prev) => ({ ...prev, [campo]: null }));
-        }
+        setFormData((prev) => ({
+            ...prev, [campo]: valor, ...(campo === "marca" ? { modelo: "" } : {})
+        }));
     };
 
     const validarFormulario = () => {
@@ -86,6 +101,9 @@ function FormularioProducto(props) {
             nuevosErrores.stock = "El stock debe igual o mayor a 0.";
         }
 
+        if (!marcaElegida) nuevosErrores.marca = "Debe seleccionar una marca.";
+        if (!modelos.some((m) => m.nombre === formData.modelo)) nuevosErrores.modelo = "Debe seleccionar un modelo.";
+
         setErrores(nuevosErrores);
         return Object.keys(nuevosErrores).length === 0;
     };
@@ -94,12 +112,14 @@ function FormularioProducto(props) {
         e.preventDefault();
         if (!validarFormulario()) return;
 
-        const productoFinal = {
+        const modeloElegido = modelos.find((m) => m.nombre === formData.modelo);
+        props.onSubmit({
             ...formData,
             precio: Number(formData.precio),
-            stock: Number(formData.stock)
-        };
-        props.onSubmit(productoFinal);
+            stock: Number(formData.stock),
+            marcaId: marcaElegida?.id,
+            modeloId: modeloElegido?.id
+        });
     };
 
     return (
@@ -146,21 +166,20 @@ function FormularioProducto(props) {
 
             <Row>
                 <Col xs={12} md={6}>
-                    <CampoFormulario
-                        id="marca"
-                        etiqueta="Marca"
-                        valor={formData.marca}
+                    <CampoFormulario id="marca" etiqueta="Marca" valor={formData.marca}
                         alCambiar={(e) => handleChange("marca", e.target.value)}
+                        opciones={marcas.map((m) => m.nombre)} placeholder="Seleccione una marca"
+                        esInvalido={Boolean(errores.marca)} mensajeError={errores.marca}
                     />
                 </Col>
 
                 <Col xs={12} md={6}>
-                    <CampoFormulario
-                        id="modelo"
-                        etiqueta="Modelo"
-                        valor={formData.modelo}
-                        alCambiar={(e) => handleChange("modelo", e.target.value)}
-                    />
+                        <CampoFormulario id="modelo" etiqueta="Modelo" valor={formData.modelo}
+                            alCambiar={(e) => handleChange("modelo", e.target.value)}
+                            opciones={modelos.map((m) => m.nombre)}
+                            placeholder={marcaElegida ? "Seleccione un modelo" : "Primero elija una marca"}
+                            esInvalido={Boolean(errores.modelo)} mensajeError={errores.modelo}
+                        />
                 </Col>
             </Row>
 

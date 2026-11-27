@@ -73,13 +73,15 @@ function TablaProductos(props) {
                                     <Boton
                                         className="btn-editar"
                                         alHacerClick={() => props.onEditar(p)}
-                                        texto="Editar"
+                                        texto={props.soloStock ? "Editar stock" : "Editar"}
                                     />
-                                    <Boton
-                                        className="btn-eliminar"
-                                        alHacerClick={() => props.onEliminar(p.codigo)}
-                                        texto="Eliminar"
-                                    />
+                                    {props.onEliminar && (
+                                        <Boton
+                                            className="btn-eliminar"
+                                            alHacerClick={() => props.onEliminar(p)}
+                                            texto="Eliminar"
+                                        />
+                                    )}
                                 </div>
                             </td>
                         </tr>

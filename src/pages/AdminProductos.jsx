@@ -8,17 +8,23 @@ import { useSesion } from "../context/SesionContext";
 import { useTituloPagina } from "../hooks/useTituloPagina";
 import ModalConfirmacion from "../components/organisms/ModalConfirmacion";
 import ModalFormularioProducto from "../components/organisms/ModalFormularioProducto";
+import { Alert } from "react-bootstrap";
+import ModalStockProducto from "../components/organisms/ModalStockProducto";
 
 function AdminProductos() {
   useTituloPagina("Administración de Productos");
 
   const { usuario } = useSesion();
   const navigate = useNavigate();
-  const { productos, crear, actualizar, eliminar } = useProductos();
+  const { productos, cargando, error, crear, actualizar, actualizarStock, eliminar } = useProductos();
 
   const [mostrarModalForm, setMostrarModalForm] = useState(false); const [productoAEditar, setProductoAEditar] = useState(null);
   const [productoAEliminar, setProductoAEliminar] = useState(null)
   const [errorGlobal, setErrorGlobal] = useState("");
+
+  const esAdmin = usuario?.rol === "Administrador";
+  const [errorAccion, setErrorAccion] = useState("");
+  const [productoStock, setProductoStock] = useState(null);
 
   if (!usuario) {
     return (
@@ -54,47 +60,86 @@ function AdminProductos() {
     setErrorGlobal("");
   };
 
-  const handleGuardar = (datosProducto) => {
+  const handleGuardar = async (datosProducto) => {
     try {
-      if (productoAEditar) {
-        actualizar(productoAEditar.codigo, datosProducto);
-      } else {
-        crear(datosProducto);
-      }
+      if (productoAEditar) await actualizar(productoAEditar.id, datosProducto);
+      else await crear(datosProducto);
+      
       handleCerrarModal();
     } catch (e) {
-      setErrorGlobal(e.message || "Error al procesar la solicitud.");
+      setErrorGlobal(e.message);
     }
   };
 
-  const handleConfirmarEliminar = () => {
-    if (productoAEliminar) {
-      eliminar(productoAEliminar);
-      setProductoAEliminar(null)
+  const handleConfirmarEliminar = async () => {
+    if(!productoAEliminar) return;
+    try{
+      await eliminar(productoAEliminar.id);
+      setErrorAccion("");
+    }catch(e){
+      setErrorAccion(e.message);
     }
+    setProductoAEliminar(null);
+  };
+
+    const handleCerrarStock = () => {
+      setProductoStock(null);
+      setErrorGlobal("");
+  };
+
+  const handleGuardarStock = async (stock) => {
+    try {
+      await actualizarStock(productoStock.id, stock);
+      handleCerrarStock();
+    } catch (e) {
+      setErrorGlobal(e.message);
+    }
+  };
+
+  const handleAbrirStock = (p) => {
+    setErrorGlobal("");
+    setProductoStock(p);
   };
 
   return (
     <PlantillaAdmin>
       <section className="encabezado-pagina">
-        <h2>Gestión de Productos</h2>
-        <Boton
-          className="btn-crear-producto"
-          alHacerClick={handleAbrirCrear}
-          texto="+ Agregar Producto"
-        />
+        <h2>{esAdmin ? "Gestión de Productos" : "Gestión de Stock"}</h2>
+        {esAdmin && (
+          <Boton
+            className="btn-crear-producto"
+            alHacerClick={handleAbrirCrear}
+            texto="+ Agregar Producto"
+          />
+        )}
       </section>
-      <TablaProductos
-        productos={productos}
-        onEditar={handleAbrirEditar}
-        onEliminar={(codigo) => setProductoAEliminar(codigo)}
-      />
 
-      <ModalFormularioProducto
-        show={mostrarModalForm}
-        onHide={handleCerrarModal}
-        productoAEditar={productoAEditar}
-        onSubmit={handleGuardar}
+      {error && <Alert variant="danger">{error}</Alert>}
+      {errorAccion && (
+        <Alert variant="danger" dismissible onClose={() => setErrorAccion("")}>{errorAccion}</Alert>
+      )}
+
+      {cargando && productos.length === 0
+        ? <p>Cargando productos...</p>
+        : <TablaProductos
+            productos={productos}
+            soloStock={!esAdmin}
+            onEditar={esAdmin ? handleAbrirEditar : handleAbrirStock}
+            onEliminar={esAdmin ? (p) => setProductoAEliminar(p) : null}
+        />}
+        
+
+      {esAdmin && (
+        <ModalFormularioProducto
+          show={mostrarModalForm} onHide={handleCerrarModal}
+          productoAEditar={productoAEditar} onSubmit={handleGuardar}
+          errorGlobal={errorGlobal}
+        />
+      )}
+
+      <ModalStockProducto
+        show={Boolean(productoStock)} producto={productoStock}
+        onHide={handleCerrarStock} onGuardar={handleGuardarStock}
         errorGlobal={errorGlobal}
       />
 
@@ -102,7 +147,7 @@ function AdminProductos() {
         show={Boolean(productoAEliminar)}
         onHide={() => setProductoAEliminar(null)}
         onConfirmar={handleConfirmarEliminar}
-        codigoProducto={productoAEliminar}
+        codigoProducto={productoAEliminar?.codigoProducto}
       />
     </PlantillaAdmin>
   );
